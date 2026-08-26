@@ -1,0 +1,20 @@
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.title {
+  font-size: clamp(24px, 3.2vw, 32px);
+  font-weight: 700;
+}
+
+.lede {
+  margin-top: 10px;
+  max-width: 66ch;
+  color: var(--ink-2);
+  font-size: 15.5px;
+}

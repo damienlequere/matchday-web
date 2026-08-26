@@ -1,0 +1,30 @@
+{
+  "name": "matchday",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Club hub — one address instead of six. Calculable blocks first.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource/archivo": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "next": "^16.3.3",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "server-only": "^0.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "eslint": "^9.28.0",
+    "eslint-config-next": "^16.3.3",
+    "typescript": "^5.8.3"
+  }
+}

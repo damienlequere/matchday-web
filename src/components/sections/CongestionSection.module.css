@@ -1,0 +1,123 @@
+.wrapper {
+  margin-top: 20px;
+}
+
+.summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.cell {
+  background: var(--surface);
+  padding: 14px 16px;
+}
+
+.cellLabel {
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.cellValue {
+  font-family: var(--font-display), sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  margin-top: 4px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.table th {
+  text-align: left;
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line-2);
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.opponent {
+  font-weight: 600;
+}
+
+.venue {
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin-right: 6px;
+}
+
+.comp {
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
+/* Severity is a coarse three-step scale. A 0-100 congestion score would imply
+   a precision that rest days and travel distance do not carry. */
+.bar {
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--line-2);
+}
+
+.normal {
+  background: var(--ok);
+}
+
+.tight {
+  background: var(--brass);
+}
+
+.heavy {
+  background: var(--crit);
+}
+
+.severityCell {
+  width: 96px;
+}
+
+.scroll {
+  overflow-x: auto;
+}
+
+@media (max-width: 860px) {
+  .summary {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,33 @@
+.nav {
+  background: var(--band);
+  border-top: 1px solid var(--band-line);
+  overflow-x: auto;
+}
+
+.nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-width: max-content;
+}
+
+.nav a {
+  display: block;
+  padding: 13px 16px;
+  color: var(--band-ink-2);
+  text-decoration: none;
+  font-family: var(--font-mono), monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.nav a:hover,
+.nav a:focus-visible {
+  color: var(--band-ink);
+  border-bottom-color: var(--brass);
+  outline: none;
+}

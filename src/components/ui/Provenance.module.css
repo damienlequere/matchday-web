@@ -1,0 +1,57 @@
+.source {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 10px;
+  letter-spacing: 0.03em;
+  color: var(--ink-3);
+}
+
+.source a {
+  color: var(--ink-3);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.source a:hover {
+  color: var(--accent-ink);
+}
+
+.confidence {
+  display: inline-block;
+  padding: 2px 5px;
+  border-radius: 2px;
+  font-family: var(--font-mono), monospace;
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.official {
+  background: var(--ok-soft);
+  color: var(--ok);
+}
+
+.reported {
+  background: var(--warn-soft);
+  color: var(--warn);
+}
+
+.derived {
+  background: var(--accent-soft);
+  color: var(--accent-ink);
+}
+
+.estimated {
+  background: var(--crit-soft);
+  color: var(--crit);
+}
+
+/* An inferred value must never be mistakable for an observed one, and the
+   difference has to survive greyscale — hence the dotted rule, not a tint. */
+.inferred {
+  border-bottom: 1px dotted var(--warn);
+}

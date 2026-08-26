@@ -1,0 +1,1244 @@
+{
+  "identity": {
+    "slug": "olympique-de-marseille",
+    "name": "Olympique de Marseille",
+    "shortName": "OM",
+    "founded": 1899,
+    "stadium": "Orange Vélodrome",
+    "stadiumCapacity": 67394,
+    "city": "Marseille",
+    "competition": "Ligue 1",
+    "colors": {
+      "primary": "#2FAEE0",
+      "secondary": "#FFFFFF"
+    }
+  },
+  "honours": [
+    {
+      "label": "Ligue 1",
+      "count": 9,
+      "years": [
+        2010,
+        1992,
+        1991,
+        1990
+      ],
+      "tier": "domestic"
+    },
+    {
+      "label": "Coupe de France",
+      "count": 10,
+      "years": [
+        1989,
+        1976,
+        1972
+      ],
+      "tier": "cup"
+    },
+    {
+      "label": "UEFA Champions League",
+      "count": 1,
+      "years": [
+        1993
+      ],
+      "tier": "continental"
+    },
+    {
+      "label": "Coupe de la Ligue",
+      "count": 3,
+      "years": [
+        2012,
+        2011,
+        2010
+      ],
+      "tier": "other"
+    }
+  ],
+  "records": [
+    {
+      "label": "Record league win",
+      "value": "8–0",
+      "detail": "v Sochaux, 1942",
+      "source": {
+        "label": "Club archive",
+        "observedAt": "2026-08-01"
+      }
+    },
+    {
+      "label": "Most appearances",
+      "value": "618",
+      "detail": "Roger Scotti",
+      "source": {
+        "label": "Club archive",
+        "observedAt": "2026-08-01"
+      }
+    },
+    {
+      "label": "Top scorer",
+      "value": "182 goals",
+      "detail": "Gunnar Andersson",
+      "source": {
+        "label": "Club archive",
+        "observedAt": "2026-08-01"
+      }
+    },
+    {
+      "label": "Record attendance",
+      "value": "65,894",
+      "detail": "v PSG, 2016",
+      "source": {
+        "label": "Club archive",
+        "observedAt": "2026-08-01"
+      }
+    }
+  ],
+  "squad": [
+    {
+      "playerSlug": "geronimo-rulli",
+      "playerName": "Gerónimo Rulli",
+      "position": "GK",
+      "shirtNumber": 1,
+      "from": "2024-08-01",
+      "until": null,
+      "contractUntil": "2027-06-30",
+      "onLoan": false,
+      "birthDate": "1992-05-20",
+      "nationality": "Argentina"
+    },
+    {
+      "playerSlug": "leonardo-balerdi",
+      "playerName": "Leonardo Balerdi",
+      "position": "DF",
+      "shirtNumber": 5,
+      "from": "2020-08-01",
+      "until": null,
+      "contractUntil": "2028-06-30",
+      "onLoan": false,
+      "birthDate": "1999-01-26",
+      "nationality": "Argentina"
+    },
+    {
+      "playerSlug": "derek-cornelius",
+      "playerName": "Derek Cornelius",
+      "position": "DF",
+      "shirtNumber": 24,
+      "from": "2024-08-01",
+      "until": null,
+      "contractUntil": "2028-06-30",
+      "onLoan": false,
+      "birthDate": "1997-11-25",
+      "nationality": "Canada"
+    },
+    {
+      "playerSlug": "amir-murillo",
+      "playerName": "Amir Murillo",
+      "position": "DF",
+      "shirtNumber": 3,
+      "from": "2024-07-01",
+      "until": null,
+      "contractUntil": "2027-06-30",
+      "onLoan": false,
+      "birthDate": "1996-02-11",
+      "nationality": "Panama"
+    },
+    {
+      "playerSlug": "quentin-merlin",
+      "playerName": "Quentin Merlin",
+      "position": "DF",
+      "shirtNumber": 27,
+      "from": "2024-01-31",
+      "until": null,
+      "contractUntil": "2028-06-30",
+      "onLoan": false,
+      "birthDate": "2002-05-16",
+      "nationality": "France"
+    },
+    {
+      "playerSlug": "pierre-emile-hojbjerg",
+      "playerName": "Pierre-Emile Højbjerg",
+      "position": "MF",
+      "shirtNumber": 23,
+      "from": "2024-08-30",
+      "until": null,
+      "contractUntil": "2029-06-30",
+      "onLoan": false,
+      "birthDate": "1995-08-05",
+      "nationality": "Denmark"
+    },
+    {
+      "playerSlug": "geoffrey-kondogbia",
+      "playerName": "Geoffrey Kondogbia",
+      "position": "MF",
+      "shirtNumber": 44,
+      "from": "2024-08-01",
+      "until": null,
+      "contractUntil": "2027-06-30",
+      "onLoan": false,
+      "birthDate": "1993-02-15",
+      "nationality": "Central African Republic"
+    },
+    {
+      "playerSlug": "adrien-rabiot",
+      "playerName": "Adrien Rabiot",
+      "position": "MF",
+      "shirtNumber": 25,
+      "from": "2025-09-01",
+      "until": null,
+      "contractUntil": "2028-06-30",
+      "onLoan": false,
+      "birthDate": "1995-04-03",
+      "nationality": "France"
+    },
+    {
+      "playerSlug": "bilal-nadir",
+      "playerName": "Bilal Nadir",
+      "position": "MF",
+      "shirtNumber": 29,
+      "from": "2023-01-01",
+      "until": null,
+      "contractUntil": null,
+      "onLoan": false,
+      "birthDate": "2003-12-25",
+      "nationality": "Morocco"
+    },
+    {
+      "playerSlug": "mason-greenwood",
+      "playerName": "Mason Greenwood",
+      "position": "FW",
+      "shirtNumber": 10,
+      "from": "2024-07-01",
+      "until": null,
+      "contractUntil": "2029-06-30",
+      "onLoan": false,
+      "birthDate": "2001-10-01",
+      "nationality": "England"
+    },
+    {
+      "playerSlug": "amine-gouiri",
+      "playerName": "Amine Gouiri",
+      "position": "FW",
+      "shirtNumber": 11,
+      "from": "2025-01-31",
+      "until": null,
+      "contractUntil": "2029-06-30",
+      "onLoan": false,
+      "birthDate": "2000-02-16",
+      "nationality": "Algeria"
+    },
+    {
+      "playerSlug": "jonathan-rowe",
+      "playerName": "Jonathan Rowe",
+      "position": "FW",
+      "shirtNumber": 20,
+      "from": "2024-08-01",
+      "until": null,
+      "contractUntil": "2027-06-30",
+      "onLoan": true,
+      "birthDate": "2003-07-18",
+      "nationality": "England"
+    },
+    {
+      "playerSlug": "faris-moumbagna",
+      "playerName": "Faris Moumbagna",
+      "position": "FW",
+      "shirtNumber": 9,
+      "from": "2024-01-01",
+      "until": null,
+      "contractUntil": "2027-06-30",
+      "onLoan": false,
+      "birthDate": "2000-06-27",
+      "nationality": "Cameroon"
+    },
+    {
+      "playerSlug": "ulisses-garcia",
+      "playerName": "Ulisses Garcia",
+      "position": "DF",
+      "shirtNumber": 21,
+      "from": "2024-08-01",
+      "until": null,
+      "contractUntil": "2027-06-30",
+      "onLoan": false,
+      "birthDate": "1996-01-11",
+      "nationality": "Switzerland"
+    }
+  ],
+  "fixtures": [
+    {
+      "id": "f01",
+      "kickoff": "2026-08-15T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "Olympique Lyonnais",
+      "opponentShort": "OL",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 0,
+        "goalsAgainst": 0
+      }
+    },
+    {
+      "id": "f02",
+      "kickoff": "2026-08-22T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "LOSC Lille",
+      "opponentShort": "LIL",
+      "venue": "away",
+      "travelKm": 205,
+      "result": {
+        "goalsFor": 3,
+        "goalsAgainst": 1
+      }
+    },
+    {
+      "id": "f03",
+      "kickoff": "2026-08-29T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "Stade Rennais",
+      "opponentShort": "REN",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 0,
+        "goalsAgainst": 2
+      }
+    },
+    {
+      "id": "f04",
+      "kickoff": "2026-09-02T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "AS Monaco",
+      "opponentShort": "MON",
+      "venue": "away",
+      "travelKm": 690,
+      "result": {
+        "goalsFor": 2,
+        "goalsAgainst": 0
+      }
+    },
+    {
+      "id": "f05",
+      "kickoff": "2026-09-09T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "OGC Nice",
+      "opponentShort": "NIC",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 0,
+        "goalsAgainst": 2
+      }
+    },
+    {
+      "id": "f06",
+      "kickoff": "2026-09-12T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "RC Lens",
+      "opponentShort": "LEN",
+      "venue": "away",
+      "travelKm": 180,
+      "result": {
+        "goalsFor": 1,
+        "goalsAgainst": 2
+      }
+    },
+    {
+      "id": "f07",
+      "kickoff": "2026-09-16T19:00:00.000Z",
+      "competition": "UEFA Champions League",
+      "opponent": "Paris Saint-Germain",
+      "opponentShort": "PSG",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 0,
+        "goalsAgainst": 2
+      }
+    },
+    {
+      "id": "f08",
+      "kickoff": "2026-09-23T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "Olympique Lyonnais",
+      "opponentShort": "OL",
+      "venue": "away",
+      "travelKm": 395,
+      "result": {
+        "goalsFor": 1,
+        "goalsAgainst": 1
+      }
+    },
+    {
+      "id": "f09",
+      "kickoff": "2026-09-30T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "LOSC Lille",
+      "opponentShort": "LIL",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 2,
+        "goalsAgainst": 1
+      }
+    },
+    {
+      "id": "f10",
+      "kickoff": "2026-10-04T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "Stade Rennais",
+      "opponentShort": "REN",
+      "venue": "away",
+      "travelKm": 310,
+      "result": {
+        "goalsFor": 0,
+        "goalsAgainst": 1
+      }
+    },
+    {
+      "id": "f11",
+      "kickoff": "2026-10-07T19:00:00.000Z",
+      "competition": "Coupe de France",
+      "opponent": "AS Monaco",
+      "opponentShort": "MON",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 2,
+        "goalsAgainst": 0
+      }
+    },
+    {
+      "id": "f12",
+      "kickoff": "2026-10-14T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "OGC Nice",
+      "opponentShort": "NIC",
+      "venue": "away",
+      "travelKm": 685,
+      "result": {
+        "goalsFor": 0,
+        "goalsAgainst": 1
+      }
+    },
+    {
+      "id": "f13",
+      "kickoff": "2026-10-18T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "RC Lens",
+      "opponentShort": "LEN",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 0,
+        "goalsAgainst": 1
+      }
+    },
+    {
+      "id": "f14",
+      "kickoff": "2026-10-25T19:00:00.000Z",
+      "competition": "UEFA Champions League",
+      "opponent": "Paris Saint-Germain",
+      "opponentShort": "PSG",
+      "venue": "away",
+      "travelKm": 660,
+      "result": {
+        "goalsFor": 1,
+        "goalsAgainst": 0
+      }
+    },
+    {
+      "id": "f15",
+      "kickoff": "2026-11-01T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "Olympique Lyonnais",
+      "opponentShort": "OL",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 3,
+        "goalsAgainst": 2
+      }
+    },
+    {
+      "id": "f16",
+      "kickoff": "2026-11-04T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "LOSC Lille",
+      "opponentShort": "LIL",
+      "venue": "away",
+      "travelKm": 205,
+      "result": {
+        "goalsFor": 2,
+        "goalsAgainst": 2
+      }
+    },
+    {
+      "id": "f17",
+      "kickoff": "2026-11-11T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "Stade Rennais",
+      "opponentShort": "REN",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 2,
+        "goalsAgainst": 2
+      }
+    },
+    {
+      "id": "f18",
+      "kickoff": "2026-11-18T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "AS Monaco",
+      "opponentShort": "MON",
+      "venue": "away",
+      "travelKm": 690,
+      "result": {
+        "goalsFor": 2,
+        "goalsAgainst": 0
+      }
+    },
+    {
+      "id": "f19",
+      "kickoff": "2026-11-22T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "OGC Nice",
+      "opponentShort": "NIC",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 3,
+        "goalsAgainst": 2
+      }
+    },
+    {
+      "id": "f20",
+      "kickoff": "2026-11-29T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "RC Lens",
+      "opponentShort": "LEN",
+      "venue": "away",
+      "travelKm": 180,
+      "result": {
+        "goalsFor": 0,
+        "goalsAgainst": 1
+      }
+    },
+    {
+      "id": "f21",
+      "kickoff": "2026-12-02T19:00:00.000Z",
+      "competition": "UEFA Champions League",
+      "opponent": "Paris Saint-Germain",
+      "opponentShort": "PSG",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 0,
+        "goalsAgainst": 2
+      }
+    },
+    {
+      "id": "f22",
+      "kickoff": "2026-12-06T19:00:00.000Z",
+      "competition": "Coupe de France",
+      "opponent": "Olympique Lyonnais",
+      "opponentShort": "OL",
+      "venue": "away",
+      "travelKm": 395,
+      "result": {
+        "goalsFor": 0,
+        "goalsAgainst": 1
+      }
+    },
+    {
+      "id": "f23",
+      "kickoff": "2026-12-13T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "LOSC Lille",
+      "opponentShort": "LIL",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 2,
+        "goalsAgainst": 0
+      }
+    },
+    {
+      "id": "f24",
+      "kickoff": "2026-12-20T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "Stade Rennais",
+      "opponentShort": "REN",
+      "venue": "away",
+      "travelKm": 310,
+      "result": {
+        "goalsFor": 2,
+        "goalsAgainst": 1
+      }
+    },
+    {
+      "id": "f25",
+      "kickoff": "2026-12-24T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "AS Monaco",
+      "opponentShort": "MON",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 3,
+        "goalsAgainst": 0
+      }
+    },
+    {
+      "id": "f26",
+      "kickoff": "2026-12-27T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "OGC Nice",
+      "opponentShort": "NIC",
+      "venue": "away",
+      "travelKm": 685,
+      "result": {
+        "goalsFor": 3,
+        "goalsAgainst": 1
+      }
+    },
+    {
+      "id": "f27",
+      "kickoff": "2027-01-03T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "RC Lens",
+      "opponentShort": "LEN",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 3,
+        "goalsAgainst": 0
+      }
+    },
+    {
+      "id": "f28",
+      "kickoff": "2027-01-07T19:00:00.000Z",
+      "competition": "UEFA Champions League",
+      "opponent": "Paris Saint-Germain",
+      "opponentShort": "PSG",
+      "venue": "away",
+      "travelKm": 660,
+      "result": {
+        "goalsFor": 0,
+        "goalsAgainst": 1
+      }
+    },
+    {
+      "id": "f29",
+      "kickoff": "2027-01-14T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "Olympique Lyonnais",
+      "opponentShort": "OL",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 3,
+        "goalsAgainst": 0
+      }
+    },
+    {
+      "id": "f30",
+      "kickoff": "2027-01-21T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "LOSC Lille",
+      "opponentShort": "LIL",
+      "venue": "away",
+      "travelKm": 205,
+      "result": {
+        "goalsFor": 3,
+        "goalsAgainst": 2
+      }
+    },
+    {
+      "id": "f31",
+      "kickoff": "2027-01-24T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "Stade Rennais",
+      "opponentShort": "REN",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 1,
+        "goalsAgainst": 1
+      }
+    },
+    {
+      "id": "f32",
+      "kickoff": "2027-01-31T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "AS Monaco",
+      "opponentShort": "MON",
+      "venue": "away",
+      "travelKm": 690,
+      "result": {
+        "goalsFor": 0,
+        "goalsAgainst": 1
+      }
+    },
+    {
+      "id": "f33",
+      "kickoff": "2027-02-07T19:00:00.000Z",
+      "competition": "Coupe de France",
+      "opponent": "OGC Nice",
+      "opponentShort": "NIC",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 2,
+        "goalsAgainst": 2
+      }
+    },
+    {
+      "id": "f34",
+      "kickoff": "2027-02-11T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "RC Lens",
+      "opponentShort": "LEN",
+      "venue": "away",
+      "travelKm": 180,
+      "result": {
+        "goalsFor": 0,
+        "goalsAgainst": 0
+      }
+    },
+    {
+      "id": "f35",
+      "kickoff": "2027-02-18T19:00:00.000Z",
+      "competition": "UEFA Champions League",
+      "opponent": "Paris Saint-Germain",
+      "opponentShort": "PSG",
+      "venue": "home",
+      "travelKm": 0,
+      "result": {
+        "goalsFor": 3,
+        "goalsAgainst": 2
+      }
+    },
+    {
+      "id": "f36",
+      "kickoff": "2027-02-21T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "Olympique Lyonnais",
+      "opponentShort": "OL",
+      "venue": "away",
+      "travelKm": 395
+    },
+    {
+      "id": "f37",
+      "kickoff": "2027-02-25T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "LOSC Lille",
+      "opponentShort": "LIL",
+      "venue": "home",
+      "travelKm": 0
+    },
+    {
+      "id": "f38",
+      "kickoff": "2027-03-04T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "Stade Rennais",
+      "opponentShort": "REN",
+      "venue": "away",
+      "travelKm": 310
+    },
+    {
+      "id": "f39",
+      "kickoff": "2027-03-11T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "AS Monaco",
+      "opponentShort": "MON",
+      "venue": "home",
+      "travelKm": 0
+    },
+    {
+      "id": "f40",
+      "kickoff": "2027-03-15T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "OGC Nice",
+      "opponentShort": "NIC",
+      "venue": "away",
+      "travelKm": 685
+    },
+    {
+      "id": "f41",
+      "kickoff": "2027-03-18T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "RC Lens",
+      "opponentShort": "LEN",
+      "venue": "home",
+      "travelKm": 0
+    },
+    {
+      "id": "f42",
+      "kickoff": "2027-03-25T19:00:00.000Z",
+      "competition": "UEFA Champions League",
+      "opponent": "Paris Saint-Germain",
+      "opponentShort": "PSG",
+      "venue": "away",
+      "travelKm": 660
+    },
+    {
+      "id": "f43",
+      "kickoff": "2027-03-29T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "Olympique Lyonnais",
+      "opponentShort": "OL",
+      "venue": "home",
+      "travelKm": 0
+    },
+    {
+      "id": "f44",
+      "kickoff": "2027-04-05T19:00:00.000Z",
+      "competition": "Coupe de France",
+      "opponent": "LOSC Lille",
+      "opponentShort": "LIL",
+      "venue": "away",
+      "travelKm": 205
+    },
+    {
+      "id": "f45",
+      "kickoff": "2027-04-12T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "Stade Rennais",
+      "opponentShort": "REN",
+      "venue": "home",
+      "travelKm": 0
+    },
+    {
+      "id": "f46",
+      "kickoff": "2027-04-15T19:00:00.000Z",
+      "competition": "Ligue 1",
+      "opponent": "AS Monaco",
+      "opponentShort": "MON",
+      "venue": "away",
+      "travelKm": 690
+    }
+  ],
+  "cards": [
+    {
+      "playerSlug": "leonardo-balerdi",
+      "fixtureId": "f29",
+      "date": "2027-01-14",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 59,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2027-01-14"
+      }
+    },
+    {
+      "playerSlug": "leonardo-balerdi",
+      "fixtureId": "f30",
+      "date": "2027-01-21",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 63,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2027-01-21"
+      }
+    },
+    {
+      "playerSlug": "leonardo-balerdi",
+      "fixtureId": "f31",
+      "date": "2027-01-24",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 20,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2027-01-24"
+      }
+    },
+    {
+      "playerSlug": "leonardo-balerdi",
+      "fixtureId": "f32",
+      "date": "2027-01-31",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 81,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2027-01-31"
+      }
+    },
+    {
+      "playerSlug": "leonardo-balerdi",
+      "fixtureId": "f34",
+      "date": "2027-02-11",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 52,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2027-02-11"
+      }
+    },
+    {
+      "playerSlug": "geoffrey-kondogbia",
+      "fixtureId": "f03",
+      "date": "2026-08-29",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 64,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-08-29"
+      }
+    },
+    {
+      "playerSlug": "geoffrey-kondogbia",
+      "fixtureId": "f05",
+      "date": "2026-09-09",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 71,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-09-09"
+      }
+    },
+    {
+      "playerSlug": "geoffrey-kondogbia",
+      "fixtureId": "f08",
+      "date": "2026-09-23",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 55,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-09-23"
+      }
+    },
+    {
+      "playerSlug": "geoffrey-kondogbia",
+      "fixtureId": "f12",
+      "date": "2026-10-14",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 22,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-10-14"
+      }
+    },
+    {
+      "playerSlug": "pierre-emile-hojbjerg",
+      "fixtureId": "f05",
+      "date": "2026-09-09",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 62,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-09-09"
+      }
+    },
+    {
+      "playerSlug": "pierre-emile-hojbjerg",
+      "fixtureId": "f08",
+      "date": "2026-09-23",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 42,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-09-23"
+      }
+    },
+    {
+      "playerSlug": "pierre-emile-hojbjerg",
+      "fixtureId": "f12",
+      "date": "2026-10-14",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 20,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-10-14"
+      }
+    },
+    {
+      "playerSlug": "pierre-emile-hojbjerg",
+      "fixtureId": "f15",
+      "date": "2026-11-01",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 72,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-11-01"
+      }
+    },
+    {
+      "playerSlug": "adrien-rabiot",
+      "fixtureId": "f08",
+      "date": "2026-09-23",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 44,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-09-23"
+      }
+    },
+    {
+      "playerSlug": "adrien-rabiot",
+      "fixtureId": "f12",
+      "date": "2026-10-14",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 48,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-10-14"
+      }
+    },
+    {
+      "playerSlug": "adrien-rabiot",
+      "fixtureId": "f15",
+      "date": "2026-11-01",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 52,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-11-01"
+      }
+    },
+    {
+      "playerSlug": "amir-murillo",
+      "fixtureId": "f12",
+      "date": "2026-10-14",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 61,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-10-14"
+      }
+    },
+    {
+      "playerSlug": "amir-murillo",
+      "fixtureId": "f15",
+      "date": "2026-11-01",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 58,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-11-01"
+      }
+    },
+    {
+      "playerSlug": "amir-murillo",
+      "fixtureId": "f32",
+      "date": "2027-01-31",
+      "competition": "Ligue 1",
+      "type": "second-yellow",
+      "minute": 79,
+      "source": {
+        "label": "LFP disciplinary committee",
+        "observedAt": "2027-01-31"
+      }
+    },
+    {
+      "playerSlug": "mason-greenwood",
+      "fixtureId": "f15",
+      "date": "2026-11-01",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 48,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-11-01"
+      }
+    },
+    {
+      "playerSlug": "mason-greenwood",
+      "fixtureId": "f17",
+      "date": "2026-11-11",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 35,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-11-11"
+      }
+    },
+    {
+      "playerSlug": "quentin-merlin",
+      "fixtureId": "f17",
+      "date": "2026-11-11",
+      "competition": "Ligue 1",
+      "type": "yellow",
+      "minute": 67,
+      "source": {
+        "label": "LFP match report",
+        "observedAt": "2026-11-11"
+      }
+    }
+  ],
+  "absences": [
+    {
+      "playerSlug": "amir-murillo",
+      "fixtureId": "f35",
+      "date": "2027-02-18",
+      "reason": "suspension",
+      "source": {
+        "label": "LFP disciplinary committee",
+        "observedAt": "2027-02-18"
+      }
+    },
+    {
+      "playerSlug": "faris-moumbagna",
+      "fixtureId": "f30",
+      "date": "2027-01-21",
+      "reason": "injury",
+      "note": "Knee",
+      "source": {
+        "label": "Club team sheet",
+        "observedAt": "2027-01-21"
+      }
+    },
+    {
+      "playerSlug": "faris-moumbagna",
+      "fixtureId": "f31",
+      "date": "2027-01-24",
+      "reason": "injury",
+      "note": "Knee",
+      "source": {
+        "label": "Club team sheet",
+        "observedAt": "2027-01-24"
+      }
+    },
+    {
+      "playerSlug": "faris-moumbagna",
+      "fixtureId": "f32",
+      "date": "2027-01-31",
+      "reason": "injury",
+      "note": "Knee",
+      "source": {
+        "label": "Club team sheet",
+        "observedAt": "2027-01-31"
+      }
+    },
+    {
+      "playerSlug": "faris-moumbagna",
+      "fixtureId": "f33",
+      "date": "2027-02-07",
+      "reason": "injury",
+      "note": "Knee",
+      "source": {
+        "label": "Club team sheet",
+        "observedAt": "2027-02-07"
+      }
+    },
+    {
+      "playerSlug": "faris-moumbagna",
+      "fixtureId": "f34",
+      "date": "2027-02-11",
+      "reason": "injury",
+      "note": "Knee",
+      "source": {
+        "label": "Club team sheet",
+        "observedAt": "2027-02-11"
+      }
+    },
+    {
+      "playerSlug": "faris-moumbagna",
+      "fixtureId": "f35",
+      "date": "2027-02-18",
+      "reason": "injury",
+      "note": "Knee",
+      "source": {
+        "label": "Club team sheet",
+        "observedAt": "2027-02-18"
+      }
+    },
+    {
+      "playerSlug": "jonathan-rowe",
+      "fixtureId": "f34",
+      "date": "2027-02-11",
+      "reason": "injury",
+      "note": "Hamstring",
+      "source": {
+        "label": "Club team sheet",
+        "observedAt": "2027-02-11"
+      }
+    },
+    {
+      "playerSlug": "jonathan-rowe",
+      "fixtureId": "f35",
+      "date": "2027-02-18",
+      "reason": "injury",
+      "note": "Hamstring",
+      "source": {
+        "label": "Club team sheet",
+        "observedAt": "2027-02-18"
+      }
+    },
+    {
+      "playerSlug": "bilal-nadir",
+      "fixtureId": "f33",
+      "date": "2027-02-07",
+      "reason": "international",
+      "note": "AFCON",
+      "source": {
+        "label": "Club team sheet",
+        "observedAt": "2027-02-07"
+      }
+    },
+    {
+      "playerSlug": "bilal-nadir",
+      "fixtureId": "f34",
+      "date": "2027-02-11",
+      "reason": "international",
+      "note": "AFCON",
+      "source": {
+        "label": "Club team sheet",
+        "observedAt": "2027-02-11"
+      }
+    },
+    {
+      "playerSlug": "bilal-nadir",
+      "fixtureId": "f35",
+      "date": "2027-02-18",
+      "reason": "international",
+      "note": "AFCON",
+      "source": {
+        "label": "Club team sheet",
+        "observedAt": "2027-02-18"
+      }
+    }
+  ],
+  "rules": [
+    {
+      "competition": "Ligue 1",
+      "yellowThreshold": 5,
+      "yellowBanMatches": 1,
+      "redBanMatches": 2,
+      "secondYellowBanMatches": 1
+    },
+    {
+      "competition": "UEFA Champions League",
+      "yellowThreshold": 3,
+      "yellowBanMatches": 1,
+      "redBanMatches": 2,
+      "secondYellowBanMatches": 1
+    },
+    {
+      "competition": "Coupe de France",
+      "yellowThreshold": 3,
+      "yellowBanMatches": 1,
+      "redBanMatches": 2,
+      "secondYellowBanMatches": 1
+    }
+  ],
+  "updatedAt": "2027-02-20T09:00:00Z"
+}

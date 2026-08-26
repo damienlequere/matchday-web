@@ -1,0 +1,124 @@
+.intro {
+  background: var(--band);
+  color: var(--band-ink);
+  padding: 64px 0 56px;
+}
+
+.wordmark {
+  font-family: var(--font-display), sans-serif;
+  font-size: clamp(38px, 6vw, 58px);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--band-ink);
+}
+
+.tagline {
+  margin-top: 12px;
+  max-width: 60ch;
+  color: var(--band-ink-2);
+  font-size: 16.5px;
+}
+
+.claim {
+  color: var(--band-ink);
+  font-weight: 600;
+}
+
+.clubs {
+  padding: 48px 0 56px;
+}
+
+.list {
+  list-style: none;
+  margin: 20px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+}
+
+.club {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.club:hover {
+  border-color: var(--line-2);
+  transform: translateY(-2px);
+}
+
+.clubTop {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.crest {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  flex: none;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  color: #fff;
+}
+
+.clubName {
+  font-family: var(--font-display), sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.clubMeta {
+  font-size: 12.5px;
+  color: var(--ink-3);
+  margin-top: 2px;
+}
+
+.figures {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.figure {
+  font-family: var(--font-display), sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.figureLabel {
+  font-size: 11px;
+  color: var(--ink-3);
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+.alert { color: var(--crit); }
+.warn { color: var(--brass); }
+
+.note {
+  margin-top: 34px;
+  max-width: 68ch;
+  color: var(--ink-2);
+  font-size: 14px;
+}
+
+.note strong {
+  color: var(--ink);
+}

@@ -1,0 +1,7 @@
+.section {
+  padding: 56px 0;
+}
+
+.section + .section {
+  border-top: 1px solid var(--line);
+}

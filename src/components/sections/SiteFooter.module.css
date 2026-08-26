@@ -1,0 +1,31 @@
+.footer {
+  background: var(--band);
+  color: var(--band-ink-2);
+  padding: 36px 0;
+  font-size: 13px;
+}
+
+.footer b {
+  color: var(--band-ink);
+}
+
+.cols {
+  display: flex;
+  gap: 28px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cols p {
+  max-width: 60ch;
+}
+
+.right {
+  text-align: right;
+}
+
+@media (max-width: 640px) {
+  .right {
+    text-align: left;
+  }
+}
