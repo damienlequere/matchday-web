@@ -68,18 +68,6 @@ export const fr: Dictionary = {
     meta: (stadium: string, capacity: string, founded: number) =>
       `${stadium} · ${capacity} places · fondé en ${founded}`,
     updated: "Mis à jour",
-    suspended: "Suspendus",
-    forFixture: (opponent: string, home: boolean) =>
-      home ? `contre ${opponent}` : `pour le déplacement à ${opponent}`,
-    noFixture: "aucun match programmé",
-    atRisk: "À un carton",
-    atRiskNote: "d'une suspension pour cumul",
-    nextSix: "6 prochains matchs",
-    congestionNote: (heavyWeeks: string, travel: string) =>
-      `${heavyWeeks}, ${travel} km`,
-    outOfContract: "En fin de contrat",
-    contractNote: (matches: string, n: number) =>
-      `en juin · ${matches} ${n < 2 ? "manqué" : "manqués"} sur suspension`,
   },
 
   squadStatus: {

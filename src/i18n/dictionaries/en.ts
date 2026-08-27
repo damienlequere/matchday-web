@@ -73,27 +73,6 @@ export const en = {
     meta: (stadium: string, capacity: string, founded: number) =>
       `${stadium} · ${capacity} seats · founded ${founded}`,
     updated: "Updated",
-    suspended: "Suspended",
-    /** The next fixture a ban is served against. */
-    forFixture: (opponent: string, home: boolean) =>
-      home ? `for ${opponent}` : `for the trip to ${opponent}`,
-    noFixture: "no fixture scheduled",
-    atRisk: "One card away",
-    atRiskNote: "from an accumulation ban",
-    nextSix: "Next 6 matches",
-    /** "2 heavy weeks, 3,410km" */
-    congestionNote: (heavyWeeks: string, travel: string) =>
-      `${heavyWeeks}, ${travel}km`,
-    outOfContract: "Out of contract",
-    /**
-     * "in June · 4 matches lost to bans"
-     *
-     * Takes the count, not a preformatted string: French has to agree the
-     * participle with it ("1 match manqué" / "4 matchs manqués"), which a
-     * caller splicing in an already-formatted noun phrase cannot do.
-     */
-    contractNote: (matches: string, n: number) =>
-      `in June · ${matches} lost to ${n === 1 ? "a ban" : "bans"}`,
   },
 
   squadStatus: {

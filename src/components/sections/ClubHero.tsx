@@ -5,33 +5,31 @@ import type { Dictionary } from "@/i18n";
 
 import styles from "./ClubHero.module.css";
 
-export interface HeroStat {
-  label: string;
-  value: string;
-  note: string;
-  tone?: "alert" | "warn";
-}
-
 interface ClubHeroProps {
   identity: ClubIdentity;
   updatedAt: string;
-  stats: HeroStat[];
   dict: Dictionary;
   locale: Locale;
 }
 
 /**
- * The hub's opening screen.
+ * The hub's opening screen — identity and freshness, and nothing else.
  *
- * It leads on the calculable figures — who is suspended, who is one card away,
- * how heavy the next fortnight is — rather than on identity. That ordering is
- * the note's central argument: opening on the costly, copyable blocks spends
- * the page's best space on what everyone else already publishes.
+ * It used to carry four computed figures: suspended, one card away, the next
+ * six matches, contracts expiring. Every one of them was already printed, in
+ * fuller form, by the section that owns it — squad status, schedule, contracts.
+ * Repeating them here cost the page's best space to say a thing twice, and the
+ * header said it first, stripped of the context that makes it mean anything:
+ * a bare "2 suspended" above the fold pre-empts a block whose whole argument is
+ * that certain absences and matchday calls are not the same number.
+ *
+ * So the figures live where their working lives. What stays is what no section
+ * below repeats — whose page this is, and how fresh it is — and the reader
+ * reaches the first real figure a screen sooner.
  */
 export function ClubHero({
   identity,
   updatedAt,
-  stats,
   dict,
   locale,
 }: ClubHeroProps) {
@@ -64,26 +62,6 @@ export function ClubHero({
             <br />
             {formatLongDate(locale, updatedAt)}
           </p>
-        </div>
-
-        <div className={styles.stats}>
-          {stats.map((stat) => (
-            <div className={styles.stat} key={stat.label}>
-              <div className={styles.statLabel}>{stat.label}</div>
-              <div
-                className={[
-                  styles.statValue,
-                  stat.tone === "alert" ? styles.alert : "",
-                  stat.tone === "warn" ? styles.warnValue : "",
-                ]
-                  .filter(Boolean)
-                  .join(" ")}
-              >
-                {stat.value}
-              </div>
-              <div className={styles.statNote}>{stat.note}</div>
-            </div>
-          ))}
         </div>
       </div>
     </header>

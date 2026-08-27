@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
 import { AvailabilitySection } from "@/components/sections/AvailabilitySection";
-import { ClubHero, type HeroStat } from "@/components/sections/ClubHero";
+import { ClubHero } from "@/components/sections/ClubHero";
 import { ContractsSection } from "@/components/sections/ContractsSection";
 import { IdentitySection } from "@/components/sections/IdentitySection";
 import { InjurySection } from "@/components/sections/InjurySection";
@@ -20,15 +20,8 @@ import {
   computeDiscipline,
   playedFixtures,
   summariseDiscipline,
-  upcomingFixtures,
 } from "@/lib/discipline";
 import { getClub, listClubSlugs } from "@/lib/clubs";
-import {
-  formatDaysShort,
-  formatHeavyWeeks,
-  formatMatches,
-  formatNumber,
-} from "@/lib/format";
 import { isLocale, LOCALES, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n";
 
@@ -54,6 +47,13 @@ import { getDictionary } from "@/i18n";
  * reader had to scroll past both to reach anything else — the summary saved
  * nobody any work. Folded, they stay one click and one `Ctrl+F` away, because
  * a closed `<details>` keeps its contents in the document.
+ *
+ * The header carries no figures. It used to open on four — suspended, one card
+ * away, the next six matches, contracts expiring — on the argument that the
+ * calculable blocks deserve the page's best space. They do; but each of those
+ * four was the headline of a section below, so the band was spending that space
+ * on a preview rather than on the thing. Every figure now appears once, in the
+ * block that shows its working.
  *
  * Availability history stays a section of its own. It looks adjacent, but it
  * answers a different question — who misses matches across a season, not who
@@ -148,54 +148,13 @@ export default async function ClubPage({
     NOW,
   );
 
-  const upcoming = upcomingFixtures(club, NOW);
   const recent = playedFixtures(club).slice(0, 6);
-  const nextFixture = upcoming[0];
-
-  const stats: HeroStat[] = [
-    {
-      label: d.hero.suspended,
-      value: String(summary.suspendedCount),
-      note: nextFixture
-        ? d.hero.forFixture(
-            nextFixture.opponentShort,
-            nextFixture.venue === "home",
-          )
-        : d.hero.noFixture,
-      tone: summary.suspendedCount > 0 ? "alert" : undefined,
-    },
-    {
-      label: d.hero.atRisk,
-      value: String(summary.atRiskCount),
-      note: d.hero.atRiskNote,
-      tone: summary.atRiskCount > 0 ? "warn" : undefined,
-    },
-    {
-      label: d.hero.nextSix,
-      value: formatDaysShort(typed, congestion.spanDays),
-      note: d.hero.congestionNote(
-        formatHeavyWeeks(typed, congestion.heavyWeeks),
-        formatNumber(typed, congestion.totalTravelKm),
-      ),
-      tone: congestion.heavyWeeks > 0 ? "warn" : undefined,
-    },
-    {
-      label: d.hero.outOfContract,
-      value: String(contracts.expiringCount),
-      note: d.hero.contractNote(
-        formatMatches(typed, availability.missedToSuspension),
-        availability.missedToSuspension,
-      ),
-      tone: contracts.expiringCount > 2 ? "warn" : undefined,
-    },
-  ];
 
   return (
     <main>
       <ClubHero
         identity={club.identity}
         updatedAt={club.updatedAt}
-        stats={stats}
         dict={d}
         locale={typed}
       />
