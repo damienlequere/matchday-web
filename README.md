@@ -36,6 +36,37 @@ for all three already exist (`Fact<T>`, `Inference<T>`, `SourceRef`,
 Transfers and probable line-ups are further out still — costly, saturated, and
 the most fragile.
 
+## Next block: the pre-match comparison
+
+One page holding **two clubs side by side before they meet** — each side's
+certain absences, matchday calls and at-risk players, line by line, with the
+congestion each arrives on.
+
+It belongs to the calculable layer rather than beside it. `computeSquadStatus`
+already answers "who do I have for Sunday" for one club; the comparison answers
+"who is worse off on Sunday", which is the question actually being asked, and it
+adds no new source — only a join over blocks that already exist. It is also the
+first screen that lands on the pre-match moment, which is where a fantasy user
+picks a side and where a suspension is worth the most.
+
+Two constraints govern it.
+
+**The fixture model has to be reconciled first.** Fixtures are generated per
+club and never crossed, so the same match exists as two independent rows that
+disagree: `f36` on 21 February is `away` for Marseille *and* `away` for Lyon,
+the trip is 395 km on one side and 660 km on the other, and `f36` is a different
+match again in Paris's file. A match has no identity in the model. Every other
+page reads one club and never notices; a comparison reads two and shows the
+contradiction under both crests. The fix is to generate the calendar at league
+level and project it per club, so `venue` and `travelKm` are derived rather than
+written twice — the rule that already governs suspensions.
+
+**No overall advantage score.** Summing a ban and an expected return into one
+number would launder an inference into the voice of a record. The three
+registers stay apart on both sides, mirrored: `certain`, `doubtful`, `atRisk`.
+The genuinely new figure is the per-line differential — `LineStatus.thin`, read
+against the opponent's same line.
+
 ## Design rules the code enforces
 
 - **The club is the root entity.** A squad is reconstructed by resolving dated
