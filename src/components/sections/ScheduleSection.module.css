@@ -88,6 +88,17 @@
   color: var(--ink-2);
 }
 
+/* Kick-off under the date rather than beside it: it qualifies the date, and a
+   column of its own would have been a fifth thing competing for the row. */
+.kickoff {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-mono), monospace;
+  font-size: 11.5px;
+  color: var(--ink-3);
+  font-variant-numeric: tabular-nums;
+}
+
 .opponent {
   font-weight: 600;
   margin-right: 8px;
@@ -104,6 +115,11 @@
   white-space: nowrap;
 }
 
+.comp {
+  font-size: 12px;
+  color: var(--ink-2);
+}
+
 /* The working, set under the pill that judges it. */
 .loadDetail {
   display: block;
@@ -117,6 +133,64 @@
   overflow-x: auto;
 }
 
+.commodity {
+  margin-top: 14px;
+  margin-bottom: 6px;
+  font-size: 12.5px;
+  color: var(--ink-3);
+}
+
+/* Played matches, inside the drawer. A list rather than a table: with no load
+   to price, a result is a date, an opponent and a score. */
+.results {
+  border-top: 1px solid var(--line);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.date {
+  font-family: var(--font-mono), monospace;
+  font-size: 11.5px;
+  color: var(--ink-3);
+  min-width: 62px;
+  font-variant-numeric: tabular-nums;
+}
+
+.middle {
+  flex: 1;
+}
+
+.resultOpponent {
+  font-weight: 600;
+  font-size: 14.5px;
+  margin-right: 8px;
+}
+
+.score {
+  font-family: var(--font-mono), monospace;
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 3px 9px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
+.win { background: var(--ok-soft); color: var(--ok); }
+.draw { background: var(--surface-2); color: var(--ink-2); }
+.loss { background: var(--crit-soft); color: var(--crit); }
+
 @media (max-width: 860px) {
   .summary {
     grid-template-columns: 1fr;
@@ -124,12 +198,12 @@
 }
 
 /*
- * Below the fold of a phone, the four columns stop being a table and become a
+ * Below the fold of a phone, the five columns stop being a table and become a
  * stack of records. The headers are dropped because each value says what it is
- * on its own — a date, an opponent, a load sentence, a distance — so no cell
- * needs a label to be read. A horizontally scrolling table hid the load column
- * — the one column this section exists for — behind a gesture most readers
- * never make.
+ * on its own — a date, an opponent, a competition, a load sentence, a distance
+ * — so no cell needs a label to be read. A horizontally scrolling table hid the
+ * load column — the one column this section exists for — behind a gesture most
+ * readers never make.
  */
 @media (max-width: 620px) {
   .table thead {
@@ -158,6 +232,13 @@
     font-size: 12px;
   }
 
+  /* Kick-off rejoins the date inline here — a stacked record has no column to
+     lose it in, and two lines for a date would outweigh the score beside it. */
+  .kickoff {
+    display: inline;
+    margin-left: 6px;
+  }
+
   .table td.num {
     grid-column: 2;
     grid-row: 1;
@@ -165,13 +246,14 @@
     color: var(--ink-2);
   }
 
-  /* Opponent and load each take the full width beneath it. */
+  /* Opponent, competition and load each take the full width beneath it. */
   .table td:nth-child(2),
-  .table td:nth-child(3) {
+  .table td:nth-child(3),
+  .table td:nth-child(4) {
     grid-column: 1 / -1;
   }
 
-  .table td:nth-child(3) {
+  .table td:nth-child(4) {
     margin-top: 6px;
   }
 }

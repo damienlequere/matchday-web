@@ -3,13 +3,12 @@ import { notFound } from "next/navigation";
 
 import { AvailabilitySection } from "@/components/sections/AvailabilitySection";
 import { ClubHero, type HeroStat } from "@/components/sections/ClubHero";
-import { CongestionSection } from "@/components/sections/CongestionSection";
 import { ContractsSection } from "@/components/sections/ContractsSection";
-import { FixturesSection } from "@/components/sections/FixturesSection";
 import { IdentitySection } from "@/components/sections/IdentitySection";
 import { InjurySection } from "@/components/sections/InjurySection";
 import { Disclosure } from "@/components/ui/Disclosure";
 import { JumpNav } from "@/components/sections/JumpNav";
+import { ScheduleSection } from "@/components/sections/ScheduleSection";
 import { SquadStatusSection } from "@/components/sections/SquadStatusSection";
 import { SuspensionsSection } from "@/components/sections/SuspensionsSection";
 import { computeAvailability } from "@/lib/availability";
@@ -39,9 +38,16 @@ import { getDictionary } from "@/i18n";
  * Section order is the note's hierarchy, not the reader's curiosity: squad
  * status first because it is the question a reader actually arrives with and a
  * summary placed after what it summarises is only a repetition, then the
- * calculable blocks because they are defensible and free to keep fresh,
- * identity afterwards because it builds trust rather than traffic, fixtures
- * last because they are commodity.
+ * calculable blocks because they are defensible and free to keep fresh, and
+ * identity last because it builds trust rather than traffic.
+ *
+ * The fixture list is no longer a block of its own. It was printing the same
+ * six upcoming matches the congestion table already priced, which made the one
+ * genuinely commodity section on the page also a duplicate one. Schedule now
+ * carries both — the list and what it costs — and keeps congestion's slot,
+ * because a fixture list where every row is priced is not commodity. Played
+ * results, the one part with no congestion figure to carry, fold into a drawer
+ * inside it.
  *
  * Suspensions and the injury room are folded into squad status rather than
  * printed after it. They are its two sources, and leaving them open meant a
@@ -95,22 +101,21 @@ const NOW = new Date("2027-02-20T12:00:00Z");
 /**
  * Section ids are stable anchors; only their labels are translated.
  *
- * One entry per section the reader can actually scroll to. Suspensions and the
- * injury room are deliberately absent: they are folded into squad status, so
- * listing them would spend three entries on one destination and would promise
- * a jump where the page performs an unfold. Their `#suspensions` and
- * `#injuries` anchors still resolve — `Disclosure` opens the targeted drawer —
- * so links already in the wild keep working; what is removed is the menu
- * entry, not the destination.
+ * One entry per section the reader can actually scroll to. Suspensions, the
+ * injury room and recent results are deliberately absent: each is folded into
+ * a drawer, so listing them would spend extra entries on a destination already
+ * in the menu and would promise a jump where the page performs an unfold.
+ * Their `#suspensions`, `#injuries` and `#fixtures` anchors still resolve —
+ * `Disclosure` opens the targeted drawer — so links already in the wild keep
+ * working; what is removed is the menu entry, not the destination.
  */
 function jumpLinks(d: ReturnType<typeof getDictionary>) {
   return [
     { id: "squad-status", label: d.nav.squadStatus },
-    { id: "congestion", label: d.nav.congestion },
+    { id: "congestion", label: d.nav.schedule },
     { id: "contracts", label: d.nav.contracts },
     { id: "availability", label: d.nav.availability },
     { id: "identity", label: d.nav.identity },
-    { id: "fixtures", label: d.nav.fixtures },
   ];
 }
 
@@ -268,7 +273,12 @@ export default async function ClubPage({
           </>
         }
       />
-      <CongestionSection congestion={congestion} dict={d} locale={typed} />
+      <ScheduleSection
+        congestion={congestion}
+        recent={recent}
+        dict={d}
+        locale={typed}
+      />
       <ContractsSection contracts={contracts} dict={d} locale={typed} />
       <AvailabilitySection
         availability={availability}
@@ -276,12 +286,6 @@ export default async function ClubPage({
         locale={typed}
       />
       <IdentitySection club={club} dict={d} />
-      <FixturesSection
-        upcoming={upcoming.slice(0, 6)}
-        recent={recent}
-        dict={d}
-        locale={typed}
-      />
     </main>
   );
 }

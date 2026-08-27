@@ -62,11 +62,10 @@ export const en = {
   nav: {
     label: "Hub sections",
     squadStatus: "Squad status",
-    congestion: "Congestion",
+    schedule: "Schedule",
     contracts: "Contracts",
     availability: "Availability",
     identity: "Identity",
-    fixtures: "Fixtures",
   },
 
   hero: {
@@ -192,9 +191,18 @@ export const en = {
     carrying: "Carrying cards",
   },
 
-  congestion: {
-    title: "Fixture congestion",
-    lede: "What the next run of matches actually costs: turnaround between games, matches inside a rolling eight days, and kilometres travelled.",
+  /**
+   * The schedule, and what it costs.
+   *
+   * One block, because the upcoming table was the same six fixtures the
+   * fixtures section listed a second time, in a different date format, with
+   * the one column that argues anything ("Load") sitting 400px from the one
+   * that made it legible (kick-off time). Merged, the calculable figures ride
+   * on the list they describe.
+   */
+  schedule: {
+    title: "Schedule",
+    lede: "The next run of matches and what it actually costs: turnaround between games, matches inside a rolling eight days, and kilometres travelled.",
     nextMatches: "Next matches",
     across: "Across",
     shortestRest: "Shortest rest",
@@ -244,11 +252,38 @@ export const en = {
     table: {
       date: "Date",
       fixture: "Fixture",
+      /** Competition and kick-off, returned to the row the load is judged on. */
+      competition: "Comp",
       load: "Load",
       travel: "Travel",
     },
     home: "Home",
     away: "Away",
+    /**
+     * The same two venues, abbreviated, for lists with no room for a word —
+     * the fixtures a player misses, inside an injury row. Kept beside the long
+     * forms so the pair cannot drift apart.
+     */
+    homeShort: "H",
+    awayShort: "A",
+    kickoffNote: "Kick-off times in UTC.",
+
+    /**
+     * Recent results, folded into a drawer.
+     *
+     * Played matches are the one part of the old fixtures section that the
+     * congestion table does not already hold — but they are also the part
+     * nobody arrives for, and printing them open pushed the calculable blocks
+     * below them down the page. Same treatment as the squad-status sources.
+     */
+    recent: {
+      title: "Recent results",
+      lede: "The last matches played, most recent first.",
+      /** "6 played · 4W 1D 1L" — enough to decide whether to open the drawer. */
+      count: (played: number, w: number, d: number, l: number) =>
+        `${played} played · ${w}W ${d}D ${l}L`,
+      empty: "None played",
+    },
   },
 
   contracts: {
@@ -375,16 +410,6 @@ export const en = {
       MF: "Midfielders",
       FW: "Forwards",
     },
-  },
-
-  fixtures: {
-    title: "Fixtures",
-    lede: "The schedule the blocks above are computed against.",
-    nextUp: "Next up",
-    recent: "Recent results",
-    kickoffNote: "Kick-off times in UTC.",
-    home: "H",
-    away: "A",
   },
 
   provenance: {

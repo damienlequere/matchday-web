@@ -58,11 +58,10 @@ export const fr: Dictionary = {
   nav: {
     label: "Sections du hub",
     squadStatus: "État de l'effectif",
-    congestion: "Calendrier",
+    schedule: "Calendrier",
     contracts: "Contrats",
     availability: "Disponibilité",
     identity: "Identité",
-    fixtures: "Matchs",
   },
 
   hero: {
@@ -156,9 +155,9 @@ export const fr: Dictionary = {
     carrying: "Cartons en cours",
   },
 
-  congestion: {
-    title: "Densité du calendrier",
-    lede: "Ce que la prochaine série de matchs coûte réellement : le temps de récupération entre les rencontres, les matchs sur huit jours glissants et les kilomètres parcourus.",
+  schedule: {
+    title: "Calendrier",
+    lede: "La prochaine série de matchs et ce qu'elle coûte vraiment : récupération entre les rencontres, matchs sur huit jours glissants, et kilomètres parcourus.",
     nextMatches: "Prochains matchs",
     across: "Sur",
     shortestRest: "Récupération la plus courte",
@@ -194,11 +193,29 @@ export const fr: Dictionary = {
     table: {
       date: "Date",
       fixture: "Match",
+      competition: "Compét.",
       load: "Charge",
       travel: "Trajet",
     },
     home: "Domicile",
     away: "Extérieur",
+    /** Formes abrégées, pour les listes sans place pour un mot entier. */
+    homeShort: "D",
+    awayShort: "E",
+    kickoffNote: "Heures de coup d'envoi en UTC.",
+
+    recent: {
+      title: "Résultats récents",
+      lede: "Les derniers matchs joués, du plus récent au plus ancien.",
+      /**
+       * « 6 joués · 4V 1N 1D ».
+       *
+       * Victoire / Nul / Défaite : les initiales françaises, pas W/D/L.
+       */
+      count: (played: number, w: number, d: number, l: number) =>
+        `${played} ${played < 2 ? "joué" : "joués"} · ${w}V ${d}N ${l}D`,
+      empty: "Aucun match joué",
+    },
   },
 
   contracts: {
@@ -311,16 +328,6 @@ export const fr: Dictionary = {
       MF: "Milieux",
       FW: "Attaquants",
     },
-  },
-
-  fixtures: {
-    title: "Matchs",
-    lede: "Le calendrier sur lequel les blocs ci-dessus sont calculés.",
-    nextUp: "À venir",
-    recent: "Résultats récents",
-    kickoffNote: "Heures de coup d'envoi en UTC.",
-    home: "D",
-    away: "E",
   },
 
   provenance: {

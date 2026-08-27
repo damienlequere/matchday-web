@@ -252,7 +252,7 @@ export function SquadStatusSection({
 
             {status.heavyWeeks > 0 ? (
               <p className={styles.congestion}>
-                <Pill tone="warn">{dict.congestion.severity.heavy}</Pill>
+                <Pill tone="warn">{dict.schedule.severity.heavy}</Pill>
                 <span>
                   {dict.squadStatus.congestion(
                     formatHeavyWeeks(locale, status.heavyWeeks),

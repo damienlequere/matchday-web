@@ -137,8 +137,8 @@ function InjuryCard({
                     </span>
                     <span className={styles.fixtureVenue}>
                       {fixture.venue === "home"
-                        ? dict.fixtures.home
-                        : dict.fixtures.away}
+                        ? dict.schedule.homeShort
+                        : dict.schedule.awayShort}
                     </span>
                     <span>{fixture.opponentShort}</span>
                   </li>
