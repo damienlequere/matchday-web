@@ -58,11 +58,9 @@ export const fr: Dictionary = {
   nav: {
     label: "Sections du hub",
     squadStatus: "État de l'effectif",
-    suspensions: "Suspensions",
     congestion: "Calendrier",
     contracts: "Contrats",
     availability: "Disponibilité",
-    injuries: "Infirmerie",
     identity: "Identité",
     fixtures: "Matchs",
   },
@@ -87,7 +85,7 @@ export const fr: Dictionary = {
 
   squadStatus: {
     title: "État de l'effectif",
-    lede: "Qui manque pour le prochain match, quelle qu'en soit la cause. Les deux blocs ci-dessous en détaillent les raisons ; celui-ci les croise, parce qu'un entraîneur compte un effectif plutôt qu'un motif.",
+    lede: "Qui manque pour le prochain match, quelle qu'en soit la cause. Les suspensions et l'infirmerie en détaillent les raisons et se déplient plus bas ; ce bloc les croise, parce qu'un entraîneur compte un effectif plutôt qu'un motif.",
     /** "Prochain match : Stade Rennais (extérieur), dimanche 21 février" */
     nextFixture: (opponent: string, home: boolean, date: string) =>
       `Prochain match : ${opponent} (${home ? "domicile" : "extérieur"}), ${date}`,
@@ -111,13 +109,24 @@ export const fr: Dictionary = {
       `${competition} · encore ${matches}`,
     lines: "Par poste",
     linesNote:
-      "Le chiffre qu'aucun des deux blocs ci-dessous ne peut donner : où tombent les absences. Trois défenseurs centraux absents et trois attaquants absents ne posent pas le même problème.",
+      "Le chiffre qu'aucun des deux blocs sources ne peut donner : où tombent les absences. Trois défenseurs centraux absents et trois attaquants absents ne posent pas le même problème.",
     thin: "Dégarni",
     lineCount: (available: number, squad: number) =>
       `${available} sur ${squad} disponibles`,
     congestion: (weeks: string) =>
       `${weeks} dans la série à venir — une absence coûte davantage sur une période chargée.`,
-    note: "Les suspensions présentées ici sont calculables et certaines. L'état de l'infirmerie ne l'est pas : un joueur forfait est annoncé forfait, un joueur incertain est annoncé incertain, et les deux ne sont jamais additionnés. Le détail, avec sources et niveaux de confiance, figure dans les blocs ci-dessous.",
+    note: "Les suspensions présentées ici sont calculables et certaines. L'état de l'infirmerie ne l'est pas : un joueur forfait est annoncé forfait, un joueur incertain est annoncé incertain, et les deux ne sont jamais additionnés. Le détail, avec sources et niveaux de confiance, se déplie dans les deux volets ci-dessous.",
+
+    sources: {
+      label: "Le détail",
+      /** « 3 suspendus · 2 à un carton » */
+      suspensionsCount: (suspended: number, atRisk: number) =>
+        `${suspended} ${suspended < 2 ? "suspendu" : "suspendus"} · ${atRisk} à un carton`,
+      /** « 5 dossiers · 2 forfaits » */
+      injuriesCount: (total: number, out: number) =>
+        `${total} ${total < 2 ? "dossier" : "dossiers"} · ${out} ${out < 2 ? "forfait" : "forfaits"}`,
+      empty: "rien à signaler",
+    },
   },
 
   suspensions: {

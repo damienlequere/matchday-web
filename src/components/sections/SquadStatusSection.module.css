@@ -264,3 +264,21 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* --- Folded sources ------------------------------------------------------
+   The two blocks this section joins, kept on the page but out of the way.
+   Separated by a rule rather than a card, so they read as the evidence
+   drawer of this section rather than as sections in their own right. */
+
+.sources {
+  margin-top: 30px;
+}
+
+.sourcesLabel {
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  margin: 0 0 4px;
+}

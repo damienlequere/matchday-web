@@ -1,0 +1,118 @@
+/* A drawer, drawn as a row of the block it belongs to rather than as a card:
+   these are the sources behind the summary above, not siblings of it. */
+
+.details {
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 12px;
+}
+
+/*
+ * Opened by its own anchor.
+ *
+ * Current browsers expand a `<details>` when a fragment lands inside it, but
+ * the links in the jump nav point at the element itself and older engines do
+ * nothing at all — either way a reader would follow "Suspensions" and arrive at
+ * a shut drawer. Forcing the contents visible on `:target` makes the anchor a
+ * working destination everywhere; `content-visibility` is the part the UA
+ * stylesheet uses to hide them, so it is the part that has to be overridden.
+ */
+.details:target > .body {
+  content-visibility: visible;
+}
+
+/*
+ * The same override for engines that ship `::details-content`, where the
+ * hiding is done on the pseudo-element rather than on the child.
+ */
+.details:target::details-content {
+  content-visibility: visible;
+  block-size: auto;
+}
+
+.details:target > .summary .marker {
+  transform: rotate(45deg) translate(-2px, -2px);
+}
+
+.details:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.summary {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 16px 2px;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+
+/* Safari still paints its own triangle without this. */
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summary:hover .title,
+.summary:focus-visible .title {
+  color: var(--accent-ink);
+}
+
+.summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Drawn as a chevron so it reads as "there is more here" rather than as a
+   checkbox or a status light. */
+.marker {
+  flex: none;
+  width: 7px;
+  height: 7px;
+  margin-right: 2px;
+  border-right: 1.5px solid var(--ink-3);
+  border-bottom: 1.5px solid var(--ink-3);
+  transform: rotate(-45deg) translate(-1px, -1px);
+  transition: transform 0.15s ease;
+}
+
+.details[open] > .summary .marker {
+  transform: rotate(45deg) translate(-2px, -2px);
+}
+
+.title {
+  font-family: var(--font-display), sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  transition: color 0.15s ease;
+}
+
+/* The count is what makes the drawer worth opening or worth skipping, so it
+   is set in data type and never truncated away on small screens. */
+.count {
+  margin-left: auto;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.body {
+  padding: 2px 0 26px;
+}
+
+.lede {
+  margin: 0 0 20px;
+  max-width: 66ch;
+  color: var(--ink-2);
+  font-size: 14.5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marker {
+    transition: none;
+  }
+}

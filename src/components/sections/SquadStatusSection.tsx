@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 import type {
   AtRiskPlayer,
   LineStatus,
@@ -16,10 +18,12 @@ import styles from "./SquadStatusSection.module.css";
 /**
  * Squad status — the synthesis block.
  *
- * It sits above suspensions and the injury room because a summary placed after
- * what it summarises is not a summary, it is a repetition. Everything here is a
- * join over those two blocks; nothing here is a figure they already print on
- * its own.
+ * Suspensions and the injury room are folded into it rather than printed after
+ * it, because a summary placed above what it summarises only works if the
+ * reader is not asked to scroll past two long blocks to reach the rest of the
+ * page. Everything at the top level here is a join over those two sources;
+ * nothing here is a figure they already print on their own, and the sources
+ * themselves sit one click away in `sources` so the join stays auditable.
  *
  * The layout enforces the one rule the data model insists on: a ban and an
  * injury are not the same kind of knowledge. Certain absences sit in one
@@ -122,10 +126,20 @@ export function SquadStatusSection({
   status,
   dict,
   locale,
+  sources,
 }: {
   status: SquadStatus;
   dict: Dictionary;
   locale: Locale;
+  /**
+   * The source blocks this section joins, rendered as drawers beneath it.
+   *
+   * A slot rather than props for each block: what belongs behind the summary
+   * is the page's decision, and passing the composed nodes keeps this section
+   * from importing — and having to keep in step with — the signature of every
+   * block it happens to fold in.
+   */
+  sources?: ReactNode;
 }) {
   const next = status.nextFixture;
 
@@ -250,6 +264,17 @@ export function SquadStatusSection({
         </div>
 
         <p className={styles.note}>{dict.squadStatus.note}</p>
+
+        {/*
+          The evidence, folded. Placed after the note that names it so the
+          reader meets the claim, then the caveat, then the way to check both.
+        */}
+        {sources ? (
+          <div className={styles.sources}>
+            <p className={styles.sourcesLabel}>{dict.squadStatus.sources.label}</p>
+            {sources}
+          </div>
+        ) : null}
       </div>
     </Section>
   );

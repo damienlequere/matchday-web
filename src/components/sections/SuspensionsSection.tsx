@@ -40,11 +40,14 @@ export function SuspensionsSection({
   summary,
   dict,
   locale,
+  nested,
 }: {
   discipline: PlayerDiscipline[];
   summary: ClubDisciplineSummary;
   dict: Dictionary;
   locale: Locale;
+  /** Folded into the squad-status drawer; see `Section`. */
+  nested?: boolean;
 }) {
   const suspended = discipline.filter((d) => d.suspendedNow);
   const atRisk = discipline.filter((d) => d.atRisk);
@@ -57,6 +60,7 @@ export function SuspensionsSection({
       id="suspensions"
       title={dict.suspensions.title}
       lede={dict.suspensions.lede}
+      nested={nested}
     >
       <div className={styles.grid}>
         <Card>

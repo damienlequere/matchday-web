@@ -62,11 +62,9 @@ export const en = {
   nav: {
     label: "Hub sections",
     squadStatus: "Squad status",
-    suspensions: "Suspensions",
     congestion: "Congestion",
     contracts: "Contracts",
     availability: "Availability",
-    injuries: "Injury room",
     identity: "Identity",
     fixtures: "Fixtures",
   },
@@ -101,7 +99,7 @@ export const en = {
 
   squadStatus: {
     title: "Squad status",
-    lede: "Who is missing for the next fixture, whatever the cause. The two blocks below hold the detail; this one crosses them, because a manager counts a squad rather than a reason.",
+    lede: "Who is missing for the next fixture, whatever the cause. Suspensions and the injury room hold the detail and open below; this block crosses them, because a manager counts a squad rather than a reason.",
     /**
      * "Next fixture: Lens (away), Sunday 22 February"
      *
@@ -134,7 +132,7 @@ export const en = {
       `${competition} · ${matches} left`,
     lines: "By position",
     linesNote:
-      "The figure neither block below can give: where the absences fall. Three missing centre-backs and three missing forwards are not the same problem.",
+      "The figure neither source block can give: where the absences fall. Three missing centre-backs and three missing forwards are not the same problem.",
     thin: "Thin",
     /** "3 of 5 available" */
     lineCount: (available: number, squad: number) =>
@@ -142,7 +140,26 @@ export const en = {
     /** Context, not a headline: congestion changes what an absence costs. */
     congestion: (weeks: string) =>
       `${weeks} in the next run of fixtures — an absence costs more across a congested spell.`,
-    note: "Suspensions here are calculable and certain. Injury status is not: a player ruled out is reported as out, a doubtful player is reported as doubtful, and the two are never added together. The detail behind both, with sources and confidence, is in the blocks below.",
+    note: "Suspensions here are calculable and certain. Injury status is not: a player ruled out is reported as out, a doubtful player is reported as doubtful, and the two are never added together. The detail behind both, with sources and confidence, opens in the two drawers below.",
+
+    /**
+     * The folded source blocks.
+     *
+     * Each drawer's summary carries a tally, because a closed drawer whose
+     * contents are unknown is a worse offer than the open block it replaced:
+     * the count is what lets a reader skip it deliberately rather than blindly.
+     */
+    sources: {
+      label: "Detail",
+      /** "3 suspended · 2 one card away" */
+      suspensionsCount: (suspended: number, atRisk: number) =>
+        `${suspended} suspended · ${atRisk} one card away`,
+      /** "5 in the room · 2 out" */
+      injuriesCount: (total: number, out: number) =>
+        `${total} in the room · ${out} out`,
+      /** Said when a drawer holds nothing, so a shut drawer is not ambiguous. */
+      empty: "nothing to report",
+    },
   },
 
   suspensions: {

@@ -8,6 +8,7 @@ import { ContractsSection } from "@/components/sections/ContractsSection";
 import { FixturesSection } from "@/components/sections/FixturesSection";
 import { IdentitySection } from "@/components/sections/IdentitySection";
 import { InjurySection } from "@/components/sections/InjurySection";
+import { Disclosure } from "@/components/ui/Disclosure";
 import { JumpNav } from "@/components/sections/JumpNav";
 import { SquadStatusSection } from "@/components/sections/SquadStatusSection";
 import { SuspensionsSection } from "@/components/sections/SuspensionsSection";
@@ -41,6 +42,17 @@ import { getDictionary } from "@/i18n";
  * calculable blocks because they are defensible and free to keep fresh,
  * identity afterwards because it builds trust rather than traffic, fixtures
  * last because they are commodity.
+ *
+ * Suspensions and the injury room are folded into squad status rather than
+ * printed after it. They are its two sources, and leaving them open meant a
+ * reader had to scroll past both to reach anything else — the summary saved
+ * nobody any work. Folded, they stay one click and one `Ctrl+F` away, because
+ * a closed `<details>` keeps its contents in the document.
+ *
+ * Availability history stays a section of its own. It looks adjacent, but it
+ * answers a different question — who misses matches across a season, not who
+ * is missing on Sunday — and filing a season-long record behind a next-fixture
+ * summary would misfile it.
  */
 
 export async function generateStaticParams() {
@@ -80,15 +92,23 @@ export async function generateMetadata({
  */
 const NOW = new Date("2027-02-20T12:00:00Z");
 
-/** Section ids are stable anchors; only their labels are translated. */
+/**
+ * Section ids are stable anchors; only their labels are translated.
+ *
+ * One entry per section the reader can actually scroll to. Suspensions and the
+ * injury room are deliberately absent: they are folded into squad status, so
+ * listing them would spend three entries on one destination and would promise
+ * a jump where the page performs an unfold. Their `#suspensions` and
+ * `#injuries` anchors still resolve — `Disclosure` opens the targeted drawer —
+ * so links already in the wild keep working; what is removed is the menu
+ * entry, not the destination.
+ */
 function jumpLinks(d: ReturnType<typeof getDictionary>) {
   return [
     { id: "squad-status", label: d.nav.squadStatus },
-    { id: "suspensions", label: d.nav.suspensions },
     { id: "congestion", label: d.nav.congestion },
     { id: "contracts", label: d.nav.contracts },
     { id: "availability", label: d.nav.availability },
-    { id: "injuries", label: d.nav.injuries },
     { id: "identity", label: d.nav.identity },
     { id: "fixtures", label: d.nav.fixtures },
   ];
@@ -176,12 +196,77 @@ export default async function ClubPage({
       />
       <JumpNav links={jumpLinks(d)} dict={d} />
 
-      <SquadStatusSection status={squadStatus} dict={d} locale={typed} />
-      <SuspensionsSection
-        discipline={discipline}
-        summary={summary}
+      <SquadStatusSection
+        status={squadStatus}
         dict={d}
         locale={typed}
+        sources={
+          <>
+            <Disclosure
+              id="suspensions"
+              title={d.suspensions.title}
+              count={
+                summary.suspendedCount + summary.atRiskCount === 0
+                  ? d.squadStatus.sources.empty
+                  : d.squadStatus.sources.suspensionsCount(
+                      summary.suspendedCount,
+                      summary.atRiskCount,
+                    )
+              }
+              lede={d.suspensions.lede}
+              /*
+               * Shut by default, including when players are banned.
+               *
+               * "Somebody is suspended" is the normal state of a squad — every
+               * club in the set trips it — so opening on it would leave the
+               * page exactly as long as it was before, which is the problem
+               * the fold exists to solve. Squad status already prints the
+               * count and the names; the drawer holds the working, and the
+               * reader asks for the working when they want it.
+               */
+              defaultOpen={false}
+            >
+              <SuspensionsSection
+                discipline={discipline}
+                summary={summary}
+                dict={d}
+                locale={typed}
+                nested
+              />
+            </Disclosure>
+
+            <Disclosure
+              id="injuries"
+              title={d.injuries.title}
+              count={
+                injuries.rows.length === 0
+                  ? d.squadStatus.sources.empty
+                  : d.squadStatus.sources.injuriesCount(
+                      injuries.rows.length,
+                      injuries.outCount,
+                    )
+              }
+              lede={d.injuries.lede}
+              /*
+               * The one exception: sources that disagree.
+               *
+               * A contested return date is the only thing in either drawer
+               * that the summary above cannot honestly stand in for — it
+               * prints a conclusion, and the disagreement behind it is exactly
+               * what a reader would want to know before trusting it. An
+               * ordinary injury list is not a reason to unfold.
+               */
+              defaultOpen={injuries.conflictCount > 0}
+            >
+              <InjurySection
+                injuries={injuries}
+                dict={d}
+                locale={typed}
+                nested
+              />
+            </Disclosure>
+          </>
+        }
       />
       <CongestionSection congestion={congestion} dict={d} locale={typed} />
       <ContractsSection contracts={contracts} dict={d} locale={typed} />
@@ -190,7 +275,6 @@ export default async function ClubPage({
         dict={d}
         locale={typed}
       />
-      <InjurySection injuries={injuries} dict={d} locale={typed} />
       <IdentitySection club={club} dict={d} />
       <FixturesSection
         upcoming={upcoming.slice(0, 6)}

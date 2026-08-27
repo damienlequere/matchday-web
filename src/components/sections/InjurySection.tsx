@@ -172,10 +172,13 @@ export function InjurySection({
   injuries,
   dict,
   locale,
+  nested,
 }: {
   injuries: InjurySummary;
   dict: Dictionary;
   locale: Locale;
+  /** Folded into the squad-status drawer; see `Section`. */
+  nested?: boolean;
 }) {
   const counts: Array<{ value: number; label: string; tone?: string }> = [
     { value: injuries.outCount, label: dict.injuries.counts.out, tone: styles.out },
@@ -196,7 +199,12 @@ export function InjurySection({
   ];
 
   return (
-    <Section id="injuries" title={dict.injuries.title} lede={dict.injuries.lede}>
+    <Section
+      id="injuries"
+      title={dict.injuries.title}
+      lede={dict.injuries.lede}
+      nested={nested}
+    >
       <div className={styles.wrapper}>
         <p className={styles.caveat}>{dict.injuries.caveat}</p>
 
