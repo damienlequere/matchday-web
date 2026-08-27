@@ -121,10 +121,6 @@ export function formatDaysShort(locale: Locale, value: number): string {
   return getDictionary(locale).units.daysShort(value);
 }
 
-export function formatHeavyWeeks(locale: Locale, value: number): string {
-  return getDictionary(locale).units.weeks(value);
-}
-
 /** Ordinal: 1st, 2nd, 3rd… / 1er, 2e, 3e… */
 export function ordinal(locale: Locale, n: number): string {
   return getDictionary(locale).units.ordinal(n);

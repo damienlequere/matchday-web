@@ -33,8 +33,14 @@ export interface CongestionSummary {
   loads: FixtureLoad[];
   /** Total km over the window. */
   totalTravelKm: number;
-  /** Windows of 8 days containing 3+ matches. */
-  heavyWeeks: number;
+  /**
+   * Fixtures arriving inside an 8-day window that holds 3+ matches.
+   *
+   * A count of *matches*, not of weeks: the window is rolling, so two fixtures
+   * in the same congested spell count twice. Naming it after weeks invited the
+   * calendar reading the rest of this module is careful to avoid.
+   */
+  heavyFixtures: number;
   /** Shortest turnaround in the window, days. */
   shortestRest: number | null;
   matchCount: number;
@@ -123,7 +129,7 @@ export function computeCongestion(
   return {
     loads,
     totalTravelKm: loads.reduce((sum, l) => sum + l.travelKm, 0),
-    heavyWeeks: loads.filter((l) => l.matchesInEightDays >= 3).length,
+    heavyFixtures: loads.filter((l) => l.matchesInEightDays >= 3).length,
     shortestRest: rests.length ? Math.min(...rests) : null,
     matchCount: loads.length,
     spanDays: first && last ? daysBetween(first, last) : 0,

@@ -115,9 +115,17 @@ export const en = {
     /** "3 of 5 available" */
     lineCount: (available: number, squad: number) =>
       `${available} of ${squad} available`,
-    /** Context, not a headline: congestion changes what an absence costs. */
-    congestion: (weeks: string) =>
-      `${weeks} in the next run of fixtures — an absence costs more across a congested spell.`,
+    /**
+     * Context, not a headline: congestion changes what an absence costs.
+     *
+     * Stated rather than graded. A "Heavy" pill used to sit in front of this
+     * line, repeating the adjective and grading the whole run off a single
+     * dense fixture — severity is computed per match in the schedule block, not
+     * here. What is left is the fact, worded as it is there (matches, not
+     * weeks) so a reader can recount it across the two blocks.
+     */
+    congestion: (heavy: number, total: number) =>
+      `${heavy} of the next ${total} fixtures ${heavy === 1 ? "falls" : "fall"} in a run of 3 in 8 days — an absence costs more there, and rotation absorbs less.`,
     note: "Suspensions here are calculable and certain. Injury status is not: a player ruled out is reported as out, a doubtful player is reported as doubtful, and the two are never added together. The detail behind both, with sources and confidence, opens in the two drawers below.",
 
     /**
@@ -194,7 +202,7 @@ export const en = {
      * borrow the shorter, wrong noun. It sits under the shortest-rest tile, so
      * it has to name its own subject rather than lean on the tile above.
      */
-    heavyWeeks: (n: number) =>
+    heavyFixtures: (n: number) =>
       `${n} ${n === 1 ? "match" : "matches"} in a three-match week`,
     severity: {
       normal: "Normal",
@@ -406,7 +414,6 @@ export const en = {
     matches: (n: number) => `${n} ${n === 1 ? "match" : "matches"}`,
     /** Compact form for stat tiles: "25d". */
     daysShort: (n: number) => `${n}d`,
-    weeks: (n: number) => `${n} heavy ${n === 1 ? "week" : "weeks"}`,
     months: (n: number) => `${n} mo`,
     years: (n: number) => `${n} yr`,
     yearsMonths: (y: number, m: number) => `${y} yr ${m} mo`,

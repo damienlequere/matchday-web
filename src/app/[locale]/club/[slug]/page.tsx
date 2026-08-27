@@ -144,7 +144,7 @@ export default async function ClubPage({
     club,
     discipline,
     injuries,
-    congestion.heavyWeeks,
+    congestion,
     NOW,
   );
 

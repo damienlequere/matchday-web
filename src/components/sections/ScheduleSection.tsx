@@ -128,9 +128,9 @@ export function ScheduleSection({
                 ? "—"
                 : formatDaysShort(locale, congestion.shortestRest)}
             </div>
-            {congestion.heavyWeeks > 0 ? (
+            {congestion.heavyFixtures > 0 ? (
               <div className={styles.cellNote}>
-                {dict.schedule.heavyWeeks(congestion.heavyWeeks)}
+                {dict.schedule.heavyFixtures(congestion.heavyFixtures)}
               </div>
             ) : null}
           </div>

@@ -7,9 +7,8 @@ import type {
   UnavailablePlayer,
 } from "@/lib/squad-status";
 import { Card } from "@/components/ui/Card";
-import { Pill } from "@/components/ui/Pill";
 import { Section } from "@/components/sections/Section";
-import { formatMatches, formatWeekdayDate, formatHeavyWeeks } from "@/lib/format";
+import { formatMatches, formatWeekdayDate } from "@/lib/format";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n";
 
@@ -161,8 +160,14 @@ export function SquadStatusSection({
         </p>
 
         {/*
-          The headline pair. Kept side by side but never summed: the divider
+          The headline figures. Kept side by side but never summed: the divider
           between them is the point, not decoration.
+
+          Only the certain count is unconditional — it is the answer to the
+          question the block asks, and zero missing is worth stating. The other
+          two are omitted when empty: a tile reading "0 doubtful" spends the
+          same space as a real figure to say nothing happened, and the detail
+          card below already says it in words.
         */}
         <div className={styles.headline}>
           <div className={styles.figure}>
@@ -175,13 +180,17 @@ export function SquadStatusSection({
             </div>
           </div>
 
-          <div className={`${styles.figure} ${styles.soft}`}>
-            <div className={styles.figureValue}>{status.doubtfulCount}</div>
-            <div className={styles.figureLabel}>{dict.squadStatus.doubtful}</div>
-            <div className={styles.figureNote}>
-              {dict.squadStatus.doubtfulNote}
+          {status.doubtfulCount > 0 ? (
+            <div className={`${styles.figure} ${styles.soft}`}>
+              <div className={styles.figureValue}>{status.doubtfulCount}</div>
+              <div className={styles.figureLabel}>
+                {dict.squadStatus.doubtful}
+              </div>
+              <div className={styles.figureNote}>
+                {dict.squadStatus.doubtfulNote}
+              </div>
             </div>
-          </div>
+          ) : null}
 
           {status.returning.length > 0 ? (
             <div className={`${styles.figure} ${styles.good}`}>
@@ -250,14 +259,14 @@ export function SquadStatusSection({
               ))}
             </div>
 
-            {status.heavyWeeks > 0 ? (
-              <p className={styles.congestion}>
-                <Pill tone="warn">{dict.schedule.severity.heavy}</Pill>
-                <span>
-                  {dict.squadStatus.congestion(
-                    formatHeavyWeeks(locale, status.heavyWeeks),
-                  )}
-                </span>
+            {status.heavyFixtures > 0 && status.congestionPressure ? (
+              <p
+                className={`${styles.congestion} ${styles[status.congestionPressure]}`}
+              >
+                {dict.squadStatus.congestion(
+                  status.heavyFixtures,
+                  status.upcomingCount,
+                )}
               </p>
             ) : null}
           </Card>

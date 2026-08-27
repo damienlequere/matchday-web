@@ -1,3 +1,4 @@
+import type { CongestionSummary } from "@/lib/congestion";
 import type { PlayerDiscipline } from "@/lib/discipline";
 import type { InjurySummary } from "@/lib/injuries";
 import type { Club, Fixture, Position, Stint } from "@/types/club";
@@ -91,8 +92,29 @@ export interface SquadStatus {
   squadSize: number;
   certainCount: number;
   doubtfulCount: number;
-  /** Windows of 8 days holding 3+ matches, passed through for context. */
-  heavyWeeks: number;
+  /**
+   * Congestion context: how many of the upcoming fixtures land inside an
+   * 8-day window holding 3+ matches, and how many fixtures the window spans.
+   *
+   * Passed through rather than recomputed, and kept as two numbers so the
+   * sentence can name a share the reader can recount in the schedule block
+   * instead of asserting a severity nothing here calculates.
+   */
+  heavyFixtures: number;
+  upcomingCount: number;
+  /**
+   * How hard the congestion bears on the window, in two steps.
+   *
+   * Derived from the share the sentence already prints, so the colour is
+   * checkable against the words beside it rather than being a mood: `heavy`
+   * once half the upcoming fixtures or more land in a congested run, `some`
+   * below that. Absent when none do, and the line does not render at all.
+   *
+   * Deliberately not `FixtureLoad["severity"]`: that grades a single match on
+   * rest and density, and reusing the word for a whole window is what let a
+   * "Heavy" badge stand in front of a run holding one dense fixture.
+   */
+  congestionPressure: "some" | "heavy" | null;
 }
 
 const POSITION_ORDER: Position[] = ["GK", "DF", "MF", "FW"];
@@ -108,11 +130,19 @@ const POSITION_ORDER: Position[] = ["GK", "DF", "MF", "FW"];
  */
 const THIN_SHARE = 0.5;
 
+/**
+ * Half the window, and half for the same reason a line is thin at half.
+ *
+ * Below it a congested run is something to note; at or above it the manager is
+ * rotating through most of the window rather than around one midweek game.
+ */
+const HEAVY_SHARE = 0.5;
+
 export function computeSquadStatus(
   club: Club,
   discipline: PlayerDiscipline[],
   injuries: InjurySummary,
-  heavyWeeks: number,
+  congestion: CongestionSummary,
   now: Date,
 ): SquadStatus {
   const squad = club.squad.filter((s) => s.until === null);
@@ -261,6 +291,13 @@ export function computeSquadStatus(
     squadSize: squad.length,
     certainCount: unavailable.length,
     doubtfulCount: doubtful.length,
-    heavyWeeks,
+    heavyFixtures: congestion.heavyFixtures,
+    upcomingCount: congestion.matchCount,
+    congestionPressure:
+      congestion.heavyFixtures === 0 || congestion.matchCount === 0
+        ? null
+        : congestion.heavyFixtures >= congestion.matchCount * HEAVY_SHARE
+          ? "heavy"
+          : "some",
   };
 }

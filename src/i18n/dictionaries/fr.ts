@@ -100,8 +100,17 @@ export const fr: Dictionary = {
     thin: "Dégarni",
     lineCount: (available: number, squad: number) =>
       `${available} sur ${squad} disponibles`,
-    congestion: (weeks: string) =>
-      `${weeks} dans la série à venir — une absence coûte davantage sur une période chargée.`,
+    /**
+     * Le contexte de charge, énoncé et non qualifié.
+     *
+     * Un badge « Lourde » précédait cette phrase : il reprenait l'adjectif sans
+     * rien ajouter, et il qualifiait toute la série à partir d'un seul match
+     * dense. La sévérité se calcule par match dans le Calendrier, pas ici. Ne
+     * reste que le fait, formulé comme là-bas — des matchs, pas des semaines —
+     * pour que le lecteur puisse le recompter d'un bloc à l'autre.
+     */
+    congestion: (heavy: number, total: number) =>
+      `${heavy} des ${total} prochains matchs ${heavy < 2 ? "tombe" : "tombent"} dans une série de 3 en 8 jours — une absence y coûte davantage, la rotation absorbe moins.`,
     note: "Les suspensions présentées ici sont calculables et certaines. L'état de l'infirmerie ne l'est pas : un joueur forfait est annoncé forfait, un joueur incertain est annoncé incertain, et les deux ne sont jamais additionnés. Le détail, avec sources et niveaux de confiance, se déplie dans les deux volets ci-dessous.",
 
     sources: {
@@ -156,7 +165,7 @@ export const fr: Dictionary = {
      * Compte des matchs, pas des semaines : la fenêtre est glissante, et
      * « semaine chargée » ferait croire à un découpage calendaire.
      */
-    heavyWeeks: (n: number) =>
+    heavyFixtures: (n: number) =>
       `${n} ${n < 2 ? "match" : "matchs"} dans une série de 3 en 8 jours`,
     severity: {
       normal: "Normale",
@@ -332,8 +341,6 @@ export const fr: Dictionary = {
     days: (n: number) => `${n} ${n < 2 ? "jour" : "jours"}`,
     matches: (n: number) => `${n} ${n < 2 ? "match" : "matchs"}`,
     daysShort: (n: number) => `${n} j`,
-    weeks: (n: number) =>
-      `${n} ${n < 2 ? "semaine chargée" : "semaines chargées"}`,
     months: (n: number) => `${n} mois`,
     years: (n: number) => `${n} ${n < 2 ? "an" : "ans"}`,
     yearsMonths: (y: number, m: number) =>
