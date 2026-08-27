@@ -253,15 +253,12 @@ export default async function ClubPage({
               }
               lede={d.injuries.lede}
               /*
-               * The one exception: sources that disagree.
-               *
-               * A contested return date is the only thing in either drawer
-               * that the summary above cannot honestly stand in for — it
-               * prints a conclusion, and the disagreement behind it is exactly
-               * what a reader would want to know before trusting it. An
-               * ordinary injury list is not a reason to unfold.
+               * Closed on arrival, like its neighbour — even when sources
+               * disagree about a return date. The summary above already
+               * carries the conclusion; a page that unfolds itself decides
+               * for the reader what deserves their attention.
                */
-              defaultOpen={injuries.conflictCount > 0}
+              defaultOpen={false}
             >
               <InjurySection
                 injuries={injuries}
