@@ -1,5 +1,7 @@
 import type { ClubIdentity } from "@/types/club";
 import { formatLongDate, formatNumber } from "@/lib/format";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n";
 
 import styles from "./ClubHero.module.css";
 
@@ -14,6 +16,8 @@ interface ClubHeroProps {
   identity: ClubIdentity;
   updatedAt: string;
   stats: HeroStat[];
+  dict: Dictionary;
+  locale: Locale;
 }
 
 /**
@@ -24,7 +28,13 @@ interface ClubHeroProps {
  * the note's central argument: opening on the costly, copyable blocks spends
  * the page's best space on what everyone else already publishes.
  */
-export function ClubHero({ identity, updatedAt, stats }: ClubHeroProps) {
+export function ClubHero({
+  identity,
+  updatedAt,
+  stats,
+  dict,
+  locale,
+}: ClubHeroProps) {
   return (
     <header className={styles.hero}>
       <div className="wrap">
@@ -40,16 +50,19 @@ export function ClubHero({ identity, updatedAt, stats }: ClubHeroProps) {
             <div>
               <h1 className={styles.name}>{identity.name}</h1>
               <p className={styles.meta}>
-                {identity.competition} · {identity.stadium} ·{" "}
-                {formatNumber(identity.stadiumCapacity)} seats · founded{" "}
-                {identity.founded}
+                {identity.competition} ·{" "}
+                {dict.hero.meta(
+                  identity.stadium,
+                  formatNumber(locale, identity.stadiumCapacity),
+                  identity.founded,
+                )}
               </p>
             </div>
           </div>
           <p className={styles.updated}>
-            Updated
+            {dict.hero.updated}
             <br />
-            {formatLongDate(updatedAt)}
+            {formatLongDate(locale, updatedAt)}
           </p>
         </div>
 

@@ -2,6 +2,8 @@ import type { ContractStatus, ContractSummary } from "@/lib/contracts";
 import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/sections/Section";
 import { formatContractRemaining, formatLongDate } from "@/lib/format";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n";
 
 import styles from "./ContractsSection.module.css";
 
@@ -20,41 +22,48 @@ const STATUS_CLASS: Record<ContractStatus, string | undefined> = {
   unknown: styles.unknown,
 };
 
-const STATUS_LABEL: Record<ContractStatus, string> = {
-  expiring: "Expiring",
-  "final-year": "Final year",
-  secure: "Under contract",
-  unknown: "Unknown",
-};
-
-export function ContractsSection({ contracts }: { contracts: ContractSummary }) {
+export function ContractsSection({
+  contracts,
+  dict,
+  locale,
+}: {
+  contracts: ContractSummary;
+  dict: Dictionary;
+  locale: Locale;
+}) {
   return (
     <Section
       id="contracts"
-      title="Contract expiries"
-      lede={`Who is out of contract on ${formatLongDate(contracts.seasonEnd)}, who is in their final year, and who is tied down. Dates only — an unknown date is shown as unknown, never estimated.`}
+      title={dict.contracts.title}
+      lede={dict.contracts.lede(formatLongDate(locale, contracts.seasonEnd))}
     >
       <div className={styles.wrapper}>
         <div className={styles.counts}>
           <div>
             <div className={styles.count}>{contracts.expiringCount}</div>
-            <div className={styles.countLabel}>Out of contract in June</div>
+            <div className={styles.countLabel}>
+              {dict.contracts.expiringCount}
+            </div>
           </div>
           <div>
             <div className={styles.count}>{contracts.finalYearCount}</div>
-            <div className={styles.countLabel}>In their final year</div>
+            <div className={styles.countLabel}>
+              {dict.contracts.finalYearCount}
+            </div>
           </div>
           <div>
             <div className={styles.count}>{contracts.unknownCount}</div>
-            <div className={styles.countLabel}>Date not known</div>
+            <div className={styles.countLabel}>
+              {dict.contracts.unknownCount}
+            </div>
           </div>
         </div>
 
         <div className={styles.legend}>
-          {(Object.keys(STATUS_LABEL) as ContractStatus[]).map((status) => (
+          {(Object.keys(dict.contracts.status) as ContractStatus[]).map((status) => (
             <span className={styles.key} key={status}>
               <span className={`${styles.swatch} ${STATUS_CLASS[status]}`} />
-              {STATUS_LABEL[status]}
+              {dict.contracts.status[status]}
             </span>
           ))}
         </div>
@@ -65,13 +74,21 @@ export function ContractsSection({ contracts }: { contracts: ContractSummary }) 
               <thead>
                 <tr>
                   <th scope="col" className={styles.marker}>
-                    <span className="visually-hidden">Status</span>
+                    <span className="visually-hidden">
+                      {dict.contracts.table.status}
+                    </span>
                   </th>
-                  <th scope="col">Player</th>
-                  <th scope="col">Position</th>
-                  <th scope="col" className={styles.num}>Age</th>
-                  <th scope="col" className={styles.num}>Contract to</th>
-                  <th scope="col" className={styles.num}>Remaining</th>
+                  <th scope="col">{dict.contracts.table.player}</th>
+                  <th scope="col">{dict.contracts.table.position}</th>
+                  <th scope="col" className={styles.num}>
+                    {dict.contracts.table.age}
+                  </th>
+                  <th scope="col" className={styles.num}>
+                    {dict.contracts.table.contractTo}
+                  </th>
+                  <th scope="col" className={styles.num}>
+                    {dict.contracts.table.remaining}
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -81,7 +98,7 @@ export function ContractsSection({ contracts }: { contracts: ContractSummary }) 
                       className={`${styles.marker} ${STATUS_CLASS[row.status]}`}
                     >
                       <span className="visually-hidden">
-                        {STATUS_LABEL[row.status]}
+                        {dict.contracts.status[row.status]}
                       </span>
                     </td>
                     <td>
@@ -89,20 +106,22 @@ export function ContractsSection({ contracts }: { contracts: ContractSummary }) 
                         {row.stint.playerName}
                       </span>
                       {row.stint.onLoan ? (
-                        <span className={styles.loan}>Loan</span>
+                        <span className={styles.loan}>{dict.contracts.loan}</span>
                       ) : null}
                     </td>
                     <td className={styles.pos}>{row.stint.position}</td>
                     <td className={styles.num}>{row.age}</td>
                     <td className={styles.num}>
                       {row.stint.contractUntil ? (
-                        formatLongDate(row.stint.contractUntil)
+                        formatLongDate(locale, row.stint.contractUntil)
                       ) : (
-                        <span className={styles.unknownText}>Not known</span>
+                        <span className={styles.unknownText}>
+                          {dict.contracts.notKnown}
+                        </span>
                       )}
                     </td>
                     <td className={styles.num}>
-                      {formatContractRemaining(row.monthsRemaining)}
+                      {formatContractRemaining(locale, row.monthsRemaining)}
                     </td>
                   </tr>
                 ))}

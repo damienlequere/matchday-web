@@ -3,10 +3,13 @@ import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/sections/Section";
 import {
   formatDays,
+  formatDaysShort,
   formatKickoff,
   formatNumber,
   formatWeekdayDate,
 } from "@/lib/format";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n";
 
 import styles from "./CongestionSection.module.css";
 
@@ -18,12 +21,6 @@ import styles from "./CongestionSection.module.css";
  * the schedule, which is what makes this defensible without any daily work.
  */
 
-const SEVERITY_LABEL: Record<FixtureLoad["severity"], string> = {
-  normal: "Normal",
-  tight: "Tight",
-  heavy: "Heavy",
-};
-
 /** Bar width encodes severity so the column scans without reading each label. */
 const SEVERITY_WIDTH: Record<FixtureLoad["severity"], string> = {
   normal: "34%",
@@ -31,33 +28,47 @@ const SEVERITY_WIDTH: Record<FixtureLoad["severity"], string> = {
   heavy: "100%",
 };
 
-export function CongestionSection({ congestion }: { congestion: CongestionSummary }) {
+export function CongestionSection({
+  congestion,
+  dict,
+  locale,
+}: {
+  congestion: CongestionSummary;
+  dict: Dictionary;
+  locale: Locale;
+}) {
   return (
     <Section
       id="congestion"
-      title="Fixture congestion"
-      lede="What the next run of matches actually costs: turnaround between games, matches inside a rolling eight days, and kilometres travelled."
+      title={dict.congestion.title}
+      lede={dict.congestion.lede}
     >
       <div className={styles.wrapper}>
         <div className={styles.summary}>
           <div className={styles.cell}>
-            <div className={styles.cellLabel}>Next matches</div>
+            <div className={styles.cellLabel}>{dict.congestion.nextMatches}</div>
             <div className={styles.cellValue}>{congestion.matchCount}</div>
           </div>
           <div className={styles.cell}>
-            <div className={styles.cellLabel}>Across</div>
-            <div className={styles.cellValue}>{congestion.spanDays}d</div>
-          </div>
-          <div className={styles.cell}>
-            <div className={styles.cellLabel}>Shortest rest</div>
+            <div className={styles.cellLabel}>{dict.congestion.across}</div>
             <div className={styles.cellValue}>
-              {congestion.shortestRest === null ? "—" : `${congestion.shortestRest}d`}
+              {formatDaysShort(locale, congestion.spanDays)}
             </div>
           </div>
           <div className={styles.cell}>
-            <div className={styles.cellLabel}>Travel</div>
+            <div className={styles.cellLabel}>
+              {dict.congestion.shortestRest}
+            </div>
             <div className={styles.cellValue}>
-              {formatNumber(congestion.totalTravelKm)}km
+              {congestion.shortestRest === null
+                ? "—"
+                : formatDaysShort(locale, congestion.shortestRest)}
+            </div>
+          </div>
+          <div className={styles.cell}>
+            <div className={styles.cellLabel}>{dict.congestion.travel}</div>
+            <div className={styles.cellValue}>
+              {formatNumber(locale, congestion.totalTravelKm)}km
             </div>
           </div>
         </div>
@@ -67,27 +78,35 @@ export function CongestionSection({ congestion }: { congestion: CongestionSummar
             <table className={styles.table}>
               <thead>
                 <tr>
-                  <th scope="col">Date</th>
-                  <th scope="col">Fixture</th>
-                  <th scope="col" className={styles.num}>Rest</th>
-                  <th scope="col" className={styles.num}>In 8 days</th>
-                  <th scope="col" className={styles.num}>Travel</th>
-                  <th scope="col">Load</th>
+                  <th scope="col">{dict.congestion.table.date}</th>
+                  <th scope="col">{dict.congestion.table.fixture}</th>
+                  <th scope="col" className={styles.num}>
+                    {dict.congestion.table.rest}
+                  </th>
+                  <th scope="col" className={styles.num}>
+                    {dict.congestion.table.inEightDays}
+                  </th>
+                  <th scope="col" className={styles.num}>
+                    {dict.congestion.table.travel}
+                  </th>
+                  <th scope="col">{dict.congestion.table.load}</th>
                 </tr>
               </thead>
               <tbody>
                 {congestion.loads.map((load) => (
                   <tr key={load.fixture.id}>
                     <td>
-                      {formatWeekdayDate(load.fixture.kickoff)}
+                      {formatWeekdayDate(locale, load.fixture.kickoff)}
                       <br />
                       <span className={styles.comp}>
-                        {formatKickoff(load.fixture.kickoff)}
+                        {formatKickoff(locale, load.fixture.kickoff)}
                       </span>
                     </td>
                     <td>
                       <span className={styles.venue}>
-                        {load.fixture.venue === "home" ? "H" : "A"}
+                        {load.fixture.venue === "home"
+                          ? dict.congestion.home
+                          : dict.congestion.away}
                       </span>
                       <span className={styles.opponent}>
                         {load.fixture.opponent}
@@ -98,18 +117,22 @@ export function CongestionSection({ congestion }: { congestion: CongestionSummar
                       </span>
                     </td>
                     <td className={styles.num}>
-                      {load.restDays === null ? "—" : formatDays(load.restDays)}
+                      {load.restDays === null
+                        ? "—"
+                        : formatDays(locale, load.restDays)}
                     </td>
                     <td className={styles.num}>{load.matchesInEightDays}</td>
                     <td className={styles.num}>
-                      {load.travelKm ? `${formatNumber(load.travelKm)}km` : "—"}
+                      {load.travelKm
+                        ? `${formatNumber(locale, load.travelKm)}km`
+                        : "—"}
                     </td>
                     <td className={styles.severityCell}>
                       <span
                         className={`${styles.bar} ${styles[load.severity]}`}
                         style={{ width: SEVERITY_WIDTH[load.severity] }}
                         role="img"
-                        aria-label={SEVERITY_LABEL[load.severity]}
+                        aria-label={dict.congestion.severity[load.severity]}
                       />
                     </td>
                   </tr>

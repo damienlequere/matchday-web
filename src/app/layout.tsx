@@ -1,4 +1,4 @@
-import type { Metadata, Viewport } from "next";
+import type { Viewport } from "next";
 
 /**
  * Self-hosted fonts via Fontsource rather than `next/font/google`.
@@ -21,18 +21,6 @@ import "@fontsource/ibm-plex-mono/600.css";
 
 import "./globals.css";
 
-import { DemoBanner } from "@/components/ui/DemoBanner";
-import { SiteFooter } from "@/components/sections/SiteFooter";
-
-export const metadata: Metadata = {
-  title: {
-    default: "Matchday",
-    template: "%s · Matchday",
-  },
-  description:
-    "The club hub: suspensions, fixture congestion and contract expiries in one address instead of six.",
-};
-
 export const viewport: Viewport = {
   themeColor: [
     { media: "(prefers-color-scheme: light)", color: "#f5f4ef" },
@@ -40,16 +28,14 @@ export const viewport: Viewport = {
   ],
 };
 
+/**
+ * The root layout owns `<html>`, but the locale lives in a route param that a
+ * root layout cannot read. So it renders no chrome: `lang`, the banner and the
+ * footer all belong to `[locale]/layout.tsx`, which knows which language it is
+ * rendering.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  return (
-    <html lang="en">
-      <body>
-        <DemoBanner />
-        {children}
-        <SiteFooter />
-      </body>
-    </html>
-  );
+  return children;
 }

@@ -1,88 +1,145 @@
-const NUMBER = new Intl.NumberFormat("en-GB");
+import { INTL_LOCALE, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n";
 
-export function formatNumber(value: number): string {
-  return NUMBER.format(value);
+/**
+ * Locale-aware formatting.
+ *
+ * `Intl` objects are expensive to construct and were previously built once at
+ * module scope against a hardcoded "en-GB". They are now memoized per locale
+ * instead, which keeps that saving while letting French render "20 février
+ * 2027" and "1 234".
+ *
+ * Everything stays on UTC: the fixture data is UTC and the footer says so, so
+ * shifting to a viewer's zone would silently contradict the page.
+ */
+
+type Formatters = {
+  number: Intl.NumberFormat;
+  longDate: Intl.DateTimeFormat;
+  shortDate: Intl.DateTimeFormat;
+  weekdayDate: Intl.DateTimeFormat;
+  kickoff: Intl.DateTimeFormat;
+};
+
+const CACHE = new Map<Locale, Formatters>();
+
+function formatters(locale: Locale): Formatters {
+  const cached = CACHE.get(locale);
+  if (cached) return cached;
+
+  const tag = INTL_LOCALE[locale];
+  const built: Formatters = {
+    number: new Intl.NumberFormat(tag),
+    longDate: new Intl.DateTimeFormat(tag, {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      timeZone: "UTC",
+    }),
+    shortDate: new Intl.DateTimeFormat(tag, {
+      day: "2-digit",
+      month: "short",
+      timeZone: "UTC",
+    }),
+    weekdayDate: new Intl.DateTimeFormat(tag, {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      timeZone: "UTC",
+    }),
+    kickoff: new Intl.DateTimeFormat(tag, {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: "UTC",
+    }),
+  };
+
+  CACHE.set(locale, built);
+  return built;
 }
 
-export function formatDecimal(value: number, digits = 1): string {
-  return value.toFixed(digits);
+export function formatNumber(locale: Locale, value: number): string {
+  return formatters(locale).number.format(value);
 }
 
-export function formatPercent(value: number, digits = 0): string {
-  return `${(value * 100).toFixed(digits)}%`;
+export function formatDecimal(
+  locale: Locale,
+  value: number,
+  digits = 1,
+): string {
+  return formatters(locale).number.format(
+    Number(value.toFixed(digits)),
+  );
 }
 
-const LONG_DATE = new Intl.DateTimeFormat("en-GB", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-  timeZone: "UTC",
-});
-
-const SHORT_DATE = new Intl.DateTimeFormat("en-GB", {
-  day: "2-digit",
-  month: "short",
-  timeZone: "UTC",
-});
-
-const WEEKDAY_DATE = new Intl.DateTimeFormat("en-GB", {
-  weekday: "long",
-  day: "numeric",
-  month: "long",
-  timeZone: "UTC",
-});
-
-const KICKOFF_TIME = new Intl.DateTimeFormat("en-GB", {
-  hour: "2-digit",
-  minute: "2-digit",
-  hour12: false,
-  timeZone: "UTC",
-});
+export function formatPercent(
+  locale: Locale,
+  value: number,
+  digits = 0,
+): string {
+  return `${formatters(locale).number.format(Number((value * 100).toFixed(digits)))}%`;
+}
 
 /** Accepts a date or a date-time; the date part is what matters. */
-export function formatLongDate(iso: string): string {
-  return LONG_DATE.format(new Date(normalise(iso)));
+export function formatLongDate(locale: Locale, iso: string): string {
+  return formatters(locale).longDate.format(new Date(normalise(iso)));
 }
 
-export function formatShortDate(iso: string): string {
-  return SHORT_DATE.format(new Date(normalise(iso)));
+export function formatShortDate(locale: Locale, iso: string): string {
+  return formatters(locale).shortDate.format(new Date(normalise(iso)));
 }
 
-export function formatWeekdayDate(iso: string): string {
-  return WEEKDAY_DATE.format(new Date(normalise(iso)));
+export function formatWeekdayDate(locale: Locale, iso: string): string {
+  return formatters(locale).weekdayDate.format(new Date(normalise(iso)));
 }
 
-export function formatKickoff(iso: string): string {
-  return KICKOFF_TIME.format(new Date(iso));
+export function formatKickoff(locale: Locale, iso: string): string {
+  return formatters(locale).kickoff.format(new Date(iso));
 }
 
 function normalise(iso: string): string {
   return iso.length === 10 ? `${iso}T00:00:00Z` : iso;
 }
 
-/** "3 days", "1 day" — rest gaps read better spelled out than as a bare number. */
-export function formatDays(value: number): string {
-  return `${value} ${value === 1 ? "day" : "days"}`;
+/**
+ * Counted nouns.
+ *
+ * The plural boundary is not the same in every language — French treats 0 as
+ * singular — so the rule lives in each dictionary rather than here.
+ */
+export function formatDays(locale: Locale, value: number): string {
+  return getDictionary(locale).units.days(value);
 }
 
-export function formatMatches(value: number): string {
-  return `${value} ${value === 1 ? "match" : "matches"}`;
+export function formatMatches(locale: Locale, value: number): string {
+  return getDictionary(locale).units.matches(value);
 }
 
-/** Ordinal: 1st, 2nd, 3rd… */
-export function ordinal(n: number): string {
-  const rem100 = n % 100;
-  if (rem100 >= 11 && rem100 <= 13) return `${n}th`;
-  const suffix = { 1: "st", 2: "nd", 3: "rd" }[n % 10] ?? "th";
-  return `${n}${suffix}`;
+/** Compact day count for stat tiles and table cells: "25d" / "25 j". */
+export function formatDaysShort(locale: Locale, value: number): string {
+  return getDictionary(locale).units.daysShort(value);
+}
+
+export function formatHeavyWeeks(locale: Locale, value: number): string {
+  return getDictionary(locale).units.weeks(value);
+}
+
+/** Ordinal: 1st, 2nd, 3rd… / 1er, 2e, 3e… */
+export function ordinal(locale: Locale, n: number): string {
+  return getDictionary(locale).units.ordinal(n);
 }
 
 /** Months remaining, expressed the way a supporter reads a contract. */
-export function formatContractRemaining(months: number | null): string {
-  if (months === null) return "Unknown";
-  if (months <= 0) return "Expired";
-  if (months < 12) return `${months} mo`;
+export function formatContractRemaining(
+  locale: Locale,
+  months: number | null,
+): string {
+  const units = getDictionary(locale).units;
+  if (months === null) return units.contractUnknown;
+  if (months <= 0) return units.contractExpired;
+  if (months < 12) return units.months(months);
   const years = Math.floor(months / 12);
   const rest = months % 12;
-  return rest === 0 ? `${years} yr` : `${years} yr ${rest} mo`;
+  return rest === 0 ? units.years(years) : units.yearsMonths(years, rest);
 }

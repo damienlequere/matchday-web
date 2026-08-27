@@ -1,3 +1,5 @@
+import type { Dictionary } from "@/i18n";
+
 import styles from "./JumpNav.module.css";
 
 export interface JumpLink {
@@ -5,9 +7,15 @@ export interface JumpLink {
   label: string;
 }
 
-export function JumpNav({ links }: { links: JumpLink[] }) {
+export function JumpNav({
+  links,
+  dict,
+}: {
+  links: JumpLink[];
+  dict: Dictionary;
+}) {
   return (
-    <nav className={styles.nav} aria-label="Hub sections">
+    <nav className={styles.nav} aria-label={dict.nav.label}>
       <div className="wrap">
         <ul>
           {links.map((link) => (

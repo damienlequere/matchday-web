@@ -3,6 +3,8 @@ import type { AbsenceReason } from "@/types/club";
 import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/sections/Section";
 import { formatPercent } from "@/lib/format";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n";
 
 import styles from "./AvailabilitySection.module.css";
 
@@ -17,13 +19,6 @@ import styles from "./AvailabilitySection.module.css";
 
 const REASONS: AbsenceReason[] = ["suspension", "injury", "international", "other"];
 
-const REASON_LABEL: Record<AbsenceReason, string> = {
-  suspension: "Suspension",
-  injury: "Injury",
-  international: "International duty",
-  other: "Other",
-};
-
 const REASON_CLASS: Record<AbsenceReason, string | undefined> = {
   suspension: styles.suspension,
   injury: styles.injury,
@@ -33,20 +28,24 @@ const REASON_CLASS: Record<AbsenceReason, string | undefined> = {
 
 export function AvailabilitySection({
   availability,
+  dict,
+  locale,
 }: {
   availability: AvailabilitySummary;
+  dict: Dictionary;
+  locale: Locale;
 }) {
   return (
     <Section
       id="availability"
-      title="Availability history"
-      lede="Matches missed so far this season and why. Derived from team sheets already on record — this is history, not a prediction of who returns when."
+      title={dict.availability.title}
+      lede={dict.availability.lede}
     >
       <div className={styles.wrapper}>
         <Card>
-          <p className={styles.blockTitle}>Matches missed by player</p>
+          <p className={styles.blockTitle}>{dict.availability.byPlayer}</p>
           {availability.rows.length === 0 ? (
-            <p>Nobody has missed a match this season.</p>
+            <p>{dict.availability.noneMissed}</p>
           ) : (
             availability.rows.map((row) => (
               <div className={styles.row} key={row.stint.playerSlug}>
@@ -54,7 +53,10 @@ export function AvailabilitySection({
                   <div className={styles.player}>{row.stint.playerName}</div>
                   <div className={styles.reasons}>
                     {REASONS.filter((r) => row.byReason[r] > 0)
-                      .map((r) => `${row.byReason[r]} ${REASON_LABEL[r].toLowerCase()}`)
+                      .map(
+                        (r) =>
+                          `${row.byReason[r]} ${dict.availability.reasonInline[r]}`,
+                      )
                       .join(" · ")}
                   </div>
                 </div>
@@ -75,7 +77,7 @@ export function AvailabilitySection({
                   {row.missed}
                   <br />
                   <span className={styles.share}>
-                    {formatPercent(row.missedShare)}
+                    {formatPercent(locale, row.missedShare)}
                   </span>
                 </div>
               </div>
@@ -84,25 +86,22 @@ export function AvailabilitySection({
         </Card>
 
         <Card>
-          <p className={styles.blockTitle}>Season total</p>
+          <p className={styles.blockTitle}>{dict.availability.seasonTotal}</p>
           <p>
-            <strong>{availability.totalMissed}</strong> player-matches lost,{" "}
-            <strong>{availability.missedToSuspension}</strong> of them to
-            suspension.
+            <strong>{availability.totalMissed}</strong>
+            {dict.availability.totalSentence.middle}
+            <strong>{availability.missedToSuspension}</strong>
+            {dict.availability.totalSentence.after}
           </p>
           <div className={styles.legend}>
             {REASONS.map((reason) => (
               <span className={styles.key} key={reason}>
                 <span className={`${styles.swatch} ${REASON_CLASS[reason]}`} />
-                {REASON_LABEL[reason]}
+                {dict.availability.reason[reason]}
               </span>
             ))}
           </div>
-          <p className={styles.note}>
-            Time lost to suspension is the avoidable share — and the only one
-            this hub can predict, because a ban follows a rule while a recovery
-            does not.
-          </p>
+          <p className={styles.note}>{dict.availability.note}</p>
         </Card>
       </div>
     </Section>

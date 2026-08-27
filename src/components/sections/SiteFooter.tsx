@@ -1,22 +1,32 @@
+import { LocaleSwitcher } from "@/components/ui/LocaleSwitcher";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n";
+
 import styles from "./SiteFooter.module.css";
 
-export function SiteFooter() {
+export function SiteFooter({
+  dict,
+  locale,
+}: {
+  dict: Dictionary;
+  locale: Locale;
+}) {
   return (
     <footer className={styles.footer}>
       <div className={`wrap ${styles.cols}`}>
         <p>
-          <b>Matchday &mdash; club hub prototype.</b>
+          <b>{dict.footer.title}</b>
           <br />
-          One address instead of six. This build ships the calculable layer —
-          suspensions, fixture congestion, contract expiries and availability
-          history — plus club identity. No affiliation with any club, league or
-          federation.
+          {dict.footer.body}
         </p>
-        <p className={styles.right}>
-          All figures are demonstration data.
-          <br />
-          Calculable blocks are computed, never stored.
-        </p>
+        <div className={styles.right}>
+          <p>
+            {dict.footer.demo}
+            <br />
+            {dict.footer.computed}
+          </p>
+          <LocaleSwitcher dict={dict} locale={locale} />
+        </div>
       </div>
     </footer>
   );

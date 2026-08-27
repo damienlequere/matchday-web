@@ -3,6 +3,8 @@ import { Card } from "@/components/ui/Card";
 import { Pill } from "@/components/ui/Pill";
 import { Section } from "@/components/sections/Section";
 import { formatDecimal, formatMatches, formatShortDate } from "@/lib/format";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n";
 
 import styles from "./SuspensionsSection.module.css";
 
@@ -13,12 +15,6 @@ import styles from "./SuspensionsSection.module.css";
  * stored as a conclusion, which is why the block cannot drift out of date
  * relative to the facts underneath it.
  */
-
-const REASON_LABEL: Record<NonNullable<PlayerDiscipline["reason"]>, string> = {
-  threshold: "Card accumulation",
-  red: "Straight red",
-  "second-yellow": "Two yellows",
-};
 
 function Pips({ held, threshold }: { held: number; threshold: number }) {
   return (
@@ -42,9 +38,13 @@ function Pips({ held, threshold }: { held: number; threshold: number }) {
 export function SuspensionsSection({
   discipline,
   summary,
+  dict,
+  locale,
 }: {
   discipline: PlayerDiscipline[];
   summary: ClubDisciplineSummary;
+  dict: Dictionary;
+  locale: Locale;
 }) {
   const suspended = discipline.filter((d) => d.suspendedNow);
   const atRisk = discipline.filter((d) => d.atRisk);
@@ -55,16 +55,14 @@ export function SuspensionsSection({
   return (
     <Section
       id="suspensions"
-      title="Suspensions & cards"
-      lede="Computed from public match reports against each competition's own rules. No judgement, no collection — the same inputs always give the same answer."
+      title={dict.suspensions.title}
+      lede={dict.suspensions.lede}
     >
       <div className={styles.grid}>
         <Card>
-          <p className={styles.blockTitle}>Out through suspension</p>
+          <p className={styles.blockTitle}>{dict.suspensions.out}</p>
           {suspended.length === 0 ? (
-            <p className={styles.empty}>
-              Nobody is currently serving a ban.
-            </p>
+            <p className={styles.empty}>{dict.suspensions.noneServing}</p>
           ) : (
             suspended.map((row) => (
               <div className={styles.row} key={`${row.playerSlug}-${row.competition}`}>
@@ -76,33 +74,39 @@ export function SuspensionsSection({
                     <span className={styles.player}>{row.playerName}</span>
                   </div>
                   <p className={styles.detail}>
-                    {row.reason ? REASON_LABEL[row.reason] : "Suspended"} ·{" "}
+                    {row.reason
+                      ? dict.suspensions.reason[row.reason]
+                      : dict.suspensions.suspendedFallback}{" "}
+                    ·{" "}
                     <span className={styles.comp}>{row.competition}</span>
                   </p>
                   {row.missedFixtures.length > 0 ? (
                     <p className={styles.missed}>
-                      Misses{" "}
-                      {row.missedFixtures
-                        .map(
-                          (f) =>
-                            `${f.venue === "home" ? "v" : "at"} ${f.opponentShort} (${formatShortDate(f.kickoff)})`,
-                        )
-                        .join(", ")}
+                      {dict.suspensions.misses(
+                        row.missedFixtures
+                          .map(
+                            (f) =>
+                              `${f.venue === "home" ? dict.suspensions.versus : dict.suspensions.at} ${f.opponentShort} (${formatShortDate(locale, f.kickoff)})`,
+                          )
+                          .join(", "),
+                      )}
                     </p>
                   ) : null}
                 </div>
                 <div className={styles.right}>
-                  <Pill tone="crit">{formatMatches(row.matchesRemaining)}</Pill>
+                  <Pill tone="crit">
+                    {formatMatches(locale, row.matchesRemaining)}
+                  </Pill>
                 </div>
               </div>
             ))
           )}
 
           <p className={`${styles.blockTitle} ${styles.spaced}`}>
-            One card from a ban
+            {dict.suspensions.oneCardAway}
           </p>
           {atRisk.length === 0 ? (
-            <p className={styles.empty}>Nobody is on the threshold.</p>
+            <p className={styles.empty}>{dict.suspensions.noneOnThreshold}</p>
           ) : (
             atRisk.map((row) => (
               <div className={styles.row} key={`${row.playerSlug}-${row.competition}`}>
@@ -114,13 +118,17 @@ export function SuspensionsSection({
                     <span className={styles.player}>{row.playerName}</span>
                   </div>
                   <p className={styles.detail}>
-                    {row.yellowsTowardBan} of {row.threshold} yellows ·{" "}
+                    {dict.suspensions.yellowsOf(
+                      row.yellowsTowardBan,
+                      row.threshold,
+                    )}{" "}
+                    ·{" "}
                     <span className={styles.comp}>{row.competition}</span>
                   </p>
                   <Pips held={row.yellowsTowardBan} threshold={row.threshold} />
                 </div>
                 <div className={styles.right}>
-                  <Pill tone="warn">At risk</Pill>
+                  <Pill tone="warn">{dict.suspensions.atRiskPill}</Pill>
                 </div>
               </div>
             ))
@@ -129,26 +137,30 @@ export function SuspensionsSection({
 
         <div>
           <Card>
-            <p className={styles.blockTitle}>Squad discipline</p>
+            <p className={styles.blockTitle}>{dict.suspensions.squadDiscipline}</p>
             <div className={styles.summary}>
               <div className={styles.cell}>
-                <div className={styles.cellLabel}>Yellow cards</div>
+                <div className={styles.cellLabel}>{dict.suspensions.yellowCards}</div>
                 <div className={styles.cellValue}>{summary.yellows}</div>
               </div>
               <div className={styles.cell}>
-                <div className={styles.cellLabel}>Dismissals</div>
+                <div className={styles.cellLabel}>{dict.suspensions.dismissals}</div>
                 <div className={styles.cellValue}>
                   {summary.reds + summary.secondYellows}
                 </div>
               </div>
               <div className={styles.cell}>
-                <div className={styles.cellLabel}>Cards per match</div>
+                <div className={styles.cellLabel}>
+                  {dict.suspensions.cardsPerMatch}
+                </div>
                 <div className={styles.cellValue}>
-                  {formatDecimal(summary.cardsPerMatch, 2)}
+                  {formatDecimal(locale, summary.cardsPerMatch, 2)}
                 </div>
               </div>
               <div className={styles.cell}>
-                <div className={styles.cellLabel}>On the threshold</div>
+                <div className={styles.cellLabel}>
+                  {dict.suspensions.onThreshold}
+                </div>
                 <div className={styles.cellValue}>{summary.atRiskCount}</div>
               </div>
             </div>
@@ -156,7 +168,7 @@ export function SuspensionsSection({
 
           {carrying.length > 0 ? (
             <Card className={styles.stacked}>
-              <p className={styles.blockTitle}>Carrying cards</p>
+              <p className={styles.blockTitle}>{dict.suspensions.carrying}</p>
               {carrying.map((row) => (
                 <div className={styles.row} key={`${row.playerSlug}-${row.competition}`}>
                   <div>

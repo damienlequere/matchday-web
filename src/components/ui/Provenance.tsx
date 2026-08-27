@@ -1,5 +1,7 @@
 import type { Confidence, Known, SourceRef } from "@/types/club";
 import { isFact } from "@/types/club";
+import type { Dictionary } from "@/i18n";
+import { translateData } from "@/i18n";
 
 import styles from "./Provenance.module.css";
 
@@ -11,15 +13,24 @@ import styles from "./Provenance.module.css";
  * can. These components exist so that rule survives contact with the page.
  */
 
-export function Source({ source }: { source: SourceRef }) {
+export function Source({
+  source,
+  dict,
+}: {
+  source: SourceRef;
+  dict: Dictionary;
+}) {
+  // Source labels arrive inside the club data; unmapped ones show as-is.
+  const label = translateData(dict.data.sourceLabel, source.label);
+
   return (
     <span className={styles.source}>
       {source.url ? (
         <a href={source.url} rel="nofollow noopener" target="_blank">
-          {source.label}
+          {label}
         </a>
       ) : (
-        <span>{source.label}</span>
+        <span>{label}</span>
       )}
       <span aria-hidden="true">·</span>
       <span>{source.observedAt}</span>
@@ -27,17 +38,16 @@ export function Source({ source }: { source: SourceRef }) {
   );
 }
 
-const CONFIDENCE_LABEL: Record<Confidence, string> = {
-  official: "Official",
-  reported: "Reported",
-  derived: "Derived",
-  estimated: "Estimated",
-};
-
-export function ConfidenceTag({ level }: { level: Confidence }) {
+export function ConfidenceTag({
+  level,
+  dict,
+}: {
+  level: Confidence;
+  dict: Dictionary;
+}) {
   return (
     <span className={`${styles.confidence} ${styles[level]}`}>
-      {CONFIDENCE_LABEL[level]}
+      {dict.provenance.confidence[level]}
     </span>
   );
 }
@@ -48,11 +58,17 @@ export function ConfidenceTag({ level }: { level: Confidence }) {
  * A fact prints plainly. An inference is underlined and tagged, because a page
  * that renders a judgement in the voice of a record lies by omission.
  */
-export function KnownValue<T extends React.ReactNode>({ datum }: { datum: Known<T> }) {
+export function KnownValue<T extends React.ReactNode>({
+  datum,
+  dict,
+}: {
+  datum: Known<T>;
+  dict: Dictionary;
+}) {
   if (isFact(datum)) {
     return (
       <span>
-        {datum.value} <Source source={datum.source} />
+        {datum.value} <Source source={datum.source} dict={dict} />
       </span>
     );
   }
@@ -62,8 +78,8 @@ export function KnownValue<T extends React.ReactNode>({ datum }: { datum: Known<
       <span className={styles.inferred} title={datum.rationale}>
         {datum.value}
       </span>{" "}
-      <ConfidenceTag level={datum.confidence} />
-      <Source source={datum.source} />
+      <ConfidenceTag level={datum.confidence} dict={dict} />
+      <Source source={datum.source} dict={dict} />
     </span>
   );
 }

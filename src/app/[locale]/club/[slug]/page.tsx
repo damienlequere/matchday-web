@@ -19,7 +19,14 @@ import {
   upcomingFixtures,
 } from "@/lib/discipline";
 import { getClub, listClubSlugs } from "@/lib/clubs";
-import { formatMatches, formatNumber } from "@/lib/format";
+import {
+  formatDaysShort,
+  formatHeavyWeeks,
+  formatMatches,
+  formatNumber,
+} from "@/lib/format";
+import { isLocale, LOCALES, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n";
 
 /**
  * The club hub.
@@ -32,21 +39,29 @@ import { formatMatches, formatNumber } from "@/lib/format";
 
 export async function generateStaticParams() {
   const slugs = await listClubSlugs();
-  return slugs.map((slug) => ({ slug }));
+  // Cross product: every club is prerendered in every locale.
+  return LOCALES.flatMap((locale) => slugs.map((slug) => ({ locale, slug })));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  const d = getDictionary(isLocale(locale) ? locale : "en");
+
   const club = await getClub(slug);
-  if (!club) return { title: "Club not found" };
+  if (!club) return { title: d.meta.clubNotFound };
 
   return {
     title: club.identity.name,
-    description: `${club.identity.name}: suspensions, card accumulation, fixture congestion and contract expiries in one place.`,
+    description: d.meta.clubDescription(club.identity.name),
+    alternates: {
+      languages: Object.fromEntries(
+        LOCALES.map((l) => [l, `/${l}/club/${slug}`]),
+      ),
+    },
   };
 }
 
@@ -59,21 +74,29 @@ export async function generateMetadata({
  */
 const NOW = new Date("2027-02-20T12:00:00Z");
 
-const LINKS = [
-  { id: "suspensions", label: "Suspensions" },
-  { id: "congestion", label: "Congestion" },
-  { id: "contracts", label: "Contracts" },
-  { id: "availability", label: "Availability" },
-  { id: "identity", label: "Identity" },
-  { id: "fixtures", label: "Fixtures" },
-];
+/** Section ids are stable anchors; only their labels are translated. */
+function jumpLinks(d: ReturnType<typeof getDictionary>) {
+  return [
+    { id: "suspensions", label: d.nav.suspensions },
+    { id: "congestion", label: d.nav.congestion },
+    { id: "contracts", label: d.nav.contracts },
+    { id: "availability", label: d.nav.availability },
+    { id: "identity", label: d.nav.identity },
+    { id: "fixtures", label: d.nav.fixtures },
+  ];
+}
 
 export default async function ClubPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  if (!isLocale(locale)) notFound();
+
+  const typed: Locale = locale;
+  const d = getDictionary(typed);
+
   const club = await getClub(slug);
   if (!club) notFound();
 
@@ -89,29 +112,38 @@ export default async function ClubPage({
 
   const stats: HeroStat[] = [
     {
-      label: "Suspended",
+      label: d.hero.suspended,
       value: String(summary.suspendedCount),
       note: nextFixture
-        ? `for ${nextFixture.venue === "home" ? "" : "the trip to "}${nextFixture.opponentShort}`
-        : "no fixture scheduled",
+        ? d.hero.forFixture(
+            nextFixture.opponentShort,
+            nextFixture.venue === "home",
+          )
+        : d.hero.noFixture,
       tone: summary.suspendedCount > 0 ? "alert" : undefined,
     },
     {
-      label: "One card away",
+      label: d.hero.atRisk,
       value: String(summary.atRiskCount),
-      note: "from an accumulation ban",
+      note: d.hero.atRiskNote,
       tone: summary.atRiskCount > 0 ? "warn" : undefined,
     },
     {
-      label: "Next 6 matches",
-      value: `${congestion.spanDays}d`,
-      note: `${congestion.heavyWeeks} heavy ${congestion.heavyWeeks === 1 ? "week" : "weeks"}, ${formatNumber(congestion.totalTravelKm)}km`,
+      label: d.hero.nextSix,
+      value: formatDaysShort(typed, congestion.spanDays),
+      note: d.hero.congestionNote(
+        formatHeavyWeeks(typed, congestion.heavyWeeks),
+        formatNumber(typed, congestion.totalTravelKm),
+      ),
       tone: congestion.heavyWeeks > 0 ? "warn" : undefined,
     },
     {
-      label: "Out of contract",
+      label: d.hero.outOfContract,
       value: String(contracts.expiringCount),
-      note: `in June · ${formatMatches(availability.missedToSuspension)} lost to bans`,
+      note: d.hero.contractNote(
+        formatMatches(typed, availability.missedToSuspension),
+        availability.missedToSuspension,
+      ),
       tone: contracts.expiringCount > 2 ? "warn" : undefined,
     },
   ];
@@ -122,15 +154,31 @@ export default async function ClubPage({
         identity={club.identity}
         updatedAt={club.updatedAt}
         stats={stats}
+        dict={d}
+        locale={typed}
       />
-      <JumpNav links={LINKS} />
+      <JumpNav links={jumpLinks(d)} dict={d} />
 
-      <SuspensionsSection discipline={discipline} summary={summary} />
-      <CongestionSection congestion={congestion} />
-      <ContractsSection contracts={contracts} />
-      <AvailabilitySection availability={availability} />
-      <IdentitySection club={club} />
-      <FixturesSection upcoming={upcoming.slice(0, 6)} recent={recent} />
+      <SuspensionsSection
+        discipline={discipline}
+        summary={summary}
+        dict={d}
+        locale={typed}
+      />
+      <CongestionSection congestion={congestion} dict={d} locale={typed} />
+      <ContractsSection contracts={contracts} dict={d} locale={typed} />
+      <AvailabilitySection
+        availability={availability}
+        dict={d}
+        locale={typed}
+      />
+      <IdentitySection club={club} dict={d} />
+      <FixturesSection
+        upcoming={upcoming.slice(0, 6)}
+        recent={recent}
+        dict={d}
+        locale={typed}
+      />
     </main>
   );
 }

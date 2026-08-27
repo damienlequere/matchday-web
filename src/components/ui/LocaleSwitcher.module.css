@@ -1,0 +1,37 @@
+/* Colours inherit from the surrounding band, so the switcher reads correctly
+   in the footer without hardcoding the footer's palette here. */
+.switcher {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  margin-top: 12px;
+}
+
+.right .switcher,
+.switcher {
+  justify-content: inherit;
+}
+
+.link,
+.current {
+  font-family: var(--mono, "IBM Plex Mono"), monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.link {
+  color: inherit;
+  opacity: 0.75;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+
+.link:hover {
+  opacity: 1;
+}
+
+.current {
+  color: var(--band-ink);
+  font-weight: 600;
+}

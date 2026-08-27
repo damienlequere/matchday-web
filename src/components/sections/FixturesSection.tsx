@@ -2,6 +2,8 @@ import type { Fixture } from "@/types/club";
 import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/sections/Section";
 import { formatKickoff, formatShortDate } from "@/lib/format";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n";
 
 import styles from "./FixturesSection.module.css";
 
@@ -25,56 +27,62 @@ function outcome(fixture: Fixture): "win" | "draw" | "loss" | null {
 export function FixturesSection({
   upcoming,
   recent,
+  dict,
+  locale,
 }: {
   upcoming: Fixture[];
   recent: Fixture[];
+  dict: Dictionary;
+  locale: Locale;
 }) {
   return (
     <Section
       id="fixtures"
-      title="Fixtures"
-      lede="The schedule the blocks above are computed against."
+      title={dict.fixtures.title}
+      lede={dict.fixtures.lede}
     >
       <div className={styles.grid}>
         <Card>
-          <p className={styles.blockTitle}>Next up</p>
+          <p className={styles.blockTitle}>{dict.fixtures.nextUp}</p>
           {upcoming.map((fixture) => (
             <div className={styles.row} key={fixture.id}>
               <span className={styles.date}>
-                {formatShortDate(fixture.kickoff)}
+                {formatShortDate(locale, fixture.kickoff)}
               </span>
               <div className={styles.middle}>
                 <div>
                   <span className={styles.venue}>
-                    {fixture.venue === "home" ? "H" : "A"}
+                    {fixture.venue === "home"
+                      ? dict.fixtures.home
+                      : dict.fixtures.away}
                   </span>
                   <span className={styles.opponent}>{fixture.opponent}</span>
                 </div>
                 <div className={styles.comp}>{fixture.competition}</div>
               </div>
               <span className={styles.time}>
-                {formatKickoff(fixture.kickoff)}
+                {formatKickoff(locale, fixture.kickoff)}
               </span>
             </div>
           ))}
-          <p className={styles.commodity}>
-            Kick-off times in UTC.
-          </p>
+          <p className={styles.commodity}>{dict.fixtures.kickoffNote}</p>
         </Card>
 
         <Card>
-          <p className={styles.blockTitle}>Recent results</p>
+          <p className={styles.blockTitle}>{dict.fixtures.recent}</p>
           {recent.map((fixture) => {
             const result = outcome(fixture);
             return (
               <div className={styles.row} key={fixture.id}>
                 <span className={styles.date}>
-                  {formatShortDate(fixture.kickoff)}
+                  {formatShortDate(locale, fixture.kickoff)}
                 </span>
                 <div className={styles.middle}>
                   <div>
                     <span className={styles.venue}>
-                      {fixture.venue === "home" ? "H" : "A"}
+                      {fixture.venue === "home"
+                      ? dict.fixtures.home
+                      : dict.fixtures.away}
                     </span>
                     <span className={styles.opponent}>{fixture.opponent}</span>
                   </div>

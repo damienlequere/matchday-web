@@ -2,6 +2,8 @@ import type { Club, Position } from "@/types/club";
 import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/sections/Section";
 import { Source } from "@/components/ui/Provenance";
+import type { Dictionary } from "@/i18n";
+import { translateData } from "@/i18n";
 
 import styles from "./IdentitySection.module.css";
 
@@ -16,26 +18,25 @@ import styles from "./IdentitySection.module.css";
 
 const POSITION_ORDER: Position[] = ["GK", "DF", "MF", "FW"];
 
-const POSITION_LABEL: Record<Position, string> = {
-  GK: "Goalkeepers",
-  DF: "Defenders",
-  MF: "Midfielders",
-  FW: "Forwards",
-};
-
-export function IdentitySection({ club }: { club: Club }) {
+export function IdentitySection({
+  club,
+  dict,
+}: {
+  club: Club;
+  dict: Dictionary;
+}) {
   const honours = [...club.honours].sort((a, b) => b.count - a.count);
   const squad = club.squad.filter((s) => s.until === null);
 
   return (
     <Section
       id="identity"
-      title="Club identity"
-      lede="Honours, records and the current squad. Stable ground rather than a reason to come back — the blocks above are that."
+      title={dict.identity.title}
+      lede={dict.identity.lede}
     >
       <div className={styles.grid}>
         <Card>
-          <p className={styles.blockTitle}>Honours</p>
+          <p className={styles.blockTitle}>{dict.identity.honours}</p>
           {honours.map((honour) => (
             <div className={styles.honour} key={honour.label}>
               <div>
@@ -60,23 +61,25 @@ export function IdentitySection({ club }: { club: Club }) {
         </Card>
 
         <Card>
-          <p className={styles.blockTitle}>Records</p>
+          <p className={styles.blockTitle}>{dict.identity.records}</p>
           {club.records.map((record) => (
             <div className={styles.record} key={record.label}>
-              <div className={styles.recordLabel}>{record.label}</div>
+              <div className={styles.recordLabel}>
+                {translateData(dict.data.recordLabel, record.label)}
+              </div>
               <div className={styles.recordValue}>{record.value}</div>
               {record.detail ? (
                 <div className={styles.recordDetail}>{record.detail}</div>
               ) : null}
               <div className={styles.recordSource}>
-                <Source source={record.source} />
+                <Source source={record.source} dict={dict} />
               </div>
             </div>
           ))}
         </Card>
 
         <Card>
-          <p className={styles.blockTitle}>Squad ({squad.length})</p>
+          <p className={styles.blockTitle}>{dict.identity.squad(squad.length)}</p>
           {POSITION_ORDER.map((position) => {
             const players = squad
               .filter((s) => s.position === position)
@@ -85,14 +88,16 @@ export function IdentitySection({ club }: { club: Club }) {
 
             return (
               <div className={styles.squadGroup} key={position}>
-                <p className={styles.pos}>{POSITION_LABEL[position]}</p>
+                <p className={styles.pos}>{dict.identity.position[position]}</p>
                 {players.map((player) => (
                   <div className={styles.player} key={player.playerSlug}>
                     <span className={styles.shirt}>
                       {player.shirtNumber ?? "—"}
                     </span>
                     <span>{player.playerName}</span>
-                    <span className={styles.nation}>{player.nationality}</span>
+                    <span className={styles.nation}>
+                      {translateData(dict.data.nationality, player.nationality)}
+                    </span>
                   </div>
                 ))}
               </div>
