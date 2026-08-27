@@ -99,3 +99,57 @@ The project rule that governs all of it: **losing a provider must degrade the
 product, not kill it.** With an agent backend that hardens — it is not enough to
 survive a source going away, the product has to survive a source that keeps
 answering while being wrong.
+
+## Where this could become a business
+
+Not from the fan hub. Consumer football content monetises through advertising,
+which monetises through traffic, which means the injury room, transfers and
+line-ups — the three blocks this build deliberately refuses. The calculable
+layer is the part nobody gets up in the morning for, which is what makes it
+uncontested and what makes it a poor advertising product.
+
+The buyer is **fantasy football operators**: the companies editing games where
+users field real players and score on real results — MPG (Mon Petit Gazon) and
+Sorare in France, Fantasy Premier League in England, plus the white-label
+providers behind media brands.
+
+Their core loop is the user deciding who to field before each matchday, and a
+suspended player scores zero. So the highest-value thing they can tell a user
+is "your midfielder is one yellow from a ban, he plays Sunday" — a decision
+taken days in advance, and exactly what `src/lib/discipline.ts` computes,
+including the part most implementations get wrong: a ban is served in the
+competition that issued it, so the next fixture is not necessarily the one
+missed.
+
+They are the right first buyer for three reasons. The question is native to
+their product rather than adjacent to it; they are game studios that buy feeds
+rather than build data capability, so this is an incremental line on an
+existing budget; and they are small enough to reach directly, which betting
+operators and clubs are not. Betting is richer and worse — Sportradar-class
+contracts, integrity regulation, quarters-long procurement. Clubs are the
+seductive wrong answer: twenty buyers in Ligue 1, nine-month cycles, and
+congestion tooling would need validation against real injury outcomes this
+build does not have.
+
+The shape is an API rather than a site: `yellowsUntilBan`, `suspendedNow` and
+the resolved fixtures, licensed yearly.
+
+### What decides it
+
+Not the buyer — the data licence. Ligue 1 card and fixture data comes through
+the LFP or a licensed reseller, and their tiers assume betting-scale revenue.
+If a non-betting derived-data licence exists at low-thousands per season, this
+works. If the only route is a Sportradar-class contract, the derived product
+cannot carry the cost at fantasy pricing, and the play becomes selling the
+engine to someone who already holds a licence. That call comes before more
+code. Worth verifying alongside it whether operators already receive
+suspension flags bundled from their current provider — if so, the wedge moves
+to congestion, which nobody packages.
+
+One readiness caveat, and it is the same one the injury room raises. The
+engine assumes clean, complete, consistent card data. Real feeds arrive late,
+get corrected after disciplinary hearings, and disagree about whether a second
+yellow was rescinded. `Fact<T>` and `Inference<T>` are the right foundation for
+that reconciliation, but the pipeline is unbuilt — and an operator pushing
+"banned" to a hundred thousand users needs it right, which is a higher bar than
+a fan page needs.
