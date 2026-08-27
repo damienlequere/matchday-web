@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { DemoBanner } from "@/components/ui/DemoBanner";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { LOCALES, isLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n";
@@ -59,7 +58,6 @@ export default async function LocaleLayout({
   return (
     <html lang={typed}>
       <body>
-        <DemoBanner dict={d} />
         {children}
         <SiteFooter dict={d} locale={typed} />
       </body>

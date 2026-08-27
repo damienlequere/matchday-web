@@ -1223,6 +1223,112 @@
       }
     }
   ],
+  "injuries": [
+    {
+      "playerSlug": "ousmane-dembele",
+      "stage": "out",
+      "area": "hamstring",
+      "since": {
+        "kind": "fact",
+        "value": "2027-02-06",
+        "source": {
+          "label": "Club medical update",
+          "observedAt": "2027-02-07"
+        }
+      },
+      "expectedReturn": {
+        "kind": "inference",
+        "value": "2027-03-13",
+        "confidence": "estimated",
+        "rationale": "The club said 'several weeks' without a date; two outlets reported a return for the Monaco fixture on 6 March. A grade-two hamstring in a 29-year-old averages 32 days, which lands a week later — the later date is used, because early returns on this injury are what cause the re-injury.",
+        "source": {
+          "label": "Recovery norms",
+          "observedAt": "2027-02-19"
+        }
+      },
+      "matchesLikelyMissed": {
+        "kind": "inference",
+        "value": 4,
+        "confidence": "estimated",
+        "rationale": "Four fixtures fall before the estimated return, including a cup tie the club may have rested him for regardless.",
+        "source": {
+          "label": "Recovery norms",
+          "observedAt": "2027-02-19"
+        }
+      },
+      "conflicts": [
+        "The club has not given a date; two press reports name 6 March, a week earlier than the recovery norm for this injury."
+      ]
+    },
+    {
+      "playerSlug": "lucas-hernandez",
+      "stage": "doubtful",
+      "area": "knee",
+      "since": {
+        "kind": "fact",
+        "value": "2027-02-15",
+        "source": {
+          "label": "Club medical update",
+          "observedAt": "2027-02-16"
+        }
+      },
+      "expectedReturn": {
+        "kind": "inference",
+        "value": "2027-02-24",
+        "confidence": "reported",
+        "rationale": "Returned to part-training on 19 February. The staff described him as available if he comes through the final session — a matchday call, not a fixed date.",
+        "source": {
+          "label": "Club medical update",
+          "observedAt": "2027-02-19"
+        }
+      },
+      "matchesLikelyMissed": {
+        "kind": "inference",
+        "value": 1,
+        "confidence": "estimated",
+        "rationale": "Expected to miss the immediate fixture only, assuming the final session is cleared.",
+        "source": {
+          "label": "Recovery norms",
+          "observedAt": "2027-02-19"
+        }
+      },
+      "conflicts": []
+    },
+    {
+      "playerSlug": "goncalo-ramos",
+      "stage": "returning",
+      "area": "ankle",
+      "since": {
+        "kind": "fact",
+        "value": "2027-01-28",
+        "source": {
+          "label": "Club medical update",
+          "observedAt": "2027-01-29"
+        }
+      },
+      "expectedReturn": {
+        "kind": "inference",
+        "value": "2027-02-22",
+        "confidence": "reported",
+        "rationale": "Full training since 17 February. The club expects a place on the bench for the next fixture rather than a start.",
+        "source": {
+          "label": "Club medical update",
+          "observedAt": "2027-02-18"
+        }
+      },
+      "matchesLikelyMissed": {
+        "kind": "inference",
+        "value": 1,
+        "confidence": "reported",
+        "rationale": "Expected back for the Monaco fixture on 25 February, so the Rennes match on 21 February is the last he misses.",
+        "source": {
+          "label": "Club medical update",
+          "observedAt": "2027-02-18"
+        }
+      },
+      "conflicts": []
+    }
+  ],
   "rules": [
     {
       "competition": "Ligue 1",

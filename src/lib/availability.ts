@@ -7,9 +7,10 @@ import type { AbsenceRecord, Club, Stint } from "@/types/club";
  * from what is already stored, which is what makes it a calculable block.
  *
  * What is *not* here: expected returns. "Back in two weeks" is an inference
- * over contradictory sources and belongs to the injury block, which this
- * version does not ship. Keeping the two apart in the code is the same
- * discipline the type system enforces between `Fact` and `Inference`.
+ * over contradictory sources and belongs to the injury block (`lib/injuries`),
+ * which models it as `Inference` rather than fact. Keeping the two apart in
+ * the code is the same discipline the type system enforces between `Fact` and
+ * `Inference`.
  */
 
 export interface AvailabilityRow {

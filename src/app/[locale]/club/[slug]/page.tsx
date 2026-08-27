@@ -7,11 +7,13 @@ import { CongestionSection } from "@/components/sections/CongestionSection";
 import { ContractsSection } from "@/components/sections/ContractsSection";
 import { FixturesSection } from "@/components/sections/FixturesSection";
 import { IdentitySection } from "@/components/sections/IdentitySection";
+import { InjurySection } from "@/components/sections/InjurySection";
 import { JumpNav } from "@/components/sections/JumpNav";
 import { SuspensionsSection } from "@/components/sections/SuspensionsSection";
 import { computeAvailability } from "@/lib/availability";
 import { computeCongestion } from "@/lib/congestion";
 import { computeContracts } from "@/lib/contracts";
+import { computeInjuries } from "@/lib/injuries";
 import {
   computeDiscipline,
   playedFixtures,
@@ -81,6 +83,7 @@ function jumpLinks(d: ReturnType<typeof getDictionary>) {
     { id: "congestion", label: d.nav.congestion },
     { id: "contracts", label: d.nav.contracts },
     { id: "availability", label: d.nav.availability },
+    { id: "injuries", label: d.nav.injuries },
     { id: "identity", label: d.nav.identity },
     { id: "fixtures", label: d.nav.fixtures },
   ];
@@ -105,6 +108,7 @@ export default async function ClubPage({
   const congestion = computeCongestion(club, NOW);
   const contracts = computeContracts(club, NOW);
   const availability = computeAvailability(club, NOW);
+  const injuries = computeInjuries(club, NOW);
 
   const upcoming = upcomingFixtures(club, NOW);
   const recent = playedFixtures(club).slice(0, 6);
@@ -172,6 +176,7 @@ export default async function ClubPage({
         dict={d}
         locale={typed}
       />
+      <InjurySection injuries={injuries} dict={d} locale={typed} />
       <IdentitySection club={club} dict={d} />
       <FixturesSection
         upcoming={upcoming.slice(0, 6)}

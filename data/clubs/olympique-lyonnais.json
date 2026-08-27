@@ -1189,6 +1189,112 @@
       }
     }
   ],
+  "injuries": [
+    {
+      "playerSlug": "corentin-tolisso",
+      "stage": "out",
+      "area": "hamstring",
+      "since": {
+        "kind": "fact",
+        "value": "2027-02-04",
+        "source": {
+          "label": "Club medical update",
+          "observedAt": "2027-02-05"
+        }
+      },
+      "expectedReturn": {
+        "kind": "inference",
+        "value": "2027-03-20",
+        "confidence": "estimated",
+        "rationale": "The club announced 'around six weeks' on 5 February, which would be mid-March. His two previous hamstring injuries each ran a fortnight past the announced date, so the estimate is pushed to the later end.",
+        "source": {
+          "label": "Recovery norms",
+          "observedAt": "2027-02-19"
+        }
+      },
+      "matchesLikelyMissed": {
+        "kind": "inference",
+        "value": 6,
+        "confidence": "estimated",
+        "rationale": "Six fixtures fall before the adjusted return date; the club's own six-week estimate would spare him the last of them.",
+        "source": {
+          "label": "Recovery norms",
+          "observedAt": "2027-02-19"
+        }
+      },
+      "conflicts": [
+        "The club's six-week estimate puts him back on 18 March. His own injury history suggests later, and the two cannot both be right."
+      ]
+    },
+    {
+      "playerSlug": "clinton-mata",
+      "stage": "out",
+      "area": "shoulder",
+      "since": {
+        "kind": "fact",
+        "value": "2027-02-14",
+        "source": {
+          "label": "Club medical update",
+          "observedAt": "2027-02-15"
+        }
+      },
+      "expectedReturn": {
+        "kind": "inference",
+        "value": "2027-03-01",
+        "confidence": "reported",
+        "rationale": "A dislocation reduced on the pitch. The club ruled out surgery on 17 February and named a two-week horizon, which press reports have repeated without adding a source of their own.",
+        "source": {
+          "label": "Club medical update",
+          "observedAt": "2027-02-17"
+        }
+      },
+      "matchesLikelyMissed": {
+        "kind": "inference",
+        "value": 2,
+        "confidence": "estimated",
+        "rationale": "Two fixtures fall before the reported return.",
+        "source": {
+          "label": "Recovery norms",
+          "observedAt": "2027-02-19"
+        }
+      },
+      "conflicts": []
+    },
+    {
+      "playerSlug": "malick-fofana",
+      "stage": "returning",
+      "area": "ankle",
+      "since": {
+        "kind": "fact",
+        "value": "2027-01-31",
+        "source": {
+          "label": "Club medical update",
+          "observedAt": "2027-02-01"
+        }
+      },
+      "expectedReturn": {
+        "kind": "inference",
+        "value": "2027-02-21",
+        "confidence": "reported",
+        "rationale": "Back in full training since 16 February with no reaction reported. Expected to be in the squad, likely from the bench.",
+        "source": {
+          "label": "Club medical update",
+          "observedAt": "2027-02-18"
+        }
+      },
+      "matchesLikelyMissed": {
+        "kind": "inference",
+        "value": 0,
+        "confidence": "reported",
+        "rationale": "Available for selection.",
+        "source": {
+          "label": "Club medical update",
+          "observedAt": "2027-02-18"
+        }
+      },
+      "conflicts": []
+    }
+  ],
   "rules": [
     {
       "competition": "Ligue 1",

@@ -22,11 +22,6 @@ export const fr: Dictionary = {
     clubNotFound: "Club introuvable",
   },
 
-  banner: {
-    tag: "Données de démonstration",
-    body: "Les matchs, cartons et contrats de ce site sont inventés pour un prototype de conception. Rien ici ne reflète de vrais clubs ni de vrais joueurs.",
-  },
-
   footer: {
     title: "Matchday — prototype de hub de club.",
     body: "Une seule adresse plutôt que six. Cette version livre la couche calculable — suspensions, densité du calendrier, fins de contrat et historique de disponibilité — ainsi que l'identité du club. Sans affiliation à un club, une ligue ou une fédération.",
@@ -49,7 +44,7 @@ export const fr: Dictionary = {
     outOfContract: "En fin de contrat",
     note: {
       lead: "Pourquoi ces blocs.",
-      body: "Les suspensions, la densité du calendrier et les fins de contrat se déduisent de faits publics : leur mise à jour ne coûte rien et personne ne peut les devancer. L'infirmerie est ce qui fait venir les visiteurs, mais elle relève du jugement sur des sources contradictoires — elle n'est pas livrée ici, car une page qui énonce une supposition sur le ton du fait établi vaut moins qu'une page qui se tait.",
+      body: "Les suspensions, la densité du calendrier et les fins de contrat se déduisent de faits publics : leur mise à jour ne coûte rien et personne ne peut les devancer. L'infirmerie est ce qui fait venir les visiteurs, mais elle relève du jugement sur des sources contradictoires — elle est donc livrée comme telle : chaque date de retour est signalée comme une estimation, porte son indice de confiance et affiche le raisonnement et les divergences qui la fondent. Une page qui énonce une supposition sur le ton du fait établi vaut moins qu'une page qui se tait.",
     },
   },
 
@@ -66,6 +61,7 @@ export const fr: Dictionary = {
     congestion: "Calendrier",
     contracts: "Contrats",
     availability: "Disponibilité",
+    injuries: "Infirmerie",
     identity: "Identité",
     fixtures: "Matchs",
   },
@@ -189,6 +185,54 @@ export const fr: Dictionary = {
     note: "Le temps perdu sur suspension est la part évitable — et la seule que ce hub peut anticiper, car une suspension suit une règle alors qu'une guérison n'en suit aucune.",
   },
 
+  injuries: {
+    title: "Infirmerie",
+    lede: "Qui est indisponible, et avec quelle certitude. Chaque date de retour affichée ici est une estimation sur des sources qui se contredisent — elle est signalée comme telle, avec le raisonnement qui la produit.",
+    caveat:
+      "Les blocs précédents appliquent des règles. Celui-ci n'en applique aucune : il arbitre entre un communiqué de club, un article de presse et un délai de guérison type, et dit lequel il retient et pourquoi. Lisez l'indice de confiance avant la date.",
+    stage: {
+      out: "Forfait",
+      doubtful: "Incertain",
+      returning: "En reprise",
+      resolved: "De nouveau disponible",
+    },
+    counts: {
+      out: "Forfaits",
+      doubtful: "Incertains",
+      returning: "En reprise",
+      conflicts: "Sources contradictoires",
+    },
+    none: "Aucun joueur de l'effectif n'est annoncé blessé.",
+    area: {
+      ankle: "Cheville",
+      calf: "Mollet",
+      hamstring: "Ischio-jambiers",
+      knee: "Genou",
+      thigh: "Cuisse",
+      groin: "Adducteurs",
+      foot: "Pied",
+      shoulder: "Épaule",
+      back: "Dos",
+      head: "Tête",
+      illness: "Maladie",
+      other: "Non précisé",
+    },
+    sinceLabel: "Absent depuis",
+    daysOut: (days: string) => `${days} d'absence`,
+    expectedLabel: "Retour attendu",
+    noReturnDate: "Aucune date de retour",
+    noReturnDetail:
+      "Aucune source n'avance de date. Le hub n'en invente pas — une absence sans horizon est signalée comme telle.",
+    missesLabel: "Devrait manquer",
+    missesCount: (n: number) => (n === 1 ? "1 match à venir" : `${n} matchs à venir`),
+    missesNone: "Aucun match avant le retour attendu",
+    fixturesLabel: "Matchs avant cette date",
+    backForNext: (opponent: string) => `Retour attendu pour ${opponent}`,
+    conflictLabel: "Ce sur quoi les sources divergent",
+    rationaleLabel: "Pourquoi cette estimation",
+    note: "Les dates de retour sont des inférences, soulignées et accompagnées de leur indice de confiance. Les matchs que chaque joueur devrait manquer sont calculés sur le calendrier réel du club, et non repris d'une source — cette partie-là est vérifiable, même quand l'estimation qui la précède ne l'est pas.",
+  },
+
   identity: {
     title: "Identité du club",
     lede: "Palmarès, records et effectif actuel. Un socle stable plutôt qu'une raison de revenir — ce sont les blocs ci-dessus qui jouent ce rôle.",
@@ -252,6 +296,9 @@ export const fr: Dictionary = {
       "Club team sheet": "Feuille de match du club",
       "LFP disciplinary committee": "Commission de discipline de la LFP",
       "LFP match report": "Rapport de match de la LFP",
+      "Club medical update": "Point médical du club",
+      "Press report": "Article de presse",
+      "Recovery norms": "Délais de guérison types",
     },
     absenceNote: {
       AFCON: "CAN",
@@ -261,6 +308,59 @@ export const fr: Dictionary = {
       Knee: "Genou",
       Knock: "Coup reçu",
       Thigh: "Cuisse",
+    },
+    /**
+     * Prose carried inside the injury records: the reasoning behind an
+     * estimate, and the wording of a source conflict. Unlike a label, these
+     * are whole sentences — they live here for the same reason the rest of
+     * this table does, so a French page does not fall back to English while
+     * the aggregator still emits one locale.
+     */
+    injuryProse: {
+      "The club said 'several weeks' without a date; two outlets reported a return for the Monaco fixture on 6 March. A grade-two hamstring in a 29-year-old averages 32 days, which lands a week later — the later date is used, because early returns on this injury are what cause the re-injury.":
+        "Le club a annoncé « plusieurs semaines » sans donner de date ; deux médias annoncent un retour pour le match contre Monaco le 6 mars. Une lésion des ischio-jambiers de grade 2 chez un joueur de 29 ans demande 32 jours en moyenne, soit une semaine plus tard — c'est la date la plus tardive qui est retenue, car sur cette blessure ce sont les retours précipités qui provoquent la rechute.",
+      "Four fixtures fall before the estimated return, including a cup tie the club may have rested him for regardless.":
+        "Quatre matchs tombent avant le retour estimé, dont un match de coupe pour lequel le club l'aurait peut-être ménagé de toute façon.",
+      "The club has not given a date; two press reports name 6 March, a week earlier than the recovery norm for this injury.":
+        "Le club n'a pas donné de date ; deux articles de presse avancent le 6 mars, soit une semaine avant le délai de guérison type pour cette blessure.",
+      "Returned to part-training on 19 February. The staff described him as available if he comes through the final session — a matchday call, not a fixed date.":
+        "Retour à l'entraînement partiel le 19 février. Le staff l'annonce disponible s'il passe la dernière séance — une décision de veille de match, pas une date arrêtée.",
+      "Expected to miss the immediate fixture only, assuming the final session is cleared.":
+        "Ne devrait manquer que le match immédiat, sous réserve que la dernière séance se passe bien.",
+      "Full training since 17 February. The club expects a place on the bench for the next fixture rather than a start.":
+        "Entraînement complet depuis le 17 février. Le club l'envisage sur le banc pour le prochain match plutôt que titulaire.",
+      "Expected back for the Monaco fixture on 25 February, so the Rennes match on 21 February is the last he misses.":
+        "Retour attendu pour le match contre Monaco le 25 février : celui contre Rennes le 21 février est donc le dernier qu'il manque.",
+      "No source will commit to a return date. The club has said only that he is 'continuing his rehabilitation' — repeated verbatim in three updates since 18 January.":
+        "Aucune source n'avance de date de retour. Le club se borne à indiquer qu'il « poursuit sa rééducation » — formule reprise mot pour mot dans trois communiqués depuis le 18 janvier.",
+      "No club statement. Withdrawn at half-time on 11 February and absent from the two team sheets since; a calf strain of that pattern averages three weeks.":
+        "Aucun communiqué du club. Sorti à la mi-temps le 11 février et absent des deux feuilles de match suivantes ; une lésion au mollet de ce type demande trois semaines en moyenne.",
+      "Three fixtures fall before the estimated return.":
+        "Trois matchs tombent avant le retour estimé.",
+      "The injury itself is inferred from two consecutive team-sheet absences, not announced. The club has not confirmed it.":
+        "La blessure elle-même est déduite de deux absences consécutives sur la feuille de match, et non annoncée. Le club ne l'a pas confirmée.",
+      "Missed two sessions with a virus. Named as a probable starter if he trains on the eve of the match.":
+        "A manqué deux séances pour un virus. Annoncé titulaire probable s'il s'entraîne la veille du match.",
+      "Expected to be available, though an illness this close to kick-off can rule a player out on the day.":
+        "Devrait être disponible, même si une maladie si près du coup d'envoi peut écarter un joueur le jour même.",
+      "Returned to the matchday squad on 14 February and played 62 minutes on 18 February.":
+        "Réintégré au groupe le 14 février, il a joué 62 minutes le 18 février.",
+      "Available and already featuring.":
+        "Disponible et déjà utilisé.",
+      "The club announced 'around six weeks' on 5 February, which would be mid-March. His two previous hamstring injuries each ran a fortnight past the announced date, so the estimate is pushed to the later end.":
+        "Le club a annoncé « environ six semaines » le 5 février, soit la mi-mars. Ses deux précédentes blessures aux ischio-jambiers ont chacune dépassé de quinze jours la date annoncée : l'estimation est donc repoussée vers la fourchette haute.",
+      "Six fixtures fall before the adjusted return date; the club's own six-week estimate would spare him the last of them.":
+        "Six matchs tombent avant la date de retour ajustée ; l'estimation à six semaines du club lui épargnerait le dernier d'entre eux.",
+      "The club's six-week estimate puts him back on 18 March. His own injury history suggests later, and the two cannot both be right.":
+        "L'estimation à six semaines du club le ramène au 18 mars. Son historique de blessures suggère plus tard, et les deux ne peuvent pas être vrais en même temps.",
+      "A dislocation reduced on the pitch. The club ruled out surgery on 17 February and named a two-week horizon, which press reports have repeated without adding a source of their own.":
+        "Une luxation réduite sur le terrain. Le club a écarté l'opération le 17 février et évoqué un horizon de deux semaines, repris tel quel par la presse sans source propre.",
+      "Two fixtures fall before the reported return.":
+        "Deux matchs tombent avant le retour annoncé.",
+      "Back in full training since 16 February with no reaction reported. Expected to be in the squad, likely from the bench.":
+        "Retour à l'entraînement complet depuis le 16 février, sans réaction signalée. Attendu dans le groupe, probablement sur le banc.",
+      "Available for selection.":
+        "Disponible pour la sélection.",
     },
     nationality: {
       Algeria: "Algérie",

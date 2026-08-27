@@ -30,8 +30,8 @@ export const viewport: Viewport = {
 
 /**
  * The root layout owns `<html>`, but the locale lives in a route param that a
- * root layout cannot read. So it renders no chrome: `lang`, the banner and the
- * footer all belong to `[locale]/layout.tsx`, which knows which language it is
+ * root layout cannot read. So it renders no chrome: `lang` and the footer
+ * both belong to `[locale]/layout.tsx`, which knows which language it is
  * rendering.
  */
 export default function RootLayout({

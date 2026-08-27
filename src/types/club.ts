@@ -202,8 +202,8 @@ export type AbsenceReason = "suspension" | "injury" | "international" | "other";
  * A match a player did not play, and why.
  *
  * History only — this records what already happened. A *prospective* absence
- * ("out for three weeks") is an inference and belongs to the injury block,
- * which this version does not ship.
+ * ("out for three weeks") is an inference and belongs to `InjuryRecord`, which
+ * keeps the judgement in a type that cannot be mistaken for a record.
  */
 export interface AbsenceRecord {
   playerSlug: string;
@@ -212,6 +212,67 @@ export interface AbsenceRecord {
   reason: AbsenceReason;
   note?: string;
   source: SourceRef;
+}
+
+/* ---------------------------------------------------------------------------
+   Injury room
+   -------------------------------------------------------------------------*/
+
+/**
+ * How far along a recovery is.
+ *
+ * Ordered from most to least severe so the UI can sort without a lookup, and
+ * so "out" and "returned" can never be confused for one another by a typo in
+ * a free-text status field.
+ */
+export type InjuryStage =
+  | "out"        // not available, no return in sight
+  | "doubtful"   // may feature; the call is made on matchday
+  | "returning"  // back in training, not yet in a squad
+  | "resolved";  // available again; kept briefly for context
+
+/** Body area. A closed set, because "knee problem" and "Knee" must not split a count. */
+export type InjuryArea =
+  | "ankle"
+  | "calf"
+  | "hamstring"
+  | "knee"
+  | "thigh"
+  | "groin"
+  | "foot"
+  | "shoulder"
+  | "back"
+  | "head"
+  | "illness"
+  | "other";
+
+/**
+ * A current injury: the one block on this page built from judgement.
+ *
+ * The split is the whole point of the type. `area` and `since` are facts —
+ * a club announced them, a team sheet showed the player absent. `expectedReturn`
+ * and `matchesLikelyMissed` are inferences: they reconcile a club statement, a
+ * press report and a recovery norm that routinely disagree, and they carry
+ * their own confidence and rationale so the page can show *why* it thinks so.
+ *
+ * Nothing here is stored as a plain string that mixes the two. That is what
+ * stops the page stating a guess in the voice of a record.
+ */
+export interface InjuryRecord {
+  playerSlug: string;
+  stage: InjuryStage;
+  area: InjuryArea;
+  /** ISO date the injury was sustained or first reported. */
+  since: Fact<string>;
+  /**
+   * Expected return date. An inference always — even a club's own "back in
+   * two weeks" is a forecast, not a record. Null when no source will commit.
+   */
+  expectedReturn: Inference<string> | null;
+  /** How many fixtures the player is judged likely to miss from `now`. */
+  matchesLikelyMissed: Inference<number> | null;
+  /** Where the sources disagree, said plainly. Empty when they agree. */
+  conflicts: string[];
 }
 
 /* ---------------------------------------------------------------------------
@@ -227,6 +288,8 @@ export interface Club {
   fixtures: Fixture[];
   cards: CardEvent[];
   absences: AbsenceRecord[];
+  /** Current injury room. Judgement, not record — see `InjuryRecord`. */
+  injuries: InjuryRecord[];
   rules: DisciplineRules[];
   /** ISO date-time the club's dataset was last refreshed. */
   updatedAt: string;

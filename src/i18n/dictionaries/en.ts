@@ -26,14 +26,9 @@ export const en = {
     clubNotFound: "Club not found",
   },
 
-  banner: {
-    tag: "Demonstration data",
-    body: "Fixtures, cards and contracts on this site are invented for a design prototype. Nothing here reflects real clubs or players.",
-  },
-
   footer: {
     title: "Matchday — club hub prototype.",
-    body: "One address instead of six. This build ships the calculable layer — suspensions, fixture congestion, contract expiries and availability history — plus club identity. No affiliation with any club, league or federation.",
+    body: "One address instead of six. This build ships the calculable layer — suspensions, fixture congestion, contract expiries and availability history — plus the injury room and club identity. No affiliation with any club, league or federation.",
     demo: "All figures are demonstration data.",
     computed: "Calculable blocks are computed, never stored.",
   },
@@ -53,7 +48,7 @@ export const en = {
     outOfContract: "Out of contract",
     note: {
       lead: "Why these blocks.",
-      body: "Suspensions, fixture congestion and contract expiries are derivable from public facts, so they cost nothing to keep current and cannot be scooped. The injury room is what brings people in, but it is judgement over contradictory sources — it is not shipped here, because a page that states a guess in the voice of a record is worse than a page that stays quiet.",
+      body: "Suspensions, fixture congestion and contract expiries are derivable from public facts, so they cost nothing to keep current and cannot be scooped. The injury room is what brings people in, but it is judgement over contradictory sources — so it is shipped as judgement: every return date is marked an estimate, carries its confidence, and shows the reasoning and the conflict behind it. A page that states a guess in the voice of a record is worse than a page that stays quiet.",
     },
   },
 
@@ -70,6 +65,7 @@ export const en = {
     congestion: "Congestion",
     contracts: "Contracts",
     availability: "Availability",
+    injuries: "Injury room",
     identity: "Identity",
     fixtures: "Fixtures",
   },
@@ -208,6 +204,66 @@ export const en = {
     note: "Time lost to suspension is the avoidable share — and the only one this hub can predict, because a ban follows a rule while a recovery does not.",
   },
 
+  /**
+   * The injury room.
+   *
+   * The wording carries weight here that it does not carry elsewhere: this is
+   * the one block built on judgement, so the copy has to keep saying so
+   * without turning every line into a disclaimer.
+   */
+  injuries: {
+    title: "Injury room",
+    lede: "Who is unavailable, and how confident that is. Every return date on this page is an estimate over sources that disagree — it is marked as one, with the reasoning attached.",
+    caveat:
+      "The blocks above follow rules. This one does not: it weighs a club statement against a press report against a recovery norm, and says which it believes and why. Read the confidence tag before the date.",
+    stage: {
+      out: "Out",
+      doubtful: "Doubtful",
+      returning: "Returning",
+      resolved: "Available again",
+    },
+    counts: {
+      out: "Ruled out",
+      doubtful: "Doubtful",
+      returning: "Back in training",
+      conflicts: "Sources disagree",
+    },
+    none: "Nobody in the squad is reported injured.",
+    area: {
+      ankle: "Ankle",
+      calf: "Calf",
+      hamstring: "Hamstring",
+      knee: "Knee",
+      thigh: "Thigh",
+      groin: "Groin",
+      foot: "Foot",
+      shoulder: "Shoulder",
+      back: "Back",
+      head: "Head",
+      illness: "Illness",
+      other: "Undisclosed",
+    },
+    sinceLabel: "Out since",
+    /** "14 days" — the elapsed half of an injury, which is a fact. */
+    daysOut: (days: string) => `${days} out`,
+    expectedLabel: "Expected back",
+    /** Shown in place of a date when no source will commit to one. */
+    noReturnDate: "No return date given",
+    noReturnDetail:
+      "No source has offered a date. The hub will not invent one — an absence with no horizon is reported as exactly that.",
+    missesLabel: "Expected to miss",
+    /** "misses 3 of the next fixtures" — the schedule half, which is derived. */
+    missesCount: (n: number) =>
+      n === 1 ? "1 upcoming fixture" : `${n} upcoming fixtures`,
+    missesNone: "No fixture before the expected return",
+    /** Fixtures the player is judged to miss, listed so the estimate is checkable. */
+    fixturesLabel: "Fixtures before that date",
+    backForNext: (opponent: string) => `Expected back for ${opponent}`,
+    conflictLabel: "Where sources disagree",
+    rationaleLabel: "Why this estimate",
+    note: "Return dates are inferences, shown underlined with their confidence. The fixtures each player is expected to miss are computed from the club's actual schedule, not restated from a source — that part is checkable even when the estimate behind it is not.",
+  },
+
   identity: {
     title: "Club identity",
     lede: "Honours, records and the current squad. Stable ground rather than a reason to come back — the blocks above are that.",
@@ -282,6 +338,9 @@ export const en = {
       "Club team sheet": "Club team sheet",
       "LFP disciplinary committee": "LFP disciplinary committee",
       "LFP match report": "LFP match report",
+      "Club medical update": "Club medical update",
+      "Press report": "Press report",
+      "Recovery norms": "Recovery norms",
     } as Record<string, string>,
     absenceNote: {
       AFCON: "AFCON",
@@ -291,6 +350,59 @@ export const en = {
       Knee: "Knee",
       Knock: "Knock",
       Thigh: "Thigh",
+    } as Record<string, string>,
+    /**
+     * Prose carried inside the injury records: the reasoning behind an
+     * estimate, and the wording of a source conflict. Unlike a label, these
+     * are whole sentences — they live here for the same reason the rest of
+     * this table does, so a French page does not fall back to English while
+     * the aggregator still emits one locale.
+     */
+    injuryProse: {
+      "The club said 'several weeks' without a date; two outlets reported a return for the Monaco fixture on 6 March. A grade-two hamstring in a 29-year-old averages 32 days, which lands a week later — the later date is used, because early returns on this injury are what cause the re-injury.":
+        "The club said 'several weeks' without a date; two outlets reported a return for the Monaco fixture on 6 March. A grade-two hamstring in a 29-year-old averages 32 days, which lands a week later — the later date is used, because early returns on this injury are what cause the re-injury.",
+      "Four fixtures fall before the estimated return, including a cup tie the club may have rested him for regardless.":
+        "Four fixtures fall before the estimated return, including a cup tie the club may have rested him for regardless.",
+      "The club has not given a date; two press reports name 6 March, a week earlier than the recovery norm for this injury.":
+        "The club has not given a date; two press reports name 6 March, a week earlier than the recovery norm for this injury.",
+      "Returned to part-training on 19 February. The staff described him as available if he comes through the final session — a matchday call, not a fixed date.":
+        "Returned to part-training on 19 February. The staff described him as available if he comes through the final session — a matchday call, not a fixed date.",
+      "Expected to miss the immediate fixture only, assuming the final session is cleared.":
+        "Expected to miss the immediate fixture only, assuming the final session is cleared.",
+      "Full training since 17 February. The club expects a place on the bench for the next fixture rather than a start.":
+        "Full training since 17 February. The club expects a place on the bench for the next fixture rather than a start.",
+      "Expected back for the Monaco fixture on 25 February, so the Rennes match on 21 February is the last he misses.":
+        "Expected back for the Monaco fixture on 25 February, so the Rennes match on 21 February is the last he misses.",
+      "No source will commit to a return date. The club has said only that he is 'continuing his rehabilitation' — repeated verbatim in three updates since 18 January.":
+        "No source will commit to a return date. The club has said only that he is 'continuing his rehabilitation' — repeated verbatim in three updates since 18 January.",
+      "No club statement. Withdrawn at half-time on 11 February and absent from the two team sheets since; a calf strain of that pattern averages three weeks.":
+        "No club statement. Withdrawn at half-time on 11 February and absent from the two team sheets since; a calf strain of that pattern averages three weeks.",
+      "Three fixtures fall before the estimated return.":
+        "Three fixtures fall before the estimated return.",
+      "The injury itself is inferred from two consecutive team-sheet absences, not announced. The club has not confirmed it.":
+        "The injury itself is inferred from two consecutive team-sheet absences, not announced. The club has not confirmed it.",
+      "Missed two sessions with a virus. Named as a probable starter if he trains on the eve of the match.":
+        "Missed two sessions with a virus. Named as a probable starter if he trains on the eve of the match.",
+      "Expected to be available, though an illness this close to kick-off can rule a player out on the day.":
+        "Expected to be available, though an illness this close to kick-off can rule a player out on the day.",
+      "Returned to the matchday squad on 14 February and played 62 minutes on 18 February.":
+        "Returned to the matchday squad on 14 February and played 62 minutes on 18 February.",
+      "Available and already featuring.":
+        "Available and already featuring.",
+      "The club announced 'around six weeks' on 5 February, which would be mid-March. His two previous hamstring injuries each ran a fortnight past the announced date, so the estimate is pushed to the later end.":
+        "The club announced 'around six weeks' on 5 February, which would be mid-March. His two previous hamstring injuries each ran a fortnight past the announced date, so the estimate is pushed to the later end.",
+      "Six fixtures fall before the adjusted return date; the club's own six-week estimate would spare him the last of them.":
+        "Six fixtures fall before the adjusted return date; the club's own six-week estimate would spare him the last of them.",
+      "The club's six-week estimate puts him back on 18 March. His own injury history suggests later, and the two cannot both be right.":
+        "The club's six-week estimate puts him back on 18 March. His own injury history suggests later, and the two cannot both be right.",
+      "A dislocation reduced on the pitch. The club ruled out surgery on 17 February and named a two-week horizon, which press reports have repeated without adding a source of their own.":
+        "A dislocation reduced on the pitch. The club ruled out surgery on 17 February and named a two-week horizon, which press reports have repeated without adding a source of their own.",
+      "Two fixtures fall before the reported return.":
+        "Two fixtures fall before the reported return.",
+      "Back in full training since 16 February with no reaction reported. Expected to be in the squad, likely from the bench.":
+        "Back in full training since 16 February with no reaction reported. Expected to be in the squad, likely from the bench.",
+      "Available for selection.":
+        "Available for selection.",
     } as Record<string, string>,
     nationality: {
       Algeria: "Algeria",
