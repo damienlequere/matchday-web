@@ -48,9 +48,18 @@ function daysBetween(a: string, b: string): number {
   );
 }
 
+/**
+ * Rest and density, resolved to one of three words.
+ *
+ * Two matches in eight days is the ordinary rhythm of a club playing one game a
+ * week, so it is not a signal — it used to raise "tight" on its own, which lit
+ * the badge on almost every row and put "Tight" next to fixtures with a week of
+ * rest. Density now only speaks at three, where the eight-day window genuinely
+ * holds a midweek game, and the middle step is left to the turnaround.
+ */
 function severityFor(restDays: number | null, density: number): FixtureLoad["severity"] {
   if (density >= 3 || (restDays !== null && restDays <= 2)) return "heavy";
-  if (density === 2 || (restDays !== null && restDays <= 3)) return "tight";
+  if (restDays !== null && restDays <= 4) return "tight";
   return "normal";
 }
 

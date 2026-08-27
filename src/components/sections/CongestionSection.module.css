@@ -4,7 +4,7 @@
 
 .summary {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1px;
   background: var(--line);
   border: 1px solid var(--line);
@@ -32,6 +32,20 @@
   font-weight: 700;
   font-variant-numeric: tabular-nums;
   margin-top: 4px;
+}
+
+/* The one tile figure allowed to colour: a turnaround of two days or less is
+   what the row scale already calls heavy. */
+.alarm {
+  color: var(--crit);
+}
+
+/* Demoted context — the window's span, the three-match count. Same tile, a
+   clear step down, so the headline figure keeps the tile. */
+.cellNote {
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--ink-2);
 }
 
 .table {
@@ -69,47 +83,34 @@
   white-space: nowrap;
 }
 
-.opponent {
-  font-weight: 600;
+.dateCell {
+  white-space: nowrap;
+  color: var(--ink-2);
 }
 
+.opponent {
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+/* Venue rides with the opponent rather than holding a column: it matters here
+   only as a cause of travel, which the last column already prices. */
 .venue {
   font-family: var(--font-mono), monospace;
   font-size: 10px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--ink-3);
-  margin-right: 6px;
+  white-space: nowrap;
 }
 
-.comp {
-  font-size: 12px;
-  color: var(--ink-2);
-}
-
-/* Severity is a coarse three-step scale. A 0-100 congestion score would imply
-   a precision that rest days and travel distance do not carry. */
-.bar {
+/* The working, set under the pill that judges it. */
+.loadDetail {
   display: block;
-  height: 6px;
-  border-radius: 3px;
-  background: var(--line-2);
-}
-
-.normal {
-  background: var(--ok);
-}
-
-.tight {
-  background: var(--brass);
-}
-
-.heavy {
-  background: var(--crit);
-}
-
-.severityCell {
-  width: 96px;
+  margin-top: 5px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
 }
 
 .scroll {
@@ -118,6 +119,59 @@
 
 @media (max-width: 860px) {
   .summary {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+  }
+}
+
+/*
+ * Below the fold of a phone, the four columns stop being a table and become a
+ * stack of records. The headers are dropped because each value says what it is
+ * on its own — a date, an opponent, a load sentence, a distance — so no cell
+ * needs a label to be read. A horizontally scrolling table hid the load column
+ * — the one column this section exists for — behind a gesture most readers
+ * never make.
+ */
+@media (max-width: 620px) {
+  .table thead {
+    display: none;
+  }
+
+  .table tr {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2px 12px;
+    padding: 14px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .table td {
+    padding: 0;
+    border: none;
+  }
+
+  .table tr:last-child {
+    border-bottom: none;
+  }
+
+  /* Date and travel share the top line, travel right-aligned. */
+  .dateCell {
+    font-size: 12px;
+  }
+
+  .table td.num {
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 12px;
+    color: var(--ink-2);
+  }
+
+  /* Opponent and load each take the full width beneath it. */
+  .table td:nth-child(2),
+  .table td:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  .table td:nth-child(3) {
+    margin-top: 6px;
   }
 }

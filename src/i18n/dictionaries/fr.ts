@@ -163,21 +163,42 @@ export const fr: Dictionary = {
     across: "Sur",
     shortestRest: "Récupération la plus courte",
     travel: "Déplacements",
+    /**
+     * « 2 matchs dans une série de 3 en 8 jours ».
+     *
+     * Compte des matchs, pas des semaines : la fenêtre est glissante, et
+     * « semaine chargée » ferait croire à un découpage calendaire.
+     */
+    heavyWeeks: (n: number) =>
+      `${n} ${n < 2 ? "match" : "matchs"} dans une série de 3 en 8 jours`,
     severity: {
       normal: "Normale",
       tight: "Serrée",
       heavy: "Lourde",
     },
+
+    /**
+     * La phrase de charge, qui remplace trois colonnes de chiffres nus.
+     *
+     * « repos » reste invariable ici : on compte les jours, pas les repos.
+     */
+    load: {
+      /** « 3 jours de repos · 2 matchs sur 8 » */
+      detail: (rest: string, density: number) =>
+        `${rest} de repos · ${density} ${density < 2 ? "match" : "matchs"} sur 8`,
+      /** « 2 matchs sur 8 jours » — première ligne, sans repos mesurable. */
+      densityOnly: (density: number) =>
+        `${density} ${density < 2 ? "match" : "matchs"} sur 8 jours`,
+    },
+
     table: {
       date: "Date",
       fixture: "Match",
-      rest: "Repos",
-      inEightDays: "Sur 8 jours",
-      travel: "Trajet",
       load: "Charge",
+      travel: "Trajet",
     },
-    home: "D",
-    away: "E",
+    home: "Domicile",
+    away: "Extérieur",
   },
 
   contracts: {

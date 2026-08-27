@@ -199,21 +199,56 @@ export const en = {
     across: "Across",
     shortestRest: "Shortest rest",
     travel: "Travel",
+    /**
+     * "2 matches in a three-match week".
+     *
+     * Counts fixtures whose trailing eight days hold three or more matches, so
+     * it is a count of matches, not of weeks — worded to say so rather than to
+     * borrow the shorter, wrong noun. It sits under the shortest-rest tile, so
+     * it has to name its own subject rather than lean on the tile above.
+     */
+    heavyWeeks: (n: number) =>
+      `${n} ${n === 1 ? "match" : "matches"} in a three-match week`,
     severity: {
       normal: "Normal",
       tight: "Tight",
       heavy: "Heavy",
     },
+
+    /**
+     * The load sentence, replacing three columns that each held an ingredient.
+     *
+     * Rest days and eight-day density are what `severity` is computed from, so
+     * printing them as bare numbers beside a coloured bar asked the reader to
+     * re-derive a judgement the page had already made. Said as a sentence, the
+     * figures explain the verdict next to them instead of competing with it.
+     */
+    load: {
+      /**
+       * "3 days rest · 2 matches in 8"
+       *
+       * No possessive apostrophe: `rest` arrives already counted, so "1 day"
+       * would have produced "1 day' rest" — and a one-day turnaround is exactly
+       * the row this section most needs to render correctly.
+       */
+      detail: (rest: string, density: number) =>
+        `${rest} rest · ${density} ${density === 1 ? "match" : "matches"} in 8`,
+      /**
+       * "2 matches in 8 days" — the first row of the window, where there is no
+       * previous fixture to measure rest against. Density still stands.
+       */
+      densityOnly: (density: number) =>
+        `${density} ${density === 1 ? "match" : "matches"} in 8 days`,
+    },
+
     table: {
       date: "Date",
       fixture: "Fixture",
-      rest: "Rest",
-      inEightDays: "In 8 days",
-      travel: "Travel",
       load: "Load",
+      travel: "Travel",
     },
-    home: "H",
-    away: "A",
+    home: "Home",
+    away: "Away",
   },
 
   contracts: {
