@@ -1,0 +1,38 @@
+.crest {
+  border-radius: var(--radius);
+  flex: none;
+  display: grid;
+  place-items: center;
+}
+
+/* A crest is drawn art: it sits in the box, it does not fill it. */
+.image {
+  object-fit: contain;
+}
+
+.initials {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  /*
+   * White over the club's own colour, which is chosen for contrast rather than
+   * inherited — PSG navy and OM cyan sit either side of any single ink token.
+   * The mark is decorative and the name is printed beside it, so the pairing
+   * carries no meaning that a reader could lose here.
+   */
+  color: #fff;
+}
+
+.sm {
+  width: 40px;
+  height: 40px;
+  font-size: 12px;
+}
+
+.lg {
+  width: 58px;
+  height: 58px;
+  font-size: 17px;
+  /* Only the hero's box sits on the dark band and needs an edge against it. */
+  border: 1px solid var(--band-line);
+}

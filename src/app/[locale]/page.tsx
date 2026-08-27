@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { Crest } from "@/components/ui/Crest";
 import { computeContracts } from "@/lib/contracts";
 import { computeDiscipline, summariseDiscipline } from "@/lib/discipline";
 import { getAllClubs } from "@/lib/clubs";
@@ -74,13 +75,7 @@ export default async function HomePage({
                   className={styles.club}
                 >
                   <div className={styles.clubTop}>
-                    <span
-                      className={styles.crest}
-                      style={{ background: club.identity.colors.primary }}
-                      aria-hidden="true"
-                    >
-                      {club.identity.shortName}
-                    </span>
+                    <Crest identity={club.identity} size="sm" />
                     <span>
                       <span className={styles.clubName}>
                         {club.identity.name}

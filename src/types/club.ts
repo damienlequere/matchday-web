@@ -83,6 +83,16 @@ export interface ClubIdentity {
   competition: string;
   /** Two brand colours, used only as a thin accent — never as page chrome. */
   colors: { primary: string; secondary: string };
+  /**
+   * Path to the club's crest under `/public`, e.g. `/crests/om.svg`.
+   *
+   * Optional, and absent for every club in this dataset. A crest is a
+   * trademark: the file is the club's to license, not the project's to ship,
+   * so the field stays empty until one is cleared. `Crest` renders the
+   * initials over `colors.primary` whenever it is missing, which makes the
+   * unlicensed state a designed state rather than a gap.
+   */
+  crest?: string;
 }
 
 export interface Honour {

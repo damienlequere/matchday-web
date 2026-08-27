@@ -3,6 +3,14 @@
   background: var(--band);
   color: var(--band-ink);
   padding: 34px 0 30px;
+  /*
+   * The club's colour, as a rule rather than as a surface. `--club` is set
+   * inline per club; the fallback keeps the band intact if it ever arrives
+   * unset. Three points is enough to tell PSG navy from OM cyan at a glance
+   * and little enough to stay an accent, which is the rule the identity type
+   * states for these colours: a thin accent, never page chrome.
+   */
+  border-bottom: 3px solid var(--club, var(--band-line));
 }
 
 .top {
@@ -11,21 +19,6 @@
   gap: 20px;
   flex-wrap: wrap;
   justify-content: space-between;
-}
-
-.crest {
-  width: 58px;
-  height: 58px;
-  border-radius: var(--radius);
-  flex: none;
-  display: grid;
-  place-items: center;
-  font-family: var(--font-display), sans-serif;
-  font-weight: 800;
-  font-size: 17px;
-  letter-spacing: -0.03em;
-  color: #fff;
-  border: 1px solid var(--band-line);
 }
 
 .headline {
