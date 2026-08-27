@@ -9,11 +9,13 @@ import { FixturesSection } from "@/components/sections/FixturesSection";
 import { IdentitySection } from "@/components/sections/IdentitySection";
 import { InjurySection } from "@/components/sections/InjurySection";
 import { JumpNav } from "@/components/sections/JumpNav";
+import { SquadStatusSection } from "@/components/sections/SquadStatusSection";
 import { SuspensionsSection } from "@/components/sections/SuspensionsSection";
 import { computeAvailability } from "@/lib/availability";
 import { computeCongestion } from "@/lib/congestion";
 import { computeContracts } from "@/lib/contracts";
 import { computeInjuries } from "@/lib/injuries";
+import { computeSquadStatus } from "@/lib/squad-status";
 import {
   computeDiscipline,
   playedFixtures,
@@ -33,8 +35,10 @@ import { getDictionary } from "@/i18n";
 /**
  * The club hub.
  *
- * Section order is the note's hierarchy, not the reader's curiosity: the
- * calculable blocks first because they are defensible and free to keep fresh,
+ * Section order is the note's hierarchy, not the reader's curiosity: squad
+ * status first because it is the question a reader actually arrives with and a
+ * summary placed after what it summarises is only a repetition, then the
+ * calculable blocks because they are defensible and free to keep fresh,
  * identity afterwards because it builds trust rather than traffic, fixtures
  * last because they are commodity.
  */
@@ -79,6 +83,7 @@ const NOW = new Date("2027-02-20T12:00:00Z");
 /** Section ids are stable anchors; only their labels are translated. */
 function jumpLinks(d: ReturnType<typeof getDictionary>) {
   return [
+    { id: "squad-status", label: d.nav.squadStatus },
     { id: "suspensions", label: d.nav.suspensions },
     { id: "congestion", label: d.nav.congestion },
     { id: "contracts", label: d.nav.contracts },
@@ -109,6 +114,14 @@ export default async function ClubPage({
   const contracts = computeContracts(club, NOW);
   const availability = computeAvailability(club, NOW);
   const injuries = computeInjuries(club, NOW);
+  // Crosses the two blocks above; computed last because it consumes both.
+  const squadStatus = computeSquadStatus(
+    club,
+    discipline,
+    injuries,
+    congestion.heavyWeeks,
+    NOW,
+  );
 
   const upcoming = upcomingFixtures(club, NOW);
   const recent = playedFixtures(club).slice(0, 6);
@@ -163,6 +176,7 @@ export default async function ClubPage({
       />
       <JumpNav links={jumpLinks(d)} dict={d} />
 
+      <SquadStatusSection status={squadStatus} dict={d} locale={typed} />
       <SuspensionsSection
         discipline={discipline}
         summary={summary}

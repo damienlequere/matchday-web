@@ -61,6 +61,7 @@ export const en = {
 
   nav: {
     label: "Hub sections",
+    squadStatus: "Squad status",
     suspensions: "Suspensions",
     congestion: "Congestion",
     contracts: "Contracts",
@@ -96,6 +97,52 @@ export const en = {
      */
     contractNote: (matches: string, n: number) =>
       `in June · ${matches} lost to ${n === 1 ? "a ban" : "bans"}`,
+  },
+
+  squadStatus: {
+    title: "Squad status",
+    lede: "Who is missing for the next fixture, whatever the cause. The two blocks below hold the detail; this one crosses them, because a manager counts a squad rather than a reason.",
+    /**
+     * "Next fixture: Lens (away), Sunday 22 February"
+     *
+     * A plain label rather than a note on method: every figure below is counted
+     * from this match, and the layout already says so. Naming the fixture is
+     * what the reader came for; explaining the frame is what the closing note
+     * is for.
+     */
+    nextFixture: (opponent: string, home: boolean, date: string) =>
+      `Next fixture: ${opponent} (${home ? "home" : "away"}), ${date}`,
+    noFixture: "No fixture scheduled — the squad as it currently stands.",
+    unavailable: "Unavailable",
+    /** Deliberately not summed with the line above — see `lib/squad-status`. */
+    doubtful: "Doubtful",
+    doubtfulNote: "a matchday call, not counted as available",
+    atRisk: "One card away",
+    returning: "Expected back",
+    /** "of a 24-player squad" */
+    ofSquad: (n: number) => `of a ${n}-player squad`,
+    certainNote: "bans and players ruled out",
+    noneUnavailable: "Nobody is ruled out for the next fixture.",
+    noneDoubtful: "No matchday calls outstanding.",
+    noneAtRisk: "Nobody is a card from a ban.",
+    cause: {
+      suspension: "Suspended",
+      injury: "Injured",
+    },
+    /** "Suspended · 2 matches left" */
+    banDetail: (competition: string, matches: string) =>
+      `${competition} · ${matches} left`,
+    lines: "By position",
+    linesNote:
+      "The figure neither block below can give: where the absences fall. Three missing centre-backs and three missing forwards are not the same problem.",
+    thin: "Thin",
+    /** "3 of 5 available" */
+    lineCount: (available: number, squad: number) =>
+      `${available} of ${squad} available`,
+    /** Context, not a headline: congestion changes what an absence costs. */
+    congestion: (weeks: string) =>
+      `${weeks} in the next run of fixtures — an absence costs more across a congested spell.`,
+    note: "Suspensions here are calculable and certain. Injury status is not: a player ruled out is reported as out, a doubtful player is reported as doubtful, and the two are never added together. The detail behind both, with sources and confidence, is in the blocks below.",
   },
 
   suspensions: {

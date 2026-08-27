@@ -57,6 +57,7 @@ export const fr: Dictionary = {
 
   nav: {
     label: "Sections du hub",
+    squadStatus: "État de l'effectif",
     suspensions: "Suspensions",
     congestion: "Calendrier",
     contracts: "Contrats",
@@ -82,6 +83,41 @@ export const fr: Dictionary = {
     outOfContract: "En fin de contrat",
     contractNote: (matches: string, n: number) =>
       `en juin · ${matches} ${n < 2 ? "manqué" : "manqués"} sur suspension`,
+  },
+
+  squadStatus: {
+    title: "État de l'effectif",
+    lede: "Qui manque pour le prochain match, quelle qu'en soit la cause. Les deux blocs ci-dessous en détaillent les raisons ; celui-ci les croise, parce qu'un entraîneur compte un effectif plutôt qu'un motif.",
+    /** "Prochain match : Stade Rennais (extérieur), dimanche 21 février" */
+    nextFixture: (opponent: string, home: boolean, date: string) =>
+      `Prochain match : ${opponent} (${home ? "domicile" : "extérieur"}), ${date}`,
+    noFixture: "Aucun match programmé — l'effectif en l'état.",
+    unavailable: "Indisponibles",
+    doubtful: "Incertains",
+    doubtfulNote: "décision au coup d'envoi, non comptés comme disponibles",
+    atRisk: "À un carton",
+    returning: "Retours attendus",
+    ofSquad: (n: number) => `sur un effectif de ${n} joueurs`,
+    certainNote: "suspensions et forfaits déclarés",
+    noneUnavailable: "Personne n'est forfait pour le prochain match.",
+    noneDoubtful: "Aucune décision en suspens.",
+    noneAtRisk: "Personne n'est à un carton d'une suspension.",
+    cause: {
+      suspension: "Suspendu",
+      injury: "Blessé",
+    },
+    /** "Ligue 1 · encore 2 matchs" — « encore » évite tout accord de participe. */
+    banDetail: (competition: string, matches: string) =>
+      `${competition} · encore ${matches}`,
+    lines: "Par poste",
+    linesNote:
+      "Le chiffre qu'aucun des deux blocs ci-dessous ne peut donner : où tombent les absences. Trois défenseurs centraux absents et trois attaquants absents ne posent pas le même problème.",
+    thin: "Dégarni",
+    lineCount: (available: number, squad: number) =>
+      `${available} sur ${squad} disponibles`,
+    congestion: (weeks: string) =>
+      `${weeks} dans la série à venir — une absence coûte davantage sur une période chargée.`,
+    note: "Les suspensions présentées ici sont calculables et certaines. L'état de l'infirmerie ne l'est pas : un joueur forfait est annoncé forfait, un joueur incertain est annoncé incertain, et les deux ne sont jamais additionnés. Le détail, avec sources et niveaux de confiance, figure dans les blocs ci-dessous.",
   },
 
   suspensions: {
