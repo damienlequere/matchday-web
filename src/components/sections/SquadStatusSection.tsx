@@ -163,11 +163,15 @@ export function SquadStatusSection({
           The headline figures. Kept side by side but never summed: the divider
           between them is the point, not decoration.
 
-          Only the certain count is unconditional — it is the answer to the
-          question the block asks, and zero missing is worth stating. The other
-          two are omitted when empty: a tile reading "0 doubtful" spends the
-          same space as a real figure to say nothing happened, and the detail
-          card below already says it in words.
+          The certain and doubtful counts both hold their place whatever they
+          read. They are the two halves of the same question — who is out, who
+          is undecided — and a reader who finds only one of them has to work
+          out which is missing before trusting the other. A zero there is an
+          answer: no calls are pending. The tile is now the only place the
+          doubtful are reported at all, which makes holding the slot the
+          difference between a stated zero and a silence. Returning is
+          different, an extra when there is one, so it still omits itself
+          when empty.
         */}
         <div className={styles.headline}>
           <div className={styles.figure}>
@@ -180,17 +184,15 @@ export function SquadStatusSection({
             </div>
           </div>
 
-          {status.doubtfulCount > 0 ? (
-            <div className={`${styles.figure} ${styles.soft}`}>
-              <div className={styles.figureValue}>{status.doubtfulCount}</div>
-              <div className={styles.figureLabel}>
-                {dict.squadStatus.doubtful}
-              </div>
-              <div className={styles.figureNote}>
-                {dict.squadStatus.doubtfulNote}
-              </div>
+          <div className={`${styles.figure} ${styles.soft}`}>
+            <div className={styles.figureValue}>{status.doubtfulCount}</div>
+            <div className={styles.figureLabel}>
+              {dict.squadStatus.doubtful}
             </div>
-          ) : null}
+            <div className={styles.figureNote}>
+              {dict.squadStatus.doubtfulNote}
+            </div>
+          </div>
 
           {status.returning.length > 0 ? (
             <div className={`${styles.figure} ${styles.good}`}>
@@ -212,22 +214,6 @@ export function SquadStatusSection({
               <p className={styles.empty}>{dict.squadStatus.noneUnavailable}</p>
             ) : (
               status.unavailable.map((player) => (
-                <PlayerRow
-                  key={player.stint.playerSlug}
-                  player={player}
-                  dict={dict}
-                  locale={locale}
-                />
-              ))
-            )}
-
-            <p className={`${styles.blockTitle} ${styles.spaced}`}>
-              {dict.squadStatus.doubtful}
-            </p>
-            {status.doubtful.length === 0 ? (
-              <p className={styles.empty}>{dict.squadStatus.noneDoubtful}</p>
-            ) : (
-              status.doubtful.map((player) => (
                 <PlayerRow
                   key={player.stint.playerSlug}
                   player={player}

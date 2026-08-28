@@ -85,7 +85,6 @@ export const fr: Dictionary = {
     ofSquad: (n: number) => `sur un effectif de ${n} joueurs`,
     certainNote: "suspensions et forfaits déclarés",
     noneUnavailable: "Personne n'est forfait pour le prochain match.",
-    noneDoubtful: "Aucune décision en suspens.",
     noneAtRisk: "Personne n'est à un carton d'une suspension.",
     cause: {
       suspension: "Suspendu",

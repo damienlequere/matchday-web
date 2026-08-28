@@ -99,7 +99,6 @@ export const en = {
     ofSquad: (n: number) => `of a ${n}-player squad`,
     certainNote: "bans and players ruled out",
     noneUnavailable: "Nobody is ruled out for the next fixture.",
-    noneDoubtful: "No matchday calls outstanding.",
     noneAtRisk: "Nobody is a card from a ban.",
     cause: {
       suspension: "Suspended",
