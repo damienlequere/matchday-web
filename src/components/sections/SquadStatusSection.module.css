@@ -19,7 +19,16 @@
 /* --- Headline ------------------------------------------------------------
    Two figures that must never look like operands of an addition. The gap and
    the rule between them are load-bearing: certain absences on the left,
-   matchday calls on the right, no total anywhere. */
+   matchday calls on the right, no total anywhere.
+
+   Status is carried by a tint over the whole tile with a rule down its
+   leading edge — the pairing `.congestion` already uses further down. Two
+   channels, not one: a reader without colour still has the rule's weight and
+   position, and the tint's value separates the steps in greyscale. It reads
+   as the state of the count rather than as a cap laid on top of it.
+
+   The tint is `--*-fill`, not `--*-soft`: at tile scale the badge tints do
+   not clear the page ground. See the token block in globals.css. */
 
 .headline {
   display: flex;
@@ -33,19 +42,21 @@
 }
 
 .figure {
-  background: var(--surface);
+  background: var(--crit-fill);
   padding: 16px 20px;
   flex: 1 1 200px;
-  border-top: 2px solid var(--crit);
+  border-left: 3px solid var(--crit);
 }
 
 /* A doubtful count is a weaker claim, and is drawn as one. */
 .soft {
-  border-top-color: var(--warn);
+  background: var(--warn-fill);
+  border-left-color: var(--warn);
 }
 
 .good {
-  border-top-color: var(--ok);
+  background: var(--ok-fill);
+  border-left-color: var(--ok);
 }
 
 .figureValue {

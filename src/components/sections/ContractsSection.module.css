@@ -103,9 +103,11 @@
 /* --- Headline ------------------------------------------------------------
    The same joined strip the other sections use for their headline figures:
    tiles separated by a rule rather than by whitespace, so the three counts
-   read as one row and not as a sum. Each tile's top rule repeats the status
-   colour the legend and the table markers already use, which is what ties a
-   figure to the rows it counts. */
+   read as one row and not as a sum. Each tile is tinted and ruled down its
+   leading edge in the status colour the legend and the table markers already
+   use, which is what ties a figure to the rows it counts. Tint and rule
+   together, so the tie survives greyscale. The unknown count keeps the plain
+   surface: it is the absence of a status, not a third one. */
 
 .counts {
   display: flex;
@@ -122,11 +124,18 @@
   background: var(--surface);
   padding: 16px 20px;
   flex: 1 1 200px;
-  border-top: 2px solid var(--line-2);
+  border-left: 3px solid var(--line-2);
 }
 
-.figureExpiring { border-top-color: var(--crit); }
-.figureFinalYear { border-top-color: var(--brass); }
+.figureExpiring {
+  background: var(--crit-fill);
+  border-left-color: var(--crit);
+}
+
+.figureFinalYear {
+  background: var(--brass-fill);
+  border-left-color: var(--brass);
+}
 
 .count {
   font-family: var(--font-display), sans-serif;
