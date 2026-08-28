@@ -1,5 +1,3 @@
-import type { CSSProperties } from "react";
-
 import type { ClubIdentity } from "@/types/club";
 import { Crest } from "@/components/ui/Crest";
 import { HomeLink } from "@/components/ui/HomeLink";
@@ -31,10 +29,13 @@ interface ClubHeroProps {
  * below repeats — whose page this is, and how fresh it is — and the reader
  * reaches the first real figure a screen sooner.
  *
- * The band belongs to the club twice over, and both times cheaply: the mark at
- * its left, and a rule in the club's own colour along its bottom edge. Neither
- * costs a row. The alternative considered was a stadium photograph behind the
- * text, and it was declined on the same argument that emptied the band of
+ * The band belongs to the club through the mark at its left, and that is the
+ * whole of it — no row spent, and no second statement of the same thing. A
+ * rule in the club's own colour ran along the bottom edge here once; the mark
+ * already carries the colour, so the rule was a tint the reader had no use for
+ * twice. The band ends on its own change of background now, with no edge
+ * drawn at all. The alternative considered was a stadium photograph behind
+ * the text, and it was declined on the same argument that emptied the band of
  * figures — it would spend the page's best space on atmosphere and push the
  * first real number below the fold. It would also borrow the visual grammar of
  * the sites this one is not: a page whose claim is a defensible number should
@@ -54,10 +55,7 @@ export function ClubHero({
   locale,
 }: ClubHeroProps) {
   return (
-    <header
-      className={styles.hero}
-      style={{ "--club": identity.colors.primary } as CSSProperties}
-    >
+    <header className={styles.hero}>
       <div className="wrap">
         <div className={styles.homeLink}>
           <HomeLink dict={dict} locale={locale} />

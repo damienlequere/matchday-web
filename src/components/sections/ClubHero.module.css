@@ -3,14 +3,6 @@
   background: var(--band);
   color: var(--band-ink);
   padding: 34px 0 30px;
-  /*
-   * The club's colour, as a rule rather than as a surface. `--club` is set
-   * inline per club; the fallback keeps the band intact if it ever arrives
-   * unset. Three points is enough to tell PSG navy from OM cyan at a glance
-   * and little enough to stay an accent, which is the rule the identity type
-   * states for these colours: a thin accent, never page chrome.
-   */
-  border-bottom: 3px solid var(--club, var(--band-line));
 }
 
 /* Sits above the name; the gap below it is the band's own breathing room. */
