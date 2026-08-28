@@ -73,6 +73,7 @@ export const en = {
     meta: (stadium: string, capacity: string, founded: number) =>
       `${stadium} · ${capacity} seats · founded ${founded}`,
     updated: "Updated",
+    home: "All clubs",
   },
 
   squadStatus: {

@@ -1,0 +1,48 @@
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--band-ink-2);
+  text-decoration: none;
+  font-family: var(--font-mono), monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: color 0.15s ease;
+}
+
+.link:hover,
+.link:focus-visible {
+  color: var(--band-ink);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/*
+ * The arrow leads the words out of the way on hover, which is the whole of the
+ * link's motion budget. Held still for readers who ask for that.
+ */
+.icon {
+  flex: none;
+  transition: transform 0.15s ease;
+}
+
+.link:hover .icon,
+.link:focus-visible .icon {
+  transform: translateX(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon {
+    transition: none;
+  }
+
+  .link:hover .icon,
+  .link:focus-visible .icon {
+    transform: none;
+  }
+}

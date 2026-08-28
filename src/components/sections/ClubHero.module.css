@@ -13,6 +13,11 @@
   border-bottom: 3px solid var(--club, var(--band-line));
 }
 
+/* Sits above the name; the gap below it is the band's own breathing room. */
+.homeLink {
+  margin-bottom: 14px;
+}
+
 .top {
   display: flex;
   align-items: flex-start;

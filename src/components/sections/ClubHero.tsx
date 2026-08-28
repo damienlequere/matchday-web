@@ -2,6 +2,7 @@ import type { CSSProperties } from "react";
 
 import type { ClubIdentity } from "@/types/club";
 import { Crest } from "@/components/ui/Crest";
+import { HomeLink } from "@/components/ui/HomeLink";
 import { formatLongDate, formatNumber } from "@/lib/format";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n";
@@ -39,6 +40,12 @@ interface ClubHeroProps {
  * the sites this one is not: a page whose claim is a defensible number should
  * read as an instrument, and the photograph is the part of that claim nobody
  * can check.
+ *
+ * The band also carries the way back to the index, above the name. A club page
+ * is a bookmarked address as often as it is a click from the list, so the back
+ * button cannot be assumed to lead anywhere; the link is one line of chrome and
+ * it sits with identity because that is the question it answers — whose page
+ * this is, and what it is one of.
  */
 export function ClubHero({
   identity,
@@ -52,6 +59,9 @@ export function ClubHero({
       style={{ "--club": identity.colors.primary } as CSSProperties}
     >
       <div className="wrap">
+        <div className={styles.homeLink}>
+          <HomeLink dict={dict} locale={locale} />
+        </div>
         <div className={styles.top}>
           <div className={styles.headline}>
             <Crest identity={identity} size="lg" />
