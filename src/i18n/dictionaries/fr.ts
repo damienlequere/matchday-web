@@ -94,6 +94,47 @@ export const fr: Dictionary = {
     /** "Ligue 1 · encore 2 matchs" — « encore » évite tout accord de participe. */
     banDetail: (competition: string, matches: string) =>
       `${competition} · encore ${matches}`,
+    /**
+     * La projection des retours.
+     *
+     * Suspensions uniquement, et la formulation porte cette limite plutôt que
+     * de compter sur le lecteur pour la déduire : une suspension s'éteint sur
+     * un compteur, ce qui autorise à nommer un match ; une blessure non. Les
+     * blessés sont dits rester ouverts dans la même phrase, pour que leur
+     * absence de la liste se lise comme un refus et non comme un oubli.
+     */
+    returns: {
+      title: "Fin des suspensions",
+      /**
+       * « 2 de retour sur les 6 matchs à venir » — `window` porte son unité.
+       *
+       * « les 6 prochains » laissait le nom en suspens. L'unité est nommée, et
+       * « à venir » suit le nom compté là où l'anglais antépose « next ».
+       * Le bloc compte en matchs, jamais en semaines.
+       *
+       * Une fenêtre d'un seul match a sa propre formulation : « sur les 1 match
+       * à venir » est une phrase au pluriel plaquée sur un singulier, et c'est
+       * le cas ordinaire d'une fin de saison.
+       */
+      backInWindow: (n: number, window: string, single: boolean) =>
+        single
+          ? `${n} de retour pour le prochain match`
+          : `${n} de retour sur les ${window} à venir`,
+      /**
+       * « de retour au match 3 » — la pastille à côté de chaque nom.
+       *
+       * L'unité est écrite plutôt que laissée à un ordinal nu : « 3e » à côté
+       * d'un nom de joueur se lit comme un numéro de maillot ou un classement,
+       * alors qu'il compte un rang dans la fenêtre à venir — ce que rien
+       * d'autre sur la ligne n'indique.
+       */
+      nthMatch: (n: number) => `de retour au match ${n}`,
+      /** « 1 encore suspendu au-delà du 6e match » — `nth` est déjà un ordinal. */
+      beyond: (n: number, nth: string) =>
+        `${n} encore ${n < 2 ? "suspendu" : "suspendus"} au-delà du ${nth} match`,
+      note: "Suspensions uniquement. Une suspension s'éteint après un nombre de matchs compté dans la compétition qui l'a prononcée : le match où elle prend fin relève donc du calcul. Les retours de blessure sont des estimations et ne sont pas projetés ici — les blessés restent dans les listes ci-dessus.",
+      none: "Aucune suspension ne prend fin sur cette période.",
+    },
     lines: "Par poste",
     linesNote:
       "Le chiffre qu'aucun des deux blocs sources ne peut donner : où tombent les absences. Trois défenseurs centraux absents et trois attaquants absents ne posent pas le même problème.",

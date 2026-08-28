@@ -108,6 +108,51 @@ export const en = {
     /** "Suspended · 2 matches left" */
     banDetail: (competition: string, matches: string) =>
       `${competition} · ${matches} left`,
+    /**
+     * The return projection.
+     *
+     * Bans only, and the wording carries that limit rather than relying on the
+     * reader to infer it: "bans clear on a counter" is why this block can name
+     * a match at all, and the injured are described as still open in the same
+     * breath so their absence from the list reads as a refusal rather than an
+     * omission.
+     */
+    returns: {
+      title: "When the bans clear",
+      /**
+       * "2 back within the next 6 matches" — `window` is already a counted noun.
+       *
+       * The unit is named rather than left to the reader: "the next 6" begged
+       * the question "6 what", and the whole block exists to count in matches
+       * rather than in weeks.
+       *
+       * A one-match window gets its own wording: "within the next 1 match" is
+       * the shape of a plural sentence forced onto a singular, and a window
+       * that holds one fixture is the ordinary end-of-season case.
+       */
+      backInWindow: (n: number, window: string, single: boolean) =>
+        single ? `${n} back for the next match` : `${n} back within the next ${window}`,
+      /**
+       * "back for match 3" — the pill beside each name.
+       *
+       * The unit is spelled out rather than left as a bare ordinal. "3rd" next
+       * to a player's name reads as a shirt number or a ranking; what it counts
+       * is position in the upcoming window, and nothing else on the row says so.
+       */
+      nthMatch: (n: number) => `back for match ${n}`,
+      /** "1 still banned beyond the 6th match" — `nth` is already an ordinal. */
+      beyond: (n: number, nth: string) =>
+        `${n} still banned beyond the ${nth} match`,
+      /**
+       * The caveat that keeps the tile honest.
+       *
+       * Stated even when no player is injured: it explains what the block is
+       * counting, and a reader who meets the sentence only on the pages where
+       * somebody is hurt learns the rule from the exception.
+       */
+      note: "Suspensions only. A ban clears on a counted number of matches in the competition that issued it, so the fixture it ends at is arithmetic. Injury returns are forecasts and are not projected here — injured players stay in the lists above.",
+      none: "No ban clears inside this window.",
+    },
     lines: "By position",
     linesNote:
       "The figure neither source block can give: where the absences fall. Three missing centre-backs and three missing forwards are not the same problem.",

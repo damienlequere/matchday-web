@@ -8,7 +8,7 @@ import type {
 } from "@/lib/squad-status";
 import { Card } from "@/components/ui/Card";
 import { Section } from "@/components/sections/Section";
-import { formatMatches, formatWeekdayDate } from "@/lib/format";
+import { formatMatches, formatWeekdayDate, ordinal } from "@/lib/format";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n";
 
@@ -268,6 +268,83 @@ export function SquadStatusSection({
                   status.upcomingCount,
                 )}
               </p>
+            ) : null}
+
+            {/*
+              When the bans clear.
+
+              Placed under the lines because it answers the question the lines
+              raise: a thin defence matters differently when it refills at the
+              second match than when it stays thin all window. Rendered only
+              when a ban actually clears — a heading over "nobody" would spend
+              the space the empty-tile rule was written to reclaim.
+
+              Injured players are absent by construction, and the note says so
+              rather than leaving the reader to notice a name missing.
+            */}
+            {status.returningFromBan.length > 0 ? (
+              <div className={styles.returns}>
+                <p className={styles.blockTitle}>
+                  {dict.squadStatus.returns.title}
+                </p>
+                <p className={styles.returnsCount}>
+                  {dict.squadStatus.returns.backInWindow(
+                    status.returningFromBan.length,
+                    formatMatches(locale, status.returnWindow.length),
+                    status.returnWindow.length === 1,
+                  )}
+                </p>
+
+                <ul className={styles.returnList}>
+                  {status.returningFromBan.map((player) => {
+                    // Non-null by construction: the list is filtered on it.
+                    const at = player.returnsAt;
+                    if (!at) return null;
+                    return (
+                      <li
+                        className={styles.returnRow}
+                        key={player.stint.playerSlug}
+                      >
+                        <span className={styles.returnBody}>
+                          <span className={styles.returnPlayer}>
+                            {player.stint.playerName}
+                          </span>
+                          {/*
+                            The rank, with the noun it counts. A bare "3rd"
+                            beside a name reads as a shirt number; the fixture
+                            underneath dates the same match, so the two lines
+                            answer "which match" and "when" separately.
+                          */}
+                          <span className={styles.returnNth}>
+                            {dict.squadStatus.returns.nthMatch(at.index)}
+                          </span>
+                          <span className={styles.returnFixture}>
+                            {at.fixture.opponent} ·{" "}
+                            {formatWeekdayDate(locale, at.fixture.kickoff)}
+                          </span>
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+
+                {/*
+                  The other half of the answer. Without it the list would imply
+                  the window clears every banned player it does not name.
+                */}
+                {status.bannedBeyondWindow > 0 ? (
+                  <p className={styles.returnsBeyond}>
+                    {dict.squadStatus.returns.beyond(
+                      status.bannedBeyondWindow,
+                      ordinal(locale, status.returnWindow.length),
+                    )}
+                  </p>
+                ) : null}
+
+                <p className={styles.returnsNote}>
+                  {dict.squadStatus.returns.note}
+                </p>
+              </div>
             ) : null}
           </Card>
         </div>
