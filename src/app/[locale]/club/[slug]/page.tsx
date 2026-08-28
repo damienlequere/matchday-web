@@ -152,12 +152,7 @@ export default async function ClubPage({
 
   return (
     <main>
-      <ClubHero
-        identity={club.identity}
-        updatedAt={club.updatedAt}
-        dict={d}
-        locale={typed}
-      />
+      <ClubHero identity={club.identity} dict={d} locale={typed} />
       <JumpNav links={jumpLinks(d)} dict={d} />
 
       <SquadStatusSection

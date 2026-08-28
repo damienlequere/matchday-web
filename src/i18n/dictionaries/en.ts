@@ -66,7 +66,6 @@ export const en = {
     /** "Parc des Princes · 47,929 seats · founded 1970" */
     meta: (stadium: string, capacity: string, founded: number) =>
       `${stadium} · ${capacity} seats · founded ${founded}`,
-    updated: "Updated",
     home: "All clubs",
   },
 

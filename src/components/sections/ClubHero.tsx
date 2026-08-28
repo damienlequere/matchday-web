@@ -1,7 +1,7 @@
 import type { ClubIdentity } from "@/types/club";
 import { Crest } from "@/components/ui/Crest";
 import { HomeLink } from "@/components/ui/HomeLink";
-import { formatLongDate, formatNumber } from "@/lib/format";
+import { formatNumber } from "@/lib/format";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n";
 
@@ -9,13 +9,12 @@ import styles from "./ClubHero.module.css";
 
 interface ClubHeroProps {
   identity: ClubIdentity;
-  updatedAt: string;
   dict: Dictionary;
   locale: Locale;
 }
 
 /**
- * The hub's opening screen — identity and freshness, and nothing else.
+ * The hub's opening screen — identity, and nothing else.
  *
  * It used to carry four computed figures: suspended, one card away, the next
  * six matches, contracts expiring. Every one of them was already printed, in
@@ -25,9 +24,12 @@ interface ClubHeroProps {
  * a bare "2 suspended" above the fold pre-empts a block whose whole argument is
  * that certain absences and matchday calls are not the same number.
  *
- * So the figures live where their working lives. What stays is what no section
- * below repeats — whose page this is, and how fresh it is — and the reader
- * reaches the first real figure a screen sooner.
+ * So the figures live where their working lives. What stays is whose page this
+ * is, and the reader reaches the first real figure a screen sooner. A stamped
+ * update date stood here too, and it went the same way for a narrower reason:
+ * a date on the band dates the whole page, which is the one thing it cannot
+ * honestly do — the sections beneath it are fresh on their own schedules, and
+ * each already says so where a reader can act on it.
  *
  * The band belongs to the club through the mark at its left, and that is the
  * whole of it — no row spent, and no second statement of the same thing. A
@@ -48,38 +50,26 @@ interface ClubHeroProps {
  * it sits with identity because that is the question it answers — whose page
  * this is, and what it is one of.
  */
-export function ClubHero({
-  identity,
-  updatedAt,
-  dict,
-  locale,
-}: ClubHeroProps) {
+export function ClubHero({ identity, dict, locale }: ClubHeroProps) {
   return (
     <header className={styles.hero}>
       <div className="wrap">
         <div className={styles.homeLink}>
           <HomeLink dict={dict} locale={locale} />
         </div>
-        <div className={styles.top}>
-          <div className={styles.headline}>
-            <Crest identity={identity} size="lg" />
-            <div>
-              <h1 className={styles.name}>{identity.name}</h1>
-              <p className={styles.meta}>
-                {identity.competition} ·{" "}
-                {dict.hero.meta(
-                  identity.stadium,
-                  formatNumber(locale, identity.stadiumCapacity),
-                  identity.founded,
-                )}
-              </p>
-            </div>
+        <div className={styles.headline}>
+          <Crest identity={identity} size="lg" />
+          <div>
+            <h1 className={styles.name}>{identity.name}</h1>
+            <p className={styles.meta}>
+              {identity.competition} ·{" "}
+              {dict.hero.meta(
+                identity.stadium,
+                formatNumber(locale, identity.stadiumCapacity),
+                identity.founded,
+              )}
+            </p>
           </div>
-          <p className={styles.updated}>
-            {dict.hero.updated}
-            <br />
-            {formatLongDate(locale, updatedAt)}
-          </p>
         </div>
       </div>
     </header>

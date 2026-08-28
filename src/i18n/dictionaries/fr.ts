@@ -61,7 +61,6 @@ export const fr: Dictionary = {
   hero: {
     meta: (stadium: string, capacity: string, founded: number) =>
       `${stadium} · ${capacity} places · fondé en ${founded}`,
-    updated: "Mis à jour",
     home: "Tous les clubs",
   },
 
