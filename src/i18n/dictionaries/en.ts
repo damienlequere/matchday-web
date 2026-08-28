@@ -27,10 +27,8 @@ export const en = {
   },
 
   footer: {
-    title: "Matchday — club hub prototype.",
-    body: "One address instead of six. This build ships the calculable layer — suspensions, fixture congestion, contract expiries and availability history — plus the injury room and club identity. No affiliation with any club, league or federation.",
-    demo: "All figures are demonstration data.",
-    computed: "Calculable blocks are computed, never stored.",
+    title: "Matchday",
+    body: "One address instead of six. No affiliation with any club, league or federation.",
   },
 
   localeSwitcher: {
@@ -46,10 +44,6 @@ export const en = {
     suspended: "Suspended",
     atRisk: "One card away",
     outOfContract: "Out of contract",
-    note: {
-      lead: "Why these blocks.",
-      body: "Suspensions, fixture congestion and contract expiries are derivable from public facts, so they cost nothing to keep current and cannot be scooped. The injury room is what brings people in, but it is judgement over contradictory sources — so it is shipped as judgement: every return date is marked an estimate, carries its confidence, and shows the reasoning and the conflict behind it. A page that states a guess in the voice of a record is worse than a page that stays quiet.",
-    },
   },
 
   notFound: {
@@ -78,14 +72,11 @@ export const en = {
 
   squadStatus: {
     title: "Squad status",
-    lede: "Who is missing for the next fixture, whatever the cause. Suspensions and the injury room hold the detail and open below; this block crosses them, because a manager counts a squad rather than a reason.",
     /**
      * "Next fixture: Lens (away), Sunday 22 February"
      *
-     * A plain label rather than a note on method: every figure below is counted
-     * from this match, and the layout already says so. Naming the fixture is
-     * what the reader came for; explaining the frame is what the closing note
-     * is for.
+     * A plain label rather than a note on method: every figure below is
+     * counted from this match, and the layout already says so.
      */
     nextFixture: (opponent: string, home: boolean, date: string) =>
       `Next fixture: ${opponent} (${home ? "home" : "away"}), ${date}`,
@@ -109,8 +100,6 @@ export const en = {
     banDetail: (competition: string, matches: string) =>
       `${competition} · ${matches} left`,
     lines: "By position",
-    linesNote:
-      "The figure neither source block can give: where the absences fall. Three missing centre-backs and three missing forwards are not the same problem.",
     thin: "Thin",
     /** "3 of 5 available" */
     lineCount: (available: number, squad: number) =>
@@ -126,7 +115,6 @@ export const en = {
      */
     congestion: (heavy: number, total: number) =>
       `${heavy} of the next ${total} fixtures ${heavy === 1 ? "falls" : "fall"} in a run of 3 in 8 days — an absence costs more there, and rotation absorbs less.`,
-    note: "Suspensions here are calculable and certain. Injury status is not: a player ruled out is reported as out, a doubtful player is reported as doubtful, and the two are never added together. The detail behind both, with sources and confidence, opens in the two drawers below.",
 
     /**
      * The folded source blocks.
@@ -150,7 +138,6 @@ export const en = {
 
   suspensions: {
     title: "Suspensions & cards",
-    lede: "Computed from public match reports against each competition's own rules. No judgement, no collection — the same inputs always give the same answer.",
     out: "Out through suspension",
     noneServing: "Nobody is currently serving a ban.",
     reason: {
@@ -189,7 +176,6 @@ export const en = {
    */
   schedule: {
     title: "Schedule",
-    lede: "The next run of matches and what it actually costs: turnaround between games, matches inside a rolling eight days, and kilometres travelled.",
     nextMatches: "Next matches",
     across: "Across",
     shortestRest: "Shortest rest",
@@ -265,7 +251,6 @@ export const en = {
      */
     recent: {
       title: "Recent results",
-      lede: "The last matches played, most recent first.",
       /** "6 played · 4W 1D 1L" — enough to decide whether to open the drawer. */
       count: (played: number, w: number, d: number, l: number) =>
         `${played} played · ${w}W ${d}D ${l}L`,
@@ -275,8 +260,6 @@ export const en = {
 
   contracts: {
     title: "Contract expiries",
-    lede: (seasonEnd: string) =>
-      `Who is out of contract on ${seasonEnd}, who is in their final year, and who is tied down. Dates only — an unknown date is shown as unknown, never estimated.`,
     expiringCount: "Out of contract in June",
     finalYearCount: "In their final year",
     unknownCount: "Date not known",
@@ -300,7 +283,6 @@ export const en = {
 
   availability: {
     title: "Availability history",
-    lede: "Matches missed so far this season and why. Derived from team sheets already on record — this is history, not a prediction of who returns when.",
     byPlayer: "Matches missed by player",
     noneMissed: "Nobody has missed a match this season.",
     reason: {
@@ -322,7 +304,6 @@ export const en = {
       middle: " player-matches lost, ",
       after: " of them to suspension.",
     },
-    note: "Time lost to suspension is the avoidable share — and the only one this hub can predict, because a ban follows a rule while a recovery does not.",
   },
 
   /**
@@ -334,9 +315,6 @@ export const en = {
    */
   injuries: {
     title: "Injury room",
-    lede: "Who is unavailable, and how confident that is. Every return date on this page is an estimate over sources that disagree — it is marked as one, with the reasoning attached.",
-    caveat:
-      "The blocks above follow rules. This one does not: it weighs a club statement against a press report against a recovery norm, and says which it believes and why. Read the confidence tag before the date.",
     stage: {
       out: "Out",
       doubtful: "Doubtful",
@@ -382,12 +360,10 @@ export const en = {
     backForNext: (opponent: string) => `Expected back for ${opponent}`,
     conflictLabel: "Where sources disagree",
     rationaleLabel: "Why this estimate",
-    note: "Return dates are inferences, shown underlined with their confidence. The fixtures each player is expected to miss are computed from the club's actual schedule, not restated from a source — that part is checkable even when the estimate behind it is not.",
   },
 
   identity: {
     title: "Club identity",
-    lede: "Honours, records and the current squad. Stable ground rather than a reason to come back — the blocks above are that.",
     honours: "Honours",
     records: "Records",
     squad: (count: number) => `Squad (${count})`,

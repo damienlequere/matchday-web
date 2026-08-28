@@ -39,7 +39,6 @@ export function AvailabilitySection({
     <Section
       id="availability"
       title={dict.availability.title}
-      lede={dict.availability.lede}
     >
       <div className={styles.wrapper}>
         <Card>
@@ -101,7 +100,6 @@ export function AvailabilitySection({
               </span>
             ))}
           </div>
-          <p className={styles.note}>{dict.availability.note}</p>
         </Card>
       </div>
     </Section>

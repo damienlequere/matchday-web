@@ -202,11 +202,9 @@ export function InjurySection({
     <Section
       id="injuries"
       title={dict.injuries.title}
-      lede={dict.injuries.lede}
       nested={nested}
     >
       <div className={styles.wrapper}>
-        <p className={styles.caveat}>{dict.injuries.caveat}</p>
 
         {injuries.rows.length === 0 ? (
           <Card>
@@ -238,8 +236,6 @@ export function InjurySection({
             </div>
           </>
         )}
-
-        <p className={styles.note}>{dict.injuries.note}</p>
       </div>
     </Section>
   );

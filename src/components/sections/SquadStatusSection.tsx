@@ -146,7 +146,6 @@ export function SquadStatusSection({
     <Section
       id="squad-status"
       title={dict.squadStatus.title}
-      lede={dict.squadStatus.lede}
     >
       <div className={styles.wrapper}>
         <p className={styles.nextFixture}>
@@ -238,7 +237,6 @@ export function SquadStatusSection({
           {/* The only genuinely new information in the block. */}
           <Card>
             <p className={styles.blockTitle}>{dict.squadStatus.lines}</p>
-            <p className={styles.linesNote}>{dict.squadStatus.linesNote}</p>
             <div className={styles.lines}>
               {status.lines.map((line) => (
                 <LineBar key={line.position} line={line} dict={dict} />
@@ -258,11 +256,8 @@ export function SquadStatusSection({
           </Card>
         </div>
 
-        <p className={styles.note}>{dict.squadStatus.note}</p>
-
         {/*
-          The evidence, folded. Placed after the note that names it so the
-          reader meets the claim, then the caveat, then the way to check both.
+          The evidence, folded: the claim first, then the way to check it.
         */}
         {sources ? (
           <div className={styles.sources}>

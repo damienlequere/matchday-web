@@ -2,19 +2,6 @@
   margin-top: 20px;
 }
 
-/*
- * The caveat is not a disclaimer in small print: it is the frame the whole
- * block is read through, so it gets the weight of a lede rather than a note.
- */
-.caveat {
-  border-left: 2px solid var(--brass);
-  padding: 2px 0 2px 14px;
-  margin: 0 0 22px;
-  max-width: 68ch;
-  font-size: 14px;
-  color: var(--ink-2);
-}
-
 .counts {
   display: flex;
   gap: 26px;
@@ -285,14 +272,6 @@
 .conflict ul {
   margin: 0;
   padding-left: 16px;
-}
-
-.note {
-  margin: 20px 0 0;
-  max-width: 72ch;
-  font-size: 12.5px;
-  line-height: 1.6;
-  color: var(--ink-3);
 }
 
 @media (max-width: 640px) {

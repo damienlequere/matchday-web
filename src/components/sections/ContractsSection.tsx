@@ -35,23 +35,28 @@ export function ContractsSection({
     <Section
       id="contracts"
       title={dict.contracts.title}
-      lede={dict.contracts.lede(formatLongDate(locale, contracts.seasonEnd))}
     >
       <div className={styles.wrapper}>
+        {/*
+          The headline figures, drawn as the joined strip the other sections
+          use. The three counts hold their slots whatever they read: a stated
+          zero on expiries is an answer, and dropping the tile would leave the
+          reader working out which of the three is missing.
+        */}
         <div className={styles.counts}>
-          <div>
+          <div className={`${styles.figure} ${styles.figureExpiring}`}>
             <div className={styles.count}>{contracts.expiringCount}</div>
             <div className={styles.countLabel}>
               {dict.contracts.expiringCount}
             </div>
           </div>
-          <div>
+          <div className={`${styles.figure} ${styles.figureFinalYear}`}>
             <div className={styles.count}>{contracts.finalYearCount}</div>
             <div className={styles.countLabel}>
               {dict.contracts.finalYearCount}
             </div>
           </div>
-          <div>
+          <div className={styles.figure}>
             <div className={styles.count}>{contracts.unknownCount}</div>
             <div className={styles.countLabel}>
               {dict.contracts.unknownCount}

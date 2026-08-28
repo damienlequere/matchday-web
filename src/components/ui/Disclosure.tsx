@@ -19,7 +19,6 @@ export function Disclosure({
   id,
   title,
   count,
-  lede,
   defaultOpen = false,
   children,
 }: {
@@ -27,7 +26,6 @@ export function Disclosure({
   title: string;
   /** Short, already-formatted tally shown beside the title. */
   count: string;
-  lede?: string;
   /**
    * Open on load.
    *
@@ -46,10 +44,7 @@ export function Disclosure({
         <span className={styles.title}>{title}</span>
         <span className={styles.count}>{count}</span>
       </summary>
-      <div className={styles.body}>
-        {lede ? <p className={styles.lede}>{lede}</p> : null}
-        {children}
-      </div>
+      <div className={styles.body}>{children}</div>
     </details>
   );
 }

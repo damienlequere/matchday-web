@@ -23,10 +23,8 @@ export const fr: Dictionary = {
   },
 
   footer: {
-    title: "Matchday — prototype de hub de club.",
-    body: "Une seule adresse plutôt que six. Cette version livre la couche calculable — suspensions, densité du calendrier, fins de contrat et historique de disponibilité — ainsi que l'identité du club. Sans affiliation à un club, une ligue ou une fédération.",
-    demo: "Tous les chiffres sont des données de démonstration.",
-    computed: "Les blocs calculables sont calculés, jamais stockés.",
+    title: "Matchday",
+    body: "Une seule adresse plutôt que six. Sans affiliation à un club, une ligue ou une fédération.",
   },
 
   localeSwitcher: {
@@ -42,10 +40,6 @@ export const fr: Dictionary = {
     suspended: "Suspendus",
     atRisk: "À un carton",
     outOfContract: "En fin de contrat",
-    note: {
-      lead: "Pourquoi ces blocs.",
-      body: "Les suspensions, la densité du calendrier et les fins de contrat se déduisent de faits publics : leur mise à jour ne coûte rien et personne ne peut les devancer. L'infirmerie est ce qui fait venir les visiteurs, mais elle relève du jugement sur des sources contradictoires — elle est donc livrée comme telle : chaque date de retour est signalée comme une estimation, porte son indice de confiance et affiche le raisonnement et les divergences qui la fondent. Une page qui énonce une supposition sur le ton du fait établi vaut moins qu'une page qui se tait.",
-    },
   },
 
   notFound: {
@@ -73,7 +67,6 @@ export const fr: Dictionary = {
 
   squadStatus: {
     title: "État de l'effectif",
-    lede: "Qui manque pour le prochain match, quelle qu'en soit la cause. Les suspensions et l'infirmerie en détaillent les raisons et se déplient plus bas ; ce bloc les croise, parce qu'un entraîneur compte un effectif plutôt qu'un motif.",
     /** "Prochain match : Stade Rennais (extérieur), dimanche 21 février" */
     nextFixture: (opponent: string, home: boolean, date: string) =>
       `Prochain match : ${opponent} (${home ? "domicile" : "extérieur"}), ${date}`,
@@ -95,8 +88,6 @@ export const fr: Dictionary = {
     banDetail: (competition: string, matches: string) =>
       `${competition} · encore ${matches}`,
     lines: "Par poste",
-    linesNote:
-      "Le chiffre qu'aucun des deux blocs sources ne peut donner : où tombent les absences. Trois défenseurs centraux absents et trois attaquants absents ne posent pas le même problème.",
     thin: "Dégarni",
     lineCount: (available: number, squad: number) =>
       `${available} sur ${squad} disponibles`,
@@ -111,7 +102,6 @@ export const fr: Dictionary = {
      */
     congestion: (heavy: number, total: number) =>
       `${heavy} des ${total} prochains matchs ${heavy < 2 ? "tombe" : "tombent"} dans une série de 3 en 8 jours — une absence y coûte davantage, la rotation absorbe moins.`,
-    note: "Les suspensions présentées ici sont calculables et certaines. L'état de l'infirmerie ne l'est pas : un joueur forfait est annoncé forfait, un joueur incertain est annoncé incertain, et les deux ne sont jamais additionnés. Le détail, avec sources et niveaux de confiance, se déplie dans les deux volets ci-dessous.",
 
     sources: {
       label: "Le détail",
@@ -127,7 +117,6 @@ export const fr: Dictionary = {
 
   suspensions: {
     title: "Suspensions et cartons",
-    lede: "Calculé à partir des rapports de match publics selon le règlement propre à chaque compétition. Aucun jugement, aucune collecte — les mêmes données donnent toujours le même résultat.",
     out: "Absents sur suspension",
     noneServing: "Personne ne purge de suspension actuellement.",
     reason: {
@@ -154,7 +143,6 @@ export const fr: Dictionary = {
 
   schedule: {
     title: "Calendrier",
-    lede: "La prochaine série de matchs et ce qu'elle coûte vraiment : récupération entre les rencontres, matchs sur huit jours glissants, et kilomètres parcourus.",
     nextMatches: "Prochains matchs",
     across: "Sur",
     shortestRest: "Récupération la plus courte",
@@ -203,7 +191,6 @@ export const fr: Dictionary = {
 
     recent: {
       title: "Résultats récents",
-      lede: "Les derniers matchs joués, du plus récent au plus ancien.",
       /**
        * « 6 joués · 4V 1N 1D ».
        *
@@ -217,8 +204,6 @@ export const fr: Dictionary = {
 
   contracts: {
     title: "Fins de contrat",
-    lede: (seasonEnd: string) =>
-      `Qui arrive en fin de contrat le ${seasonEnd}, qui entame sa dernière année et qui est sous contrat. Des dates uniquement — une date inconnue est affichée comme inconnue, jamais estimée.`,
     expiringCount: "En fin de contrat en juin",
     finalYearCount: "Dans leur dernière année",
     unknownCount: "Date inconnue",
@@ -242,7 +227,6 @@ export const fr: Dictionary = {
 
   availability: {
     title: "Historique de disponibilité",
-    lede: "Les matchs manqués depuis le début de la saison et pourquoi. Établi à partir des feuilles de match déjà publiées — c'est un historique, pas une prévision de retour.",
     byPlayer: "Matchs manqués par joueur",
     noneMissed: "Personne n'a manqué de match cette saison.",
     reason: {
@@ -262,14 +246,10 @@ export const fr: Dictionary = {
       middle: " matchs-joueurs perdus, dont ",
       after: " sur suspension.",
     },
-    note: "Le temps perdu sur suspension est la part évitable — et la seule que ce hub peut anticiper, car une suspension suit une règle alors qu'une guérison n'en suit aucune.",
   },
 
   injuries: {
     title: "Infirmerie",
-    lede: "Qui est indisponible, et avec quelle certitude. Chaque date de retour affichée ici est une estimation sur des sources qui se contredisent — elle est signalée comme telle, avec le raisonnement qui la produit.",
-    caveat:
-      "Les blocs précédents appliquent des règles. Celui-ci n'en applique aucune : il arbitre entre un communiqué de club, un article de presse et un délai de guérison type, et dit lequel il retient et pourquoi. Lisez l'indice de confiance avant la date.",
     stage: {
       out: "Forfait",
       doubtful: "Incertain",
@@ -310,12 +290,10 @@ export const fr: Dictionary = {
     backForNext: (opponent: string) => `Retour attendu pour ${opponent}`,
     conflictLabel: "Ce sur quoi les sources divergent",
     rationaleLabel: "Pourquoi cette estimation",
-    note: "Les dates de retour sont des inférences, soulignées et accompagnées de leur indice de confiance. Les matchs que chaque joueur devrait manquer sont calculés sur le calendrier réel du club, et non repris d'une source — cette partie-là est vérifiable, même quand l'estimation qui la précède ne l'est pas.",
   },
 
   identity: {
     title: "Identité du club",
-    lede: "Palmarès, records et effectif actuel. Un socle stable plutôt qu'une raison de revenir — ce sont les blocs ci-dessus qui jouent ce rôle.",
     honours: "Palmarès",
     records: "Records",
     squad: (count: number) => `Effectif (${count})`,

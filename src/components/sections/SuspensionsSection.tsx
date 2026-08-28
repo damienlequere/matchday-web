@@ -59,7 +59,6 @@ export function SuspensionsSection({
     <Section
       id="suspensions"
       title={dict.suspensions.title}
-      lede={dict.suspensions.lede}
       nested={nested}
     >
       <div className={styles.grid}>

@@ -7,7 +7,6 @@ import styles from "./Section.module.css";
 interface SectionProps {
   id: string;
   title: string;
-  lede?: string;
   /**
    * Render the contents alone, without the band, the width wrapper or the
    * heading.
@@ -22,13 +21,13 @@ interface SectionProps {
   children: ReactNode;
 }
 
-export function Section({ id, title, lede, nested, children }: SectionProps) {
+export function Section({ id, title, nested, children }: SectionProps) {
   if (nested) return <>{children}</>;
 
   return (
     <section id={id} className={styles.section}>
       <div className="wrap">
-        <SectionHeader title={title} lede={lede} />
+        <SectionHeader title={title} />
         {children}
       </div>
     </section>

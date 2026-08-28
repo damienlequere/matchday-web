@@ -177,7 +177,6 @@ export default async function ClubPage({
                       summary.atRiskCount,
                     )
               }
-              lede={d.suspensions.lede}
               /*
                * Shut by default, including when players are banned.
                *
@@ -210,7 +209,6 @@ export default async function ClubPage({
                       injuries.outCount,
                     )
               }
-              lede={d.injuries.lede}
               /*
                * Closed on arrival, like its neighbour — even when sources
                * disagree about a return date. The summary above already

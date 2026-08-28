@@ -20,11 +20,6 @@ export function SiteFooter({
           {dict.footer.body}
         </p>
         <div className={styles.right}>
-          <p>
-            {dict.footer.demo}
-            <br />
-            {dict.footer.computed}
-          </p>
           <LocaleSwitcher dict={dict} locale={locale} />
         </div>
       </div>

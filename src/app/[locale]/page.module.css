@@ -98,14 +98,3 @@
 
 .alert { color: var(--crit); }
 .warn { color: var(--brass); }
-
-.note {
-  margin-top: 34px;
-  max-width: 68ch;
-  color: var(--ink-2);
-  font-size: 14px;
-}
-
-.note strong {
-  color: var(--ink);
-}

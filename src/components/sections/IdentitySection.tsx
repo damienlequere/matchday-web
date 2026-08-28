@@ -32,7 +32,6 @@ export function IdentitySection({
     <Section
       id="identity"
       title={dict.identity.title}
-      lede={dict.identity.lede}
     >
       <div className={styles.grid}>
         <Card>

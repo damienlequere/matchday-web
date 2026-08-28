@@ -89,7 +89,6 @@ export function ScheduleSection({
     <Section
       id="congestion"
       title={dict.schedule.title}
-      lede={dict.schedule.lede}
     >
       <div className={styles.wrapper}>
         {/*
@@ -229,7 +228,6 @@ export function ScheduleSection({
               ? dict.schedule.recent.empty
               : dict.schedule.recent.count(recent.length, w, draws, l)
           }
-          lede={dict.schedule.recent.lede}
         >
           <div className={styles.results}>
             {recent.map((fixture) => {

@@ -116,10 +116,6 @@ export default async function HomePage({
               </li>
             ))}
           </ul>
-
-          <p className={styles.note}>
-            <strong>{d.home.note.lead}</strong> {d.home.note.body}
-          </p>
         </div>
       </section>
     </main>
